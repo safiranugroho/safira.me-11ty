@@ -1,3 +1,9 @@
+# 11ty
 _site/
+
+# npm
 node_modules/
 package-lock.json
+
+# editor
+.vscode
