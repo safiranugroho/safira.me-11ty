@@ -5,11 +5,30 @@ eleventyNavigation:
   order: 1
 ---
 
-{% set maxPosts = collections.posts.length | min(3) %}
-<h1>Latest {% if maxPosts == 1 %}Post{% else %}{{ maxPosts }} Posts{% endif %}</h1>
-
-{% set postslist = collections.posts | head(-3) %}
-{% set postslistCounter = collections.posts | length %}
-{% include "posts-list.njk" %}
-
-<p>More posts can be found in <a href="{{ '/posts/' | url }}">the archive</a>.</p>
+<h1>Hi, I'm Safira.</h1>
+<p>
+  Least dev-iest dev you'll ever meet probably. <br />
+  Whatever that means.
+</p>
+<p>
+  I'm a consultant/software developer at ThoughtWorks. I grew up in
+  Jakarta, Indonesia 🇲🇨 but currently based in Melbourne, Australia 🇦🇺.
+  That oughtta show ya a glimpse of my identity crisis.
+</p>
+<p>
+  I'm still figuring out the content of this site, but it will probably
+  be a concoction of some stream-of-consciousness blog posts and any
+  experiments I do outside of work. Nothing too mindblowing honestly.
+</p>
+<p>
+  If any of this strikes your fancy or you just want to say hello,
+  connect with me on 
+  <a href="https://www.twitter.com/hisafira/">Twitter</a> and 
+  <a href="https://www.linkedin.com/in/safiranugroho/">LinkedIn</a>,
+  check out my many unfinished code on 
+  <a href="https://github.com/safiranugroho">GitHub</a>, or 
+  <a href="mailto:safiranugroho@gmail.com?subject=Hi from your blog!">
+    shoot me an email
+  </a>!
+</p>
+<p>👋</p>

@@ -31,6 +31,12 @@ module.exports = function (eleventyConfig) {
     Math.min.apply(null, numbers)
   );
 
+  eleventyConfig.addFilter(
+    "excerpt",
+    (content) =>
+      content.replace(/(<\w*>)|(<\/\w*>)/g, "").slice(0, 260) + "..."
+  );
+
   eleventyConfig.addPassthroughCopy("img");
   eleventyConfig.addPassthroughCopy("css");
 
