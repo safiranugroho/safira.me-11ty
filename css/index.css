@@ -148,6 +148,8 @@ nav {
 .theme-toggle {
   font-style: normal;
   line-height: 0;
+  border: none;
+  font-size: 1.1rem;
 }
 
 .theme-toggle::before {
