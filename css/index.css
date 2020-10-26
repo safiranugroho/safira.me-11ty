@@ -142,7 +142,7 @@ nav {
 
 .nav-list > li::before {
   content: "/";
-  padding-right: 1.5rem;
+  padding-right: 1rem;
 }
 
 .theme-toggle {
