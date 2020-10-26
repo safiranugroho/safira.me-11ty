@@ -65,6 +65,11 @@ a:hover {
   background-position: -99.99% 0;
 }
 
+h1 {
+  font-size: 2rem;
+  line-height: calc(36 / 32);
+}
+
 h6 {
   font-weight: 300;
 }
@@ -139,6 +144,7 @@ nav {
 
 .theme-toggle {
   font-style: normal;
+  line-height: 0;
 }
 
 .theme-toggle:hover {
