@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap">
   </head>
   <body>
+    <script src="{{ '/js/setTheme.js' | url }}"></script>
+    <script src="{{ '/js/onThemeChange.js' | url }}"></script>
     <nav>
       <ul class="nav-list">
       {%- for entry in collections.all | eleventyNavigation %}
@@ -21,7 +23,13 @@
         </li>
       {%- endfor %}
         <li>
-          <span role="button" class="theme-toggle">🌚</span>
+          <span
+            role="button"
+            tabindex="0"
+            title="Color theme toggle"
+            class="theme-toggle"
+            onclick="onThemeChange()">
+          </span>
         </li>
       </ul>
     </nav>

@@ -1,20 +1,20 @@
 {
   "title": "Safira Nugroho",
-  "url": "https://safira.me/",
+  "url": "https://www.safira.me/",
   "description": "Personal blog of Safira Nugroho",
   "feed": {
     "subtitle": "Personal blog of Safira Nugroho",
     "filename": "feed.xml",
     "path": "/feed/feed.xml",
-    "id": "https://safira.me/"
+    "id": "https://www.safira.me/"
   },
   "jsonfeed": {
     "path": "/feed/feed.json",
-    "url": "https://safira.me/feed/feed.json"
+    "url": "https://www.safira.me/feed/feed.json"
   },
   "author": {
     "name": "Safira Nugroho",
     "email": "safiranugroho@gmail.com",
-    "url": "https://safira.me/about-me/"
+    "url": "https://www.safira.me/"
   }
 }

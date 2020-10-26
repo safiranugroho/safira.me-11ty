@@ -1,5 +1,6 @@
 :root {
   --yellow: #ffff00;
+  --yellow-50: rgb(255, 255, 0.5);
   --blue-dark: #3f528c;
   --white: #fff;
   --grey-lightest: #ececec;
@@ -23,6 +24,7 @@ body {
 body {
   --bg: var(--white);
   --img-filter: unset;
+  --theme-toggle-content: "🌚";
   --blockquote-border: var(--grey-lighter);
   --blockquote-color: var(--grey);
   --highlight-bg: var(--yellow);
@@ -36,9 +38,10 @@ body {
 body.dark {
   --bg: var(--grey-dark);
   --img-filter: grayscale(30%);
+  --theme-toggle-content: "🌞";
   --blockquote-border: var(--grey-light);
   --blockquote-color: var(--grey-light);
-  --highlight-bg: var(--yellow);
+  --highlight-bg: var(--yellow-50);
   --highlight-text: var(--grey-dark);
   --checklist-border: var(--grey-50);
   --text: var(--white);
@@ -46,7 +49,7 @@ body.dark {
   --hover-bg: linear-gradient(
     to right,
     var(--grey-dark) 50%,
-    var(--yellow) 50%
+    var(--yellow-50) 50%
   );
 }
 
@@ -145,6 +148,10 @@ nav {
 .theme-toggle {
   font-style: normal;
   line-height: 0;
+}
+
+.theme-toggle::before {
+  content: var(--theme-toggle-content);
 }
 
 .theme-toggle:hover {
