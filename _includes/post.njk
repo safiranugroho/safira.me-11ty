@@ -1,7 +1,11 @@
 ---
 layout: base.njk
 ---
-<h1>{{ title }}</h1>
-<h5>{{ date | readableDate }}</h5>
+<article>
+  <h1>{{ title }}</h1>
+  <h5>{{ date | readableDate }}</h5>
 
-{{ content | safe }}
+  <section>
+    {{ content | safe }}
+  </section>
+</article>

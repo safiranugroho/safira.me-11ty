@@ -96,6 +96,14 @@ main {
   padding: 3rem 1.5rem;
 }
 
+section > ul > li {
+  margin: 0.75em 0;
+}
+
+section > p {
+  margin: 2em 0;
+}
+
 nav {
   width: 100%;
   text-align: left;

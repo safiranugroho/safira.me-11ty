@@ -1,6 +1,8 @@
 ---
 title: Prototyping with Next.js and Now
 description: I was involved in a user research project, with eight days allocated to it. Essentially, my job was to build a high-fidelity, interactive, mobile-first prototype.
+image: /img/002/paper-wireframes.jpg
+type: article
 date: 2020-10-17
 tags:
   - posts

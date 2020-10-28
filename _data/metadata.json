@@ -1,7 +1,10 @@
 {
   "title": "Safira Nugroho",
-  "url": "https://www.safira.me/",
+  "url": "https://www.safira.me",
+  "image": "/img/favicon.ico",
   "description": "Personal blog of Safira Nugroho",
+  "twitter": "@hisafira",
+  "type": "website",
   "feed": {
     "subtitle": "Personal blog of Safira Nugroho",
     "filename": "feed.xml",
