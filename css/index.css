@@ -63,11 +63,6 @@ a {
   transition: background-position 0.1s ease-out;
 }
 
-a:hover {
-  color: var(--hover-text);
-  background-position: -99.99% 0;
-}
-
 h1 {
   font-size: 2rem;
   line-height: calc(36 / 32);
@@ -105,6 +100,7 @@ section > p {
 }
 
 nav {
+  z-index: 999;
   width: 100%;
   text-align: left;
   padding: 1.5rem 0 1rem;
@@ -125,13 +121,44 @@ nav {
   color: var(--highlight-text);
 }
 
-/* Heading styles to allow correct heading hierarchy without compromising on styles */
-.h1 { margin-block-start: 0.67em; margin-block-end: 0.67em; font-size: 2.00em; font-weight: bold; }
-.h2 { margin-block-start: 0.83em; margin-block-end: 0.83em; font-size: 1.50em; font-weight: bold; }
-.h3 { margin-block-start: 1.00em; margin-block-end: 1.00em; font-size: 1.17em; font-weight: bold; }
-.h4 { margin-block-start: 1.33em; margin-block-end: 1.33em; font-size: 1.00em; font-weight: bold; }
-.h5 { margin-block-start: 1.67em; margin-block-end: 1.67em; font-size: 0.83em; font-weight: bold; }
-.h6 { margin-block-start: 2.33em; margin-block-end: 2.33em; font-size: 0.67em; font-weight: bold; }
+/* Heading styles to allow correct heading hierarchy 
+** without compromising on styles */
+.h1 {
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  font-size: 2em;
+  font-weight: bold;
+}
+.h2 {
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.h3 {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  font-size: 1.17em;
+  font-weight: bold;
+}
+.h4 {
+  margin-block-start: 1.33em;
+  margin-block-end: 1.33em;
+  font-size: 1em;
+  font-weight: bold;
+}
+.h5 {
+  margin-block-start: 1.67em;
+  margin-block-end: 1.67em;
+  font-size: 0.83em;
+  font-weight: bold;
+}
+.h6 {
+  margin-block-start: 2.33em;
+  margin-block-end: 2.33em;
+  font-size: 0.67em;
+  font-weight: bold;
+}
 
 .nav-list {
   width: max-content;
@@ -162,12 +189,12 @@ nav {
 }
 
 .theme-toggle {
-  background: transparent;
   padding: 0;
+  background: transparent;
   font-style: normal;
-  line-height: 0;
+  vertical-align: text-top;
   border: none;
-  font-size: 1.1rem;
+  font-size: 0.75rem;
 }
 
 .theme-toggle::before {
@@ -183,9 +210,20 @@ nav {
 }
 
 @media screen and (min-width: 480px) {
+  a:hover {
+    color: var(--hover-text);
+    background-position: -99.99% 0;
+  }
+
   .nav-list {
     width: max-content;
     margin: 0;
+  }
+
+  .theme-toggle {
+    vertical-align: middle;
+    line-height: 0;
+    font-size: 1.1rem;
   }
 }
 
