@@ -2,10 +2,10 @@
 layout: base.njk
 ---
 <article>
-  <h1>{{ title }}</h1>
-  <h5>{{ date | readableDate }}</h5>
+  <h1 id="article-title">{{ title }}</h1>
+  <h2 class="h5">{{ date | readableDate }}</h2>
 
-  <section>
+  <section aria-labelledby="article-title">
     {{ content | safe }}
   </section>
 </article>

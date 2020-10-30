@@ -20,8 +20,7 @@ In a nutshell, I had about three full days to prepare for my role without knowin
 I then knew that I had to strategize on how to do this so that I didn’t have to waste time on setup when the project actually starts, and that mainly involved choosing the right set of tools.
 
 <img alt="Paper wireframes" src="/img/002/paper-wireframes.jpg" srcSet="/img/002/paper-wireframes@1x.jpg 320w, /img/002/paper-wireframes@2x.jpg 480w, /img/002/paper-wireframes@3x.jpg 768w, /img/002/paper-wireframes@4x.jpg 1024w, /img/002/paper-wireframes.jpg 1920w" />
-
-###### _Photo by [Halacious on Unsplash](https://unsplash.com/photos/tZc3vjPCk-Q)_
+<em class="h6">Photo by <a href="https://unsplash.com/photos/tZc3vjPCk-Q">Halacious on Unsplash</a></em>
 
 ## What I needed from my tool(s)
 
@@ -73,8 +72,7 @@ I ended up with Rebass, because it’s built on top of styled-system, which supp
 I was confident in choosing this library, because I thought Rebass has an extensive list of basic components, including a Carousel, a Hide component (which will hide its children components when rendered on a screen with a resolution that you pass into the props) and various form input fields.
 
 <img alt="Neon smiley face" src="/img/002/neon-smiley-face.jpg" srcSet="/img/002/neon-smiley-face@1x.jpg 320w, /img/002/neon-smiley-face@2x.jpg 480w, /img/002/neon-smiley-face@3x.jpg 768w, /img/002/neon-smiley-face@4x.jpg 1024w, /img/002/neon-smiley-face.jpg 1920w" />
-
-###### _Photo by [Jason Leung on Unsplash](https://unsplash.com/photos/60j0UB-Z_Yk)_
+<em class="h6">Photo by <a href="https://unsplash.com/photos/60j0UB-Z_Yk">Jason Leung on Unsplash</a></em>
 
 ## What worked well
 
