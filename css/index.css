@@ -6,8 +6,8 @@
   --grey-lightest: #ececec;
   --grey-lighter: #d3d3d3;
   --grey-light: #bcbcbc;
-  --grey: #808080;
-  --grey-50: rgb(128, 128, 128, 0.5);
+  --grey: #6b6b6b;
+  --grey-50: rgb(107, 107, 107, 0.5);
   --grey-dark: #242629;
   --grey-darkest: #1c1d1f;
 }
@@ -29,7 +29,6 @@ body {
   --blockquote-color: var(--grey);
   --highlight-bg: var(--yellow);
   --highlight-text: var(--grey-dark);
-  --checklist-border: var(--grey-lightest);
   --text: var(--grey-dark);
   --hover-text: var(--grey-dark);
   --hover-bg: linear-gradient(to right, var(--white) 50%, var(--yellow) 50%);
@@ -43,7 +42,6 @@ body.dark {
   --blockquote-color: var(--grey-light);
   --highlight-bg: var(--yellow-50);
   --highlight-text: var(--grey-dark);
-  --checklist-border: var(--grey-50);
   --text: var(--white);
   --hover-text: var(--grey-dark);
   --hover-bg: linear-gradient(
@@ -61,15 +59,6 @@ a {
   line-height: 1.15em;
   text-decoration: underline;
   transition: background-position 0.1s ease-out;
-}
-
-h1 {
-  font-size: 2rem;
-  line-height: calc(36 / 32);
-}
-
-h6 {
-  font-weight: 300;
 }
 
 blockquote {
@@ -123,41 +112,43 @@ nav {
 
 /* Heading styles to allow correct heading hierarchy 
 ** without compromising on styles */
-.h1 {
+h1, .h1 {
   margin-block-start: 0.67em;
   margin-block-end: 0.67em;
   font-size: 2em;
   font-weight: bold;
+  line-height: calc(36 / 32);
 }
-.h2 {
+h2, .h2 {
   margin-block-start: 0.83em;
   margin-block-end: 0.83em;
   font-size: 1.5em;
   font-weight: bold;
 }
-.h3 {
+h3, .h3 {
   margin-block-start: 1em;
   margin-block-end: 1em;
   font-size: 1.17em;
   font-weight: bold;
 }
-.h4 {
+h4, .h4 {
   margin-block-start: 1.33em;
   margin-block-end: 1.33em;
   font-size: 1em;
   font-weight: bold;
 }
-.h5 {
+h5, .h5 {
   margin-block-start: 1.67em;
   margin-block-end: 1.67em;
   font-size: 0.83em;
   font-weight: bold;
 }
-.h6 {
+h6, .h6 {
   margin-block-start: 2.33em;
   margin-block-end: 2.33em;
   font-size: 0.67em;
-  font-weight: bold;
+  font-weight: 300;
+  font-style: italic;
 }
 
 .nav-list {
