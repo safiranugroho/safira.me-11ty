@@ -13,7 +13,7 @@ I recently had the pleasure of working on a mature, highly adopted design system
 
 ## 💭 Think in APIs.
 
-I would argue that the majority of elements in a design system component makes up, if not directly affects, that component's API. The exposed component itself, every prop accepted by that component, any styles applied to that component, every value accepted by that prop, and any exposed type definitions – they are all public APIs. The API specification is your design system's documentation, design guidelines, and example component usages combined.
+I would argue that the majority of elements in a design system component makes up, if not directly affects, that component's API. The exposed component itself, every prop accepted by that component, every value accepted by that prop, any styles applied to the component, and any exposed type definitions – they are all public APIs. The API specification is your design system's documentation, design guidelines, and example component usages combined.
 
 Hence, any internal design decision you make that *could* change the shape/definition of any of those elements is as crucial as the *very act* of making changes to those elements directly.
 
