@@ -1,7 +1,7 @@
 ---
 title: Prototyping with Next.js and Now
 description: I was involved in a user research project, with eight days allocated to it. Essentially, my job was to build a high-fidelity, interactive, mobile-first prototype.
-image: /img/002/paper-wireframes.jpg
+image: /img/001/paper-wireframes.jpg
 type: article
 date: 2020-10-17
 tags:
@@ -19,7 +19,7 @@ In a nutshell, I had about three full days to prepare for my role without knowin
 (To be fair, the prototype was not an integral part of the research process, but it was important to make sure it supports the research process well.)
 I then knew that I had to strategize on how to do this so that I didn’t have to waste time on setup when the project actually starts, and that mainly involved choosing the right set of tools.
 
-<img alt="Paper wireframes" src="/img/002/paper-wireframes.jpg" srcSet="/img/002/paper-wireframes@1x.jpg 320w, /img/002/paper-wireframes@2x.jpg 480w, /img/002/paper-wireframes@3x.jpg 768w, /img/002/paper-wireframes@4x.jpg 1024w, /img/002/paper-wireframes.jpg 1920w" />
+<img alt="Paper wireframes" src="/img/001/paper-wireframes.jpg" srcSet="/img/001/paper-wireframes@1x.jpg 320w, /img/001/paper-wireframes@2x.jpg 480w, /img/001/paper-wireframes@3x.jpg 768w, /img/001/paper-wireframes@4x.jpg 1024w, /img/001/paper-wireframes.jpg 1920w" />
 <span class="h6">Photo by <a href="https://unsplash.com/photos/tZc3vjPCk-Q">Halacious on Unsplash</a></span>
 
 ## What I needed from my tool(s)
@@ -71,7 +71,7 @@ I ended up with Rebass, because it’s built on top of styled-system, which supp
 
 I was confident in choosing this library, because I thought Rebass has an extensive list of basic components, including a Carousel, a Hide component (which will hide its children components when rendered on a screen with a resolution that you pass into the props) and various form input fields.
 
-<img alt="Neon smiley face" src="/img/002/neon-smiley-face.jpg" srcSet="/img/002/neon-smiley-face@1x.jpg 320w, /img/002/neon-smiley-face@2x.jpg 480w, /img/002/neon-smiley-face@3x.jpg 768w, /img/002/neon-smiley-face@4x.jpg 1024w, /img/002/neon-smiley-face.jpg 1920w" />
+<img alt="Neon smiley face" src="/img/001/neon-smiley-face.jpg" srcSet="/img/001/neon-smiley-face@1x.jpg 320w, /img/001/neon-smiley-face@2x.jpg 480w, /img/001/neon-smiley-face@3x.jpg 768w, /img/001/neon-smiley-face@4x.jpg 1024w, /img/001/neon-smiley-face.jpg 1920w" />
 <span class="h6">Photo by <a href="https://unsplash.com/photos/60j0UB-Z_Yk">Jason Leung on Unsplash</a></span>
 
 ## What worked well
