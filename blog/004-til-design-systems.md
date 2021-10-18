@@ -25,9 +25,9 @@ Making breaking changes is not a decision to be taken lightly. Changing the shap
 
 One strategy that we used to reduce the delay of the release was to split out the non-breaking changes from the breaking changes as much as we could. Instead of releasing *everything* as one major version upgrade at the end, we aimed to release multiple patch and minor versions and leave out as little breaking changes as we could. 
 
-For example, one of the enum values that an existing prop accepts was redundant because its behavior was almost identical to another value in the enum. We decided that it should be removed from that prop's API altogether. To put this change out to our consumers quicker, we merged the behaviors of the two enum values under the hood without changing the prop's API, release that change as a minor version upgrade, and save the removal of the redundant value for the major version release at the end.
+For example, one of the enum values that an existing prop accepts was redundant because its behavior was almost identical to another value in the enum. We decided that it should be removed from that prop's API altogether. To put this change out to our consumers quicker, we merged the behaviors of the two enum values under the hood without changing the prop's API, released that change as a minor version upgrade, and saved the removal of the redundant value for the major version release at the end.
 
-Even with that though, we still ended up with one huge release at the end. For the one component that I worked on for example, there was a difference of ~3 months between the time that the last non-major version was released and the final major version being released. It saddens me a little that the very nature of releasing breaking changes goes against the ethos of continuous integration and continuous delivery – integration between changes are delayed until the end, and some code that was written then was only delivered to the consumers three months later.
+Even with that though, we still ended up with one huge release at the end. For the one component that I worked on for example, there was a difference of ~3 months between the time that the last non-major version was released and the final major version being released. It saddens me a little that the very nature of releasing breaking changes goes against the ethos of continuous integration and continuous delivery – integration between changes were delayed until the end, and some code that was written then was only delivered to the consumers three months later.
 
 Why *can't* we release major versions more frequently? 
 
@@ -41,7 +41,7 @@ I know, but a dev can dream.
 
 ## 🤓 Take time to understand CSS.
 
-When writing CSS, it's good to *really* understand what each property does before choosing to apply them. One little decision could snowball into an unnecessary change in the component's API. For example, the decision between positioning an element with `absolute` versus `fixed`. As you probably know, `absolute` positions an element relative to its parent, while `fixed` positions it relative to the viewport. Because of this behavior, a bug was found in a component that uses the `absolute` positioning on one of its elements.
+When writing CSS, it's good to *really* understand what each property does before choosing to apply them. One little decision could snowball into an unnecessary change to the component's API. For example, the decision between positioning an element with `absolute` versus `fixed`. As you probably know, `absolute` positions an element relative to its parent, while `fixed` positions it relative to the viewport. Because of this behavior, a bug was found in a component that uses the `absolute` positioning on one of its elements.
 
 The fix, we decided, would be to change the element's position to `fixed`. However, this is considered a breaking change because a public prop controls this positioning based on the enum that it accepts. Changing this element's positioning would completely change the component's behavior when interacting with other elements.
 
