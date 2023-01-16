@@ -61,8 +61,8 @@
 </script>
 
 <Header
-	heading="My keyboard jiggles"
-	subheading="Press the key on your keyboard to stop the jiggle."
+	heading="Keyboard"
+	subheading="My keyboard jiggle jiggles - press the key on your keyboard to stop the jiggle."
 	completedDate="16 January 2023"
 />
 

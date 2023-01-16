@@ -14,9 +14,9 @@
 </script>
 
 <div class="header">
-	<h1>{heading}</h1>
-	<h2>{subheading}</h2>
-	<p>{completedDate}</p>
+	<h1 class="heading">{heading}</h1>
+	<h2 class="subheading">{subheading}</h2>
+	<p class="date">{completedDate}</p>
 </div>
 
 <style>
@@ -26,7 +26,7 @@
 		font-family: 'Noto Serif Toto', serif;
 	}
 
-	:global(h1) {
+	.heading {
 		font-weight: 700;
 		font-size: 20px;
 		line-height: 17px;
@@ -34,14 +34,14 @@
 		color: #525252;
 	}
 
-	:global(h2) {
+	.subheading {
 		font-weight: 400;
 		font-size: 14px;
 		line-height: 12px;
 		color: #525252;
 	}
 
-	:global(p) {
+	.date {
 		font-weight: 400;
 		font-size: 12px;
 		line-height: 10px;
