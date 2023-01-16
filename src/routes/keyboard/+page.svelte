@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import Header from '../../Header.svelte';
+	import Header from '$lib/Header.svelte';
 
 	const keys = ['`1234567890-=', 'qwertyuiop[]\\', "asdfghjkl;'", 'zxcvbnm,./'];
 	const modifiers = ['backspace', 'tab', 'enter', 'capslock', 'enter', 'shift'];
@@ -106,11 +106,11 @@
 	}
 
 	.content {
+		font-family: 'Inter', sans-serif;
 		padding: 16px;
 	}
 
 	.container {
-		font-family: 'Inter', sans-serif;
 		font-size: 24px;
 
 		background: #f6f6f6;
