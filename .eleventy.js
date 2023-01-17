@@ -14,7 +14,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.setDataDeepMerge(true);
 
   eleventyConfig.addFilter("readableDate", (dateObj) =>
-    DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("dd LLL yyyy")
+    DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("dd LLLL yyyy")
   );
 
   // https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
@@ -33,8 +33,7 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addFilter(
     "excerpt",
-    (content) =>
-      content.replace(/(<\w*>)|(<\/\w*>)/g, "").slice(0, 260) + "..."
+    (content) => content.replace(/(<\w*>)|(<\/\w*>)/g, "").slice(0, 260) + "..."
   );
 
   eleventyConfig.addPassthroughCopy("img");

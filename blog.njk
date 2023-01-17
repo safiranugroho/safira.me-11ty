@@ -10,8 +10,8 @@ eleventyNavigation:
 
 {% for post in collections.posts | reverse %}
   <div class="post-list-item">
-    <h2>{{ post.data.title }}</h2>
-    <h5>{{ post.date | readableDate}}</h5>
+    <h2 class="post-title">{{ post.data.title }}</h2>
+    <h5 class="post-date">{{ post.date | readableDate}}</h5>
     <p>{{ post.templateContent | excerpt }}</p>
     <a href="{{ post.url | url }}">Keep reading &gt;</a>
   </div>
