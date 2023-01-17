@@ -247,6 +247,12 @@
     text-align: center;
   }
 
+  .tip-amount > input:hover + label,
+  input:focus + label,
+  input:focus-visible + label {
+    text-decoration: underline;
+  }
+
   .tip-amount > input:checked + label {
     background: #60c1b6;
     color: #ffffff;
@@ -278,6 +284,12 @@
     font-size: 24px;
 
     text-align: center;
+  }
+
+  .actions > button:hover,
+  button:focus,
+  button:focus-visible {
+    text-decoration: underline;
   }
 
   .actions > button:first-child {
