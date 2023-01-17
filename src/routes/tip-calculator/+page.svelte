@@ -35,7 +35,7 @@
   }
 </script>
 
-<Page>
+<Page backgroundColor="#f6f6f3">
   <Header
     slot="header"
     heading="Tip calculator"
@@ -96,10 +96,6 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
-
-  :global(body) {
-    background-color: #f6f6f3;
-  }
 
   .bill {
     font-family: 'Inter', sans-serif;

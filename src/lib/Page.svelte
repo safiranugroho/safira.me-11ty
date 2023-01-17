@@ -1,4 +1,9 @@
-<div class="page">
+<script>
+  export let backgroundColor = '#ffffff';
+</script>
+
+<div class="page" style="--background-color: {backgroundColor};">
+  {@debug backgroundColor}
   <slot name="header" />
   <div class="content"><slot name="content" /></div>
 </div>
@@ -16,7 +21,6 @@
     min-height: 100%;
     margin: 0;
 
-    background-color: #ffffff;
     color: var(--primary-text-color);
   }
 
@@ -40,7 +44,7 @@
     display: flex;
     flex-direction: column;
 
-    background-color: #ffffff;
+    background-color: var(--background-color);
 
     width: fit-content;
     height: fit-content;
@@ -59,13 +63,8 @@
 
   @media screen and (min-width: 768px) {
     .page {
-      height: auto;
-    }
-  }
-
-  @media screen and (min-width: 1024px) {
-    .page {
       width: auto;
+      height: auto;
     }
   }
 </style>

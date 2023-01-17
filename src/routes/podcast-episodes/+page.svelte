@@ -4,7 +4,7 @@
   import cover from '$lib/assets/podcast-cover.png';
 </script>
 
-<Page>
+<Page backgroundColor="#f3f3f3">
   <Header
     slot="header"
     heading="Podcast episodes"
@@ -28,10 +28,6 @@
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;900&display=swap');
-
-  :global(body) {
-    background: #f3f3f3;
-  }
 
   .container {
     font-family: 'Nunito Sans', sans-serif;
