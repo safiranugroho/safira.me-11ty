@@ -51,7 +51,7 @@
   }
 
   .header {
-    height: 72px;
+    min-height: 72px;
 
     display: flex;
     flex-direction: row;
@@ -82,7 +82,7 @@
   .heading {
     font-weight: 700;
     font-size: 20px;
-    line-height: 17px;
+    line-height: 24px;
     font-style: italic;
     color: var(--primary-text-color);
   }
@@ -117,7 +117,7 @@
     display: inline-block;
     height: 1em;
     width: 1em;
-    vertical-align: bottom;
+    vertical-align: middle;
     background-size: 1em;
     background-repeat: no-repeat;
     margin-left: 0.25em;

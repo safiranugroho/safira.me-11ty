@@ -47,6 +47,8 @@
 
     min-height: 100%;
     height: fit-content;
+
+    overflow: scroll;
   }
 
   .content {

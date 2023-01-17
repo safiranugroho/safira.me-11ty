@@ -122,12 +122,13 @@
   .description {
     flex: 1;
 
-    text-align: right;
-    padding-right: 32px;
+    padding: 0 32px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    gap: 8px;
 
     height: 90px;
   }
@@ -165,6 +166,7 @@
     border-top-right-radius: 20px;
 
     display: flex;
+    flex-direction: column;
 
     max-width: inherit;
   }
@@ -216,9 +218,9 @@
   .tip-amount {
     all: unset;
 
-    display: flex;
-    flex-direction: row;
-    gap: 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
 
     background: #eeeeee;
     padding: 24px 48px;
@@ -252,8 +254,8 @@
 
   .actions {
     display: flex;
-    flex-direction: row;
-    gap: 48px;
+    flex-direction: column;
+    gap: 24px;
     justify-content: right;
 
     background: #f7f7f7;
@@ -286,5 +288,26 @@
   .actions > button:last-child {
     background: #ed7861;
     color: #ffffff;
+  }
+
+  @media screen and (min-width: 768px) {
+    .description {
+      text-align: right;
+      padding-right: 32px;
+    }
+
+    .inputs {
+      flex-direction: row;
+    }
+
+    .tip-amount {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 48px;
+    }
+
+    .actions {
+      flex-direction: row;
+      gap: 48px;
+    }
   }
 </style>

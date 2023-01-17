@@ -69,7 +69,7 @@
     completedDate="16 January 2023"
   />
 
-  <div class="container" slot="content">
+  <div class="keyboard" slot="content">
     <div class="row">
       {#each keys[0] as char}
         <div class="key" id={char}>{char}</div>
@@ -102,7 +102,7 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
 
-  .container {
+  .keyboard {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 24px;
@@ -178,6 +178,12 @@
     }
     100% {
       transform: translate(0, 0) rotate(0deg);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .keyboard {
+      transform: unset;
     }
   }
 </style>
