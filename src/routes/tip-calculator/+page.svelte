@@ -3,26 +3,57 @@
 	import dollarIcon from '$lib/assets/dollar.svg';
 	import peopleIcon from '$lib/assets/people.svg';
 
-	let billAmount = 0;
-	let numberOfPeople = 0;
-	$: totalPerPerson =
-		billAmount > 0 && numberOfPeople > 0 ? (billAmount / numberOfPeople).toFixed(2) : 0.0;
+	/**
+	 * @type {number | null}
+	 */
+	let billAmount = null;
+	/**
+	 * @type {number | null}
+	 */
+	let numberOfPeople = null;
+	let tipAmount = 0;
+
+	let totalTipAmount = 0;
+	let totalPerPerson = '0';
+
+	function handleReset() {
+		billAmount = null;
+		numberOfPeople = null;
+		tipAmount = 0;
+
+		totalTipAmount = 0;
+		totalPerPerson = '0';
+	}
+
+	function handleCalculate() {
+		totalTipAmount = tipAmount && billAmount ? billAmount * (tipAmount * 0.01) : 0;
+		totalPerPerson =
+			billAmount && numberOfPeople
+				? ((billAmount + totalTipAmount) / numberOfPeople).toFixed(2)
+				: '0';
+	}
 </script>
 
 <Header
 	heading="Tip calculator"
 	subheading="Input the bill amount and number of people, and select a tip percentage."
-	completedDate="16 January 2023"
+	completedDate="17 January 2023"
 />
 
 <div class="content">
 	<div class="bill">
 		<div class="output">
-			<span class="label">Tip amount</span>
-			<p class="value"><span class="currency">$</span>4.02</p>
+			<div class="description">
+				<span class="label">Tip amount</span>
+				<span class="label">% from bill amount</span>
+			</div>
+			<p class="value"><span class="currency">$</span>{totalTipAmount}</p>
 		</div>
 		<div class="output">
-			<span class="label">Total per person</span>
+			<div class="description">
+				<span class="label">Total per person</span>
+				<span class="label">Bill + tip amount divided by number of people</span>
+			</div>
 			<p class="value"><span class="currency">$</span>{totalPerPerson}</p>
 		</div>
 		<div class="inputs">
@@ -41,6 +72,22 @@
 				<label for="number-of-people">Number of people</label>
 			</div>
 		</div>
+		<fieldset class="tip-amount">
+			{#each [5, 10, 15, 20] as amount}
+				<input
+					type="radio"
+					id={`${amount}-percent`}
+					name="tip-amount"
+					value={amount}
+					bind:group={tipAmount}
+				/>
+				<label for={`${amount}-percent`}>{amount}%</label>
+			{/each}
+		</fieldset>
+		<div class="actions">
+			<button on:click={handleReset}>Reset</button>
+			<button on:click={handleCalculate}>Calculate</button>
+		</div>
 	</div>
 </div>
 
@@ -50,13 +97,14 @@
 
 	:global(body) {
 		display: grid;
-		grid-template-rows: 1fr 3fr;
+		grid-template-rows: 1fr 4fr;
 		background: #f6f6f3;
 	}
 
 	.content {
 		font-family: 'Inter', sans-serif;
 		padding: 16px;
+		padding-bottom: 72px;
 		color: #333333;
 	}
 
@@ -65,6 +113,8 @@
 		border-radius: 20px;
 		max-width: 768px;
 		margin: auto;
+
+		box-shadow: 0px 0px 42px rgba(148, 146, 120, 0.2);
 	}
 
 	.output {
@@ -77,19 +127,33 @@
 		margin: 0 8px;
 	}
 
-	.label {
+	.description {
 		flex: 1;
 
+		text-align: right;
+		padding-right: 32px;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		height: 90px;
+	}
+
+	.label:first-child {
 		font-family: 'Roboto Mono', sans-serif;
 		font-weight: 700;
-		line-height: 90px;
+	}
 
-		text-align: right;
-		padding-right: 34px;
+	.label:last-child {
+		font-family: 'Roboto Mono', sans-serif;
+		font-weight: 400;
+		font-style: italic;
+		font-size: 12px;
 	}
 
 	.currency {
-		font-size: 54px;
+		font-size: 56px;
 		vertical-align: text-top;
 	}
 
@@ -97,15 +161,16 @@
 		flex: 2;
 
 		font-weight: 700;
-		font-size: 82px;
-		line-height: 82px;
+		font-size: 80px;
+		line-height: 80px;
 
 		margin: 0;
 	}
 
 	.inputs {
 		background: #f7f7f7;
-		border-radius: 20px;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
 
 		display: flex;
 
@@ -154,5 +219,80 @@
 
 	.number-of-people {
 		flex: 1.5;
+	}
+
+	.tip-amount {
+		all: unset;
+
+		display: flex;
+		flex-direction: row;
+		gap: 48px;
+
+		background: #eeeeee;
+		padding: 24px 48px;
+
+		border-top: 1px solid #dedede;
+		border-bottom: 1px solid #dedede;
+	}
+
+	.tip-amount > input {
+		display: none;
+	}
+
+	.tip-amount > label {
+		flex: 1;
+		padding: 16px;
+
+		background: #ffffff;
+		border-radius: 16px;
+
+		font-family: 'Roboto Mono', sans-serif;
+		font-weight: 700;
+		font-size: 24px;
+		color: #60c1b6;
+		text-align: center;
+	}
+
+	.tip-amount > input:checked + label {
+		background: #60c1b6;
+		color: #ffffff;
+	}
+
+	.actions {
+		display: flex;
+		flex-direction: row;
+		gap: 48px;
+		justify-content: right;
+
+		background: #f7f7f7;
+		padding: 24px 48px;
+
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
+	}
+
+	.actions > button {
+		all: unset;
+
+		flex: 1;
+		padding: 16px;
+
+		border-radius: 16px;
+
+		font-family: 'Roboto Mono', sans-serif;
+		font-weight: 700;
+		font-size: 24px;
+
+		text-align: center;
+	}
+
+	.actions > button:first-child {
+		border: 1px solid #ed7861;
+		color: #ed7861;
+	}
+
+	.actions > button:last-child {
+		background: #ed7861;
+		color: #ffffff;
 	}
 </style>
