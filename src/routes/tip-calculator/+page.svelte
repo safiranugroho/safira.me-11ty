@@ -35,7 +35,7 @@
   }
 </script>
 
-<Page backgroundColor="#f6f6f3">
+<Page background="#f6f6f3">
   <Header
     slot="header"
     heading="Tip calculator"

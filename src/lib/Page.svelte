@@ -1,8 +1,8 @@
 <script>
-  export let backgroundColor = '#ffffff';
+  export let background = '#ffffff';
 </script>
 
-<div class="page" style="--background-color: {backgroundColor};">
+<div class="page" style="--background: {background};">
   <slot name="header" />
   <div class="content"><slot name="content" /></div>
 </div>
@@ -43,7 +43,7 @@
     display: flex;
     flex-direction: column;
 
-    background-color: var(--background-color);
+    background: var(--background);
 
     min-height: 100%;
     height: fit-content;

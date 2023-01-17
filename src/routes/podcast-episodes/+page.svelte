@@ -4,7 +4,7 @@
   import cover from '$lib/assets/podcast-cover.png';
 </script>
 
-<Page backgroundColor="#f3f3f3">
+<Page background="#f3f3f3">
   <Header
     slot="header"
     heading="Podcast episodes"
