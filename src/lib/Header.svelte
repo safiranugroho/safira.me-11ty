@@ -57,6 +57,8 @@
     flex-direction: row;
     justify-content: center;
     gap: 24px;
+
+    margin-top: 60px;
   }
 
   .header-section {
@@ -94,10 +96,10 @@
   .metadata {
     font-weight: 400;
     font-size: 12px;
-    line-height: 10px;
     color: var(--secondary-text-color);
 
     display: flex;
+    flex-direction: column;
   }
 
   .metadata > *:first-child {
@@ -128,8 +130,9 @@
   }
 
   @media screen and (min-width: 768px) {
-    .metadata > *:last-child {
-      flex: 3;
+    .metadata {
+      flex-direction: row;
+      line-height: 10px;
     }
   }
 

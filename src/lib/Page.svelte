@@ -3,7 +3,6 @@
 </script>
 
 <div class="page" style="--background-color: {backgroundColor};">
-  {@debug backgroundColor}
   <slot name="header" />
   <div class="content"><slot name="content" /></div>
 </div>
@@ -33,7 +32,7 @@
   }
 
   .page {
-    padding: 60px 24px;
+    padding: 0 24px;
 
     position: absolute;
     top: 0px;
@@ -46,7 +45,7 @@
 
     background-color: var(--background-color);
 
-    width: fit-content;
+    min-height: 100%;
     height: fit-content;
   }
 
@@ -59,12 +58,6 @@
 
     margin: auto;
     margin-top: 32px;
-  }
-
-  @media screen and (min-width: 768px) {
-    .page {
-      width: auto;
-      height: auto;
-    }
+    margin-bottom: 60px;
   }
 </style>

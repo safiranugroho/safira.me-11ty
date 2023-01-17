@@ -32,14 +32,14 @@
   .container {
     font-family: 'Nunito Sans', sans-serif;
 
-    width: fit-content;
-    max-width: 1200px;
     margin: auto;
 
     display: flex;
+    flex-direction: column;
   }
 
   .cover {
+    width: 100%;
     z-index: 999;
 
     box-shadow: 0px 4px 24px 0px #453f3f;
@@ -51,18 +51,16 @@
     gap: 24px;
 
     background: #ffffff;
-    grid-column-start: 2;
 
-    margin: 25px 0;
+    margin: 0 25px;
     padding: 60px;
 
     border-bottom-right-radius: 32px;
-    border-top-right-radius: 32px;
+    border-bottom-left-radius: 32px;
     box-shadow: 0px 4px 20px 0px #e8eaef;
 
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
-    line-height: 33px;
     color: #4e4e4e;
   }
 
@@ -74,7 +72,6 @@
     letter-spacing: 0.1em;
 
     margin: 0;
-    margin-bottom: 16px;
 
     color: #a7a7a7;
   }
@@ -84,20 +81,57 @@
   }
 
   :global(input) + label::before {
-    content: url('$lib/assets/checkbox--unchecked.svg');
+    content: '';
+    background-image: url('$lib/assets/checkbox--unchecked.svg');
+    background-size: cover;
     display: inline-block;
     vertical-align: middle;
-    margin-right: 20px;
+    margin-right: 12px;
 
-    width: 40px;
-    height: 40px;
+    width: 24px;
+    height: 24px;
   }
 
   :global(input):checked + label::before {
-    content: url('$lib/assets/checkbox--checked.svg');
+    content: '';
+    background-image: url('$lib/assets/checkbox--checked.svg');
   }
 
   :global(input):checked + label {
     text-decoration: line-through;
+    opacity: 0.5;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .container {
+      flex-direction: row;
+      width: fit-content;
+      max-width: 1200px;
+    }
+
+    .cover {
+      width: unset;
+    }
+
+    .title {
+      margin-bottom: 16px;
+    }
+
+    .list {
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 32px;
+
+      margin: 25px 0;
+
+      font-size: 24px;
+      line-height: 33px;
+    }
+
+    :global(input) + label::before {
+      margin-right: 20px;
+
+      width: 40px;
+      height: 40px;
+    }
   }
 </style>
