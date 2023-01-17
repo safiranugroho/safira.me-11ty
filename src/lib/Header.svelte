@@ -31,7 +31,7 @@
 		font-size: 20px;
 		line-height: 17px;
 		font-style: italic;
-		color: #525252;
+		color: #242629;
 	}
 
 	.subheading {
