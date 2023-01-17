@@ -26,7 +26,7 @@
 
 <Page>
   <div slot="content" class="content">
-    <h1>Doodles by Safira. 🖍️</h1>
+    <h1 class="title">Doodles by Safira. 🖍️</h1>
     <p>A collection of HTML/CSS/JS doodles, inspired by various prompts.</p>
     <p>In addition to fulfilling the prompt, I aim to produce solutions that are also:</p>
     <ul>
@@ -50,6 +50,10 @@
   .content {
     width: 100%;
     margin: auto;
+  }
+
+  .title {
+    margin: 0;
   }
 
   .doodle-list {
