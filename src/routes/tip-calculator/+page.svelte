@@ -1,294 +1,294 @@
 <script>
-	import Page from '$lib/Page.svelte';
-	import Header from '$lib/Header.svelte';
-	import dollarIcon from '$lib/assets/dollar.svg';
-	import peopleIcon from '$lib/assets/people.svg';
+  import Page from '$lib/Page.svelte';
+  import Header from '$lib/Header.svelte';
+  import dollarIcon from '$lib/assets/dollar.svg';
+  import peopleIcon from '$lib/assets/people.svg';
 
-	/**
-	 * @type {number | null}
-	 */
-	let billAmount = null;
-	/**
-	 * @type {number | null}
-	 */
-	let numberOfPeople = null;
-	let tipAmount = 0;
+  /**
+   * @type {number | null}
+   */
+  let billAmount = null;
+  /**
+   * @type {number | null}
+   */
+  let numberOfPeople = null;
+  let tipAmount = 0;
 
-	let totalTipAmount = 0;
-	let totalPerPerson = '0';
+  let totalTipAmount = 0;
+  let totalPerPerson = '0';
 
-	function handleReset() {
-		billAmount = null;
-		numberOfPeople = null;
-		tipAmount = 0;
+  function handleReset() {
+    billAmount = null;
+    numberOfPeople = null;
+    tipAmount = 0;
 
-		totalTipAmount = 0;
-		totalPerPerson = '0';
-	}
+    totalTipAmount = 0;
+    totalPerPerson = '0';
+  }
 
-	function handleCalculate() {
-		totalTipAmount = tipAmount && billAmount ? billAmount * (tipAmount * 0.01) : 0;
-		totalPerPerson =
-			billAmount && numberOfPeople
-				? ((billAmount + totalTipAmount) / numberOfPeople).toFixed(2)
-				: '0';
-	}
+  function handleCalculate() {
+    totalTipAmount = tipAmount && billAmount ? billAmount * (tipAmount * 0.01) : 0;
+    totalPerPerson =
+      billAmount && numberOfPeople
+        ? ((billAmount + totalTipAmount) / numberOfPeople).toFixed(2)
+        : '0';
+  }
 </script>
 
 <Page>
-	<Header
-		slot="header"
-		heading="Tip calculator"
-		subheading="Input the bill amount and number of people, and select a tip percentage."
-		completedDate="17 January 2023"
-	/>
+  <Header
+    slot="header"
+    heading="Tip calculator"
+    subheading="Input the bill amount and number of people, and select a tip percentage."
+    completedDate="17 January 2023"
+  />
 
-	<div class="bill" slot="content">
-		<div class="output">
-			<div class="description">
-				<span class="label">Tip amount</span>
-				<span class="label">% from bill amount</span>
-			</div>
-			<p class="value"><span class="currency">$</span>{totalTipAmount}</p>
-		</div>
-		<div class="output">
-			<div class="description">
-				<span class="label">Total per person</span>
-				<span class="label">Bill + tip amount divided by number of people</span>
-			</div>
-			<p class="value"><span class="currency">$</span>{totalPerPerson}</p>
-		</div>
-		<div class="inputs">
-			<div class="bill-amount input">
-				<div>
-					<img alt="Dollar sign icon" src={dollarIcon} />
-					<input type="number" id="bill-amount" maxlength="10" bind:value={billAmount} />
-				</div>
-				<label for="bill-amount">Bill amount</label>
-			</div>
-			<div class="number-of-people input">
-				<div>
-					<img alt="People icon" src={peopleIcon} />
-					<input type="number" id="number-of-people" maxlength="10" bind:value={numberOfPeople} />
-				</div>
-				<label for="number-of-people">Number of people</label>
-			</div>
-		</div>
-		<fieldset class="tip-amount">
-			{#each [5, 10, 15, 20] as amount}
-				<input
-					type="radio"
-					id={`${amount}-percent`}
-					name="tip-amount"
-					value={amount}
-					bind:group={tipAmount}
-				/>
-				<label for={`${amount}-percent`}>{amount}%</label>
-			{/each}
-		</fieldset>
-		<div class="actions">
-			<button on:click={handleReset}>Reset</button>
-			<button on:click={handleCalculate}>Calculate</button>
-		</div>
-	</div>
+  <div class="bill" slot="content">
+    <div class="output">
+      <div class="description">
+        <span class="label">Tip amount</span>
+        <span class="label">% from bill amount</span>
+      </div>
+      <p class="value"><span class="currency">$</span>{totalTipAmount}</p>
+    </div>
+    <div class="output">
+      <div class="description">
+        <span class="label">Total per person</span>
+        <span class="label">Bill + tip amount divided by number of people</span>
+      </div>
+      <p class="value"><span class="currency">$</span>{totalPerPerson}</p>
+    </div>
+    <div class="inputs">
+      <div class="bill-amount input">
+        <div>
+          <img alt="Dollar sign icon" src={dollarIcon} />
+          <input type="number" id="bill-amount" maxlength="10" bind:value={billAmount} />
+        </div>
+        <label for="bill-amount">Bill amount</label>
+      </div>
+      <div class="number-of-people input">
+        <div>
+          <img alt="People icon" src={peopleIcon} />
+          <input type="number" id="number-of-people" maxlength="10" bind:value={numberOfPeople} />
+        </div>
+        <label for="number-of-people">Number of people</label>
+      </div>
+    </div>
+    <fieldset class="tip-amount">
+      {#each [5, 10, 15, 20] as amount}
+        <input
+          type="radio"
+          id={`${amount}-percent`}
+          name="tip-amount"
+          value={amount}
+          bind:group={tipAmount}
+        />
+        <label for={`${amount}-percent`}>{amount}%</label>
+      {/each}
+    </fieldset>
+    <div class="actions">
+      <button on:click={handleReset}>Reset</button>
+      <button on:click={handleCalculate}>Calculate</button>
+    </div>
+  </div>
 </Page>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
-	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
-	:global(body) {
-		background: #f6f6f3;
-	}
+  :global(body) {
+    background: #f6f6f3;
+  }
 
-	.bill {
-		font-family: 'Inter', sans-serif;
-		color: #333333;
+  .bill {
+    font-family: 'Inter', sans-serif;
+    color: #333333;
 
-		background: #fff;
-		border-radius: 20px;
-		max-width: 768px;
-		margin: auto;
+    background: #fff;
+    border-radius: 20px;
+    max-width: 768px;
+    margin: auto;
 
-		box-shadow: 0px 0px 42px rgba(148, 146, 120, 0.2);
-	}
+    box-shadow: 0px 0px 42px rgba(148, 146, 120, 0.2);
+  }
 
-	.output {
-		display: flex;
-		padding: 40px 0;
-	}
+  .output {
+    display: flex;
+    padding: 40px 0;
+  }
 
-	.output:first-child {
-		border-bottom: 1px solid #dedede;
-		margin: 0 8px;
-	}
+  .output:first-child {
+    border-bottom: 1px solid #dedede;
+    margin: 0 8px;
+  }
 
-	.description {
-		flex: 1;
+  .description {
+    flex: 1;
 
-		text-align: right;
-		padding-right: 32px;
+    text-align: right;
+    padding-right: 32px;
 
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
-		height: 90px;
-	}
+    height: 90px;
+  }
 
-	.label:first-child {
-		font-family: 'Roboto Mono', sans-serif;
-		font-weight: 700;
-	}
+  .label:first-child {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 700;
+  }
 
-	.label:last-child {
-		font-family: 'Roboto Mono', sans-serif;
-		font-weight: 400;
-		font-style: italic;
-		font-size: 12px;
-	}
+  .label:last-child {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 12px;
+  }
 
-	.currency {
-		font-size: 56px;
-		vertical-align: text-top;
-	}
+  .currency {
+    font-size: 56px;
+    vertical-align: text-top;
+  }
 
-	.value {
-		flex: 2;
+  .value {
+    flex: 2;
 
-		font-weight: 700;
-		font-size: 80px;
-		line-height: 80px;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 80px;
 
-		margin: 0;
-	}
+    margin: 0;
+  }
 
-	.inputs {
-		background: #f7f7f7;
-		border-top-left-radius: 20px;
-		border-top-right-radius: 20px;
+  .inputs {
+    background: #f7f7f7;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 
-		display: flex;
+    display: flex;
 
-		max-width: inherit;
-	}
+    max-width: inherit;
+  }
 
-	.input {
-		display: flex;
-		flex-direction: column;
-		padding: 56px 48px;
+  .input {
+    display: flex;
+    flex-direction: column;
+    padding: 56px 48px;
 
-		text-align: center;
-	}
+    text-align: center;
+  }
 
-	.input > div {
-		display: flex;
-		align-items: center;
-		border-bottom: 3px dotted #b3b3b3;
-	}
+  .input > div {
+    display: flex;
+    align-items: center;
+    border-bottom: 3px dotted #b3b3b3;
+  }
 
-	.input > div > img {
-		height: 42px;
-	}
+  .input > div > img {
+    height: 42px;
+  }
 
-	.input > div > input {
-		all: unset;
-		font-size: 60px;
-		font-weight: 700;
-		width: 100%;
-		line-height: 56px;
-	}
+  .input > div > input {
+    all: unset;
+    font-size: 60px;
+    font-weight: 700;
+    width: 100%;
+    line-height: 56px;
+  }
 
-	.input > label {
-		font-family: 'Roboto Mono', sans-serif;
-		font-weight: 700;
-		font-size: 14px;
-		line-height: 18px;
+  .input > label {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 18px;
 
-		margin-top: 12px;
-	}
+    margin-top: 12px;
+  }
 
-	.bill-amount {
-		flex: 2;
-		border-right: 1px solid #dedede;
-	}
+  .bill-amount {
+    flex: 2;
+    border-right: 1px solid #dedede;
+  }
 
-	.number-of-people {
-		flex: 1.5;
-	}
+  .number-of-people {
+    flex: 1.5;
+  }
 
-	.tip-amount {
-		all: unset;
+  .tip-amount {
+    all: unset;
 
-		display: flex;
-		flex-direction: row;
-		gap: 48px;
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
 
-		background: #eeeeee;
-		padding: 24px 48px;
+    background: #eeeeee;
+    padding: 24px 48px;
 
-		border-top: 1px solid #dedede;
-		border-bottom: 1px solid #dedede;
-	}
+    border-top: 1px solid #dedede;
+    border-bottom: 1px solid #dedede;
+  }
 
-	.tip-amount > input {
-		display: none;
-	}
+  .tip-amount > input {
+    display: none;
+  }
 
-	.tip-amount > label {
-		flex: 1;
-		padding: 16px;
+  .tip-amount > label {
+    flex: 1;
+    padding: 16px;
 
-		background: #ffffff;
-		border-radius: 16px;
+    background: #ffffff;
+    border-radius: 16px;
 
-		font-family: 'Roboto Mono', sans-serif;
-		font-weight: 700;
-		font-size: 24px;
-		color: #60c1b6;
-		text-align: center;
-	}
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+    color: #60c1b6;
+    text-align: center;
+  }
 
-	.tip-amount > input:checked + label {
-		background: #60c1b6;
-		color: #ffffff;
-	}
+  .tip-amount > input:checked + label {
+    background: #60c1b6;
+    color: #ffffff;
+  }
 
-	.actions {
-		display: flex;
-		flex-direction: row;
-		gap: 48px;
-		justify-content: right;
+  .actions {
+    display: flex;
+    flex-direction: row;
+    gap: 48px;
+    justify-content: right;
 
-		background: #f7f7f7;
-		padding: 24px 48px;
+    background: #f7f7f7;
+    padding: 24px 48px;
 
-		border-bottom-left-radius: 20px;
-		border-bottom-right-radius: 20px;
-	}
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
 
-	.actions > button {
-		all: unset;
+  .actions > button {
+    all: unset;
 
-		flex: 1;
-		padding: 16px;
+    flex: 1;
+    padding: 16px;
 
-		border-radius: 16px;
+    border-radius: 16px;
 
-		font-family: 'Roboto Mono', sans-serif;
-		font-weight: 700;
-		font-size: 24px;
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
 
-		text-align: center;
-	}
+    text-align: center;
+  }
 
-	.actions > button:first-child {
-		border: 1px solid #ed7861;
-		color: #ed7861;
-	}
+  .actions > button:first-child {
+    border: 1px solid #ed7861;
+    color: #ed7861;
+  }
 
-	.actions > button:last-child {
-		background: #ed7861;
-		color: #ffffff;
-	}
+  .actions > button:last-child {
+    background: #ed7861;
+    color: #ffffff;
+  }
 </style>

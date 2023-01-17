@@ -2,5 +2,5 @@ fileignoreconfig:
 - filename: package-lock.json
   checksum: f067d286b3e051a720252a770e42137fab68dc4b75afbcd1dbd87f88c3fb61e2
 - filename: src/routes/keyboard/+page.svelte
-  checksum: a4017ef0c94cbf57fe037d0f6bf93e7fcb035d4959bef86eacbb197096720434
+  checksum: 37644f10b9ff564eb6ffbe3383dee68246305851084d45db3e158b4f826e4ee5
 version: "1.0"
