@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import Page from '$lib/Page.svelte';
 	import Header from '$lib/Header.svelte';
 
 	const keys = ['`1234567890-=', 'qwertyuiop[]\\', "asdfghjkl;'", 'zxcvbnm,./'];
@@ -60,14 +61,15 @@
 	});
 </script>
 
-<Header
-	heading="Keyboard"
-	subheading="My keyboard jiggle jiggles - press the key on your keyboard to stop the jiggle."
-	completedDate="16 January 2023"
-/>
+<Page>
+	<Header
+		slot="header"
+		heading="Keyboard"
+		subheading="My keyboard jiggle jiggles - press the key on your keyboard to stop the jiggle."
+		completedDate="16 January 2023"
+	/>
 
-<div class="content">
-	<div class="container">
+	<div class="container" slot="content">
 		<div class="row">
 			{#each keys[0] as char}
 				<div class="key" id={char}>{char}</div>
@@ -95,22 +97,13 @@
 			<div class="key modifier" id="shift">shift</div>
 		</div>
 	</div>
-</div>
+</Page>
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
 
-	:global(body) {
-		display: grid;
-		grid-template-rows: 1fr 2fr;
-	}
-
-	.content {
-		font-family: 'Inter', sans-serif;
-		padding: 16px;
-	}
-
 	.container {
+		font-family: 'Inter', sans-serif;
 		font-size: 24px;
 
 		background: #f6f6f6;
@@ -124,8 +117,7 @@
 
 		text-transform: uppercase;
 
-		max-width: 1200px;
-		margin: auto;
+		width: 1200px;
 	}
 
 	.row {

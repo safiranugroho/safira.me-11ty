@@ -1,16 +1,18 @@
 <script>
+	import Page from '$lib/Page.svelte';
 	import Header from '$lib/Header.svelte';
 	import cover from '$lib/assets/podcast-cover.png';
 </script>
 
-<Header
-	heading="Podcast episodes"
-	subheading="Mark each episode as watched!"
-	completedDate="16 January 2023"
-/>
+<Page>
+	<Header
+		slot="header"
+		heading="Podcast episodes"
+		subheading="Mark each episode as watched!"
+		completedDate="16 January 2023"
+	/>
 
-<div class="content">
-	<div class="container">
+	<div class="container" slot="content">
 		<img class="cover" alt="Compressed.fm podcast cover" src={cover} />
 		<div class="list">
 			<p class="title">Listen to all the Compressed.fm episodes</p>
@@ -22,23 +24,18 @@
 			{/each}
 		</div>
 	</div>
-</div>
+</Page>
 
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;900&display=swap');
 
 	:global(body) {
-		display: grid;
-		grid-template-rows: 1fr 3fr;
 		background: #f3f3f3;
 	}
 
-	.content {
-		font-family: 'Nunito Sans', sans-serif;
-		padding: 16px;
-	}
-
 	.container {
+		font-family: 'Nunito Sans', sans-serif;
+
 		width: fit-content;
 		max-width: 1200px;
 		margin: auto;

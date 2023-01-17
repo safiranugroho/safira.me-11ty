@@ -32,14 +32,8 @@
 </div>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Toto:wght@400;700&display=swap');
-
-	:global(body) {
-		font-family: 'Noto Serif Toto', serif;
-	}
-
 	.header {
-		margin-top: 60px;
+		height: 72px;
 
 		display: flex;
 		flex-direction: row;
@@ -49,7 +43,6 @@
 
 	.header > div {
 		flex: 1;
-		height: 72px;
 
 		display: flex;
 		flex-direction: column;

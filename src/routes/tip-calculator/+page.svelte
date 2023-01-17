@@ -1,4 +1,5 @@
 <script>
+	import Page from '$lib/Page.svelte';
 	import Header from '$lib/Header.svelte';
 	import dollarIcon from '$lib/assets/dollar.svg';
 	import peopleIcon from '$lib/assets/people.svg';
@@ -34,14 +35,15 @@
 	}
 </script>
 
-<Header
-	heading="Tip calculator"
-	subheading="Input the bill amount and number of people, and select a tip percentage."
-	completedDate="17 January 2023"
-/>
+<Page>
+	<Header
+		slot="header"
+		heading="Tip calculator"
+		subheading="Input the bill amount and number of people, and select a tip percentage."
+		completedDate="17 January 2023"
+	/>
 
-<div class="content">
-	<div class="bill">
+	<div class="bill" slot="content">
 		<div class="output">
 			<div class="description">
 				<span class="label">Tip amount</span>
@@ -89,26 +91,20 @@
 			<button on:click={handleCalculate}>Calculate</button>
 		</div>
 	</div>
-</div>
+</Page>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap');
-	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap');
+	@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
 	:global(body) {
-		display: grid;
-		grid-template-rows: 1fr 4fr;
 		background: #f6f6f3;
 	}
 
-	.content {
-		font-family: 'Inter', sans-serif;
-		padding: 16px;
-		padding-bottom: 72px;
-		color: #333333;
-	}
-
 	.bill {
+		font-family: 'Inter', sans-serif;
+		color: #333333;
+
 		background: #fff;
 		border-radius: 20px;
 		max-width: 768px;
