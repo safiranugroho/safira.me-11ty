@@ -104,6 +104,7 @@
 
   .container {
     font-family: 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 24px;
 
     background: #f6f6f6;
