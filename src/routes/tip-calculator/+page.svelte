@@ -98,7 +98,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
   :global(body) {
-    background: #f6f6f3;
+    background-color: #f6f6f3;
   }
 
   .bill {
@@ -119,7 +119,7 @@
   }
 
   .output:first-child {
-    border-bottom: 1px solid #dedede;
+    border-bottom: 1px solid var(--border-color);
     margin: 0 8px;
   }
 
@@ -210,7 +210,7 @@
 
   .bill-amount {
     flex: 2;
-    border-right: 1px solid #dedede;
+    border-right: 1px solid var(--border-color);
   }
 
   .number-of-people {
@@ -227,8 +227,8 @@
     background: #eeeeee;
     padding: 24px 48px;
 
-    border-top: 1px solid #dedede;
-    border-bottom: 1px solid #dedede;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .tip-amount > input {

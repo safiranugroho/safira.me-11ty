@@ -14,11 +14,12 @@
 </script>
 
 <div class="header">
-  <div>
+  <a href="/" title="Back to home" class="home-link">🖍️</a>
+  <div class="header-section">
     <h1 class="heading">{heading}</h1>
     <h2 class="subheading">{subheading}</h2>
   </div>
-  <div>
+  <div class="header-section">
     <p class="metadata">
       <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
     </p>
@@ -32,6 +33,23 @@
 </div>
 
 <style>
+  .home-link {
+    text-decoration: none;
+    position: absolute;
+    top: 24px;
+    left: 24px;
+
+    font-size: 32px;
+    padding: 4px;
+    border: 1px solid transparent;
+  }
+
+  .home-link:hover,
+  .home-link:focus,
+  .home-link:focus-visible {
+    border: 1px solid var(--border-color);
+  }
+
   .header {
     height: 72px;
 
@@ -41,7 +59,7 @@
     gap: 24px;
   }
 
-  .header > div {
+  .header-section {
     flex: 1;
 
     display: flex;
@@ -49,13 +67,13 @@
     justify-content: center;
   }
 
-  .header > div > * {
+  .header-section > * {
     margin: 4px 0;
   }
 
-  .header > div:first-child {
+  .header-section:first-of-type {
     text-align: right;
-    border-right: 1px solid #dedede;
+    border-right: 1px solid var(--border-color);
     padding: 0 24px;
   }
 
@@ -64,20 +82,20 @@
     font-size: 20px;
     line-height: 17px;
     font-style: italic;
-    color: #242629;
+    color: var(--primary-text-color);
   }
 
   .subheading {
     font-weight: 400;
     font-size: 14px;
-    color: #525252;
+    color: var(--secondary-text-color);
   }
 
   .metadata {
     font-weight: 400;
     font-size: 12px;
     line-height: 10px;
-    color: #525252;
+    color: var(--secondary-text-color);
 
     display: flex;
   }
