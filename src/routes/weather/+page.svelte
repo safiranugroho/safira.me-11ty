@@ -185,7 +185,7 @@
   }
 
   .loc {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 
     margin: 32px 0;
@@ -289,6 +289,14 @@
   }
 
   @media screen and (min-width: 768px) {
+    .loc {
+      font-size: 14px;
+    }
+
+    .loc-desc {
+      font-size: 12px;
+    }
+
     .weather-container {
       gap: 24px;
     }
