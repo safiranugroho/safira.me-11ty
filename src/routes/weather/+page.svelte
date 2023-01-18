@@ -147,9 +147,7 @@
                 {map[day].temperatureMax.toFixed(0)}<span class="degree">°</span>
               </p>
               <p class="prec" style="--color: {map[day].weather.contentText}">
-                <PrecipitationIcon /><span
-                  >{map[day].precipitation.toFixed(0)} <span class="unit">mm</span></span
-                >
+                <PrecipitationIcon /><span>{map[day].precipitation.toFixed(0)}</span>
               </p>
               <p class="temp-min" style="--color: {map[day].weather.contentText}">
                 <TemperatureIcon /><span
@@ -161,9 +159,10 @@
         {/each}
       </div>
       <p class="loc">
-        <span class="loc-desc">Showing weather for</span>
-        {suburb}, {state}.
+        Showing weather for
+        <span class="loc-values">{suburb}, {state}.</span>
       </p>
+      <p class="loc">(Precipitation reading in mm, temperature in Celcius.)</p>
     {:else}
       <div class="lds-ring">
         <div />
@@ -185,15 +184,18 @@
   }
 
   .loc {
-    font-size: 13px;
-    font-weight: 700;
-
-    margin: 32px 0;
-  }
-
-  .loc-desc {
     font-size: 12px;
     font-weight: 400;
+    margin: 0;
+  }
+
+  .loc:first-of-type {
+    margin-top: 32px;
+  }
+
+  .loc-values {
+    font-size: 13px;
+    font-weight: 700;
   }
 
   .weather-container {
@@ -277,10 +279,6 @@
     text-align: left;
   }
 
-  .unit {
-    font-size: 0.75em;
-  }
-
   :global(.prec > svg),
   :global(.temp-min > svg) {
     width: 8px;
@@ -289,12 +287,8 @@
   }
 
   @media screen and (min-width: 768px) {
-    .loc {
+    .loc-values {
       font-size: 14px;
-    }
-
-    .loc-desc {
-      font-size: 12px;
     }
 
     .weather-container {
