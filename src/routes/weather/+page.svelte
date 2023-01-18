@@ -1,4 +1,5 @@
 <script>
+  import { PUBLIC_OPENCAGE_API_KEY } from '$env/static/public';
   import Page from '$lib/Page.svelte';
 
   import cloudy from '$lib/assets/cloudy.svg';
@@ -12,13 +13,11 @@
   import TemperatureIcon from '$lib/assets/temperature.svelte';
 
   import { onMount } from 'svelte';
+  import Header from '$lib/Header.svelte';
 
   const weekday = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-  /** @type {Record<string, any>} */
-  $: map = {};
   const getWeatherByCode = (/** @type {string} */ code) => {
-    console.log({ code });
     switch (code.toString()) {
       case '0':
         return {
@@ -87,24 +86,37 @@
     }
   };
 
+  /** @type {Record<string, any>} */
+  $: map = {};
+  $: suburb = '';
+  $: state = '';
+
   onMount(() => {
     navigator.geolocation.getCurrentPosition(
       async (/** @type {{ coords: { latitude: any; longitude: any; }; }} */ position) => {
-        const res = await fetch(
+        const locRes = await fetch(
+          `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=${PUBLIC_OPENCAGE_API_KEY}`
+        );
+
+        const locData = await locRes.json();
+        suburb = locData.results[0].components.suburb;
+        state = locData.results[0].components.state;
+
+        const weatherRes = await fetch(
           `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`
         );
 
-        const data = await res.json();
+        const weatherData = await weatherRes.json();
         let i = 0;
 
         while (i < 7) {
-          map[data.daily.time[i]] = {
-            day: weekday[new Date(data.daily.time[i]).getDay()],
-            date: data.daily.time[i].split('-')[2],
-            weather: getWeatherByCode(data.daily.weathercode[i]),
-            precipitation: data.daily.precipitation_sum[i],
-            temperatureMax: data.daily.temperature_2m_max[i],
-            temperatureMin: data.daily.temperature_2m_min[i]
+          map[weatherData.daily.time[i]] = {
+            day: weekday[new Date(weatherData.daily.time[i]).getDay()],
+            date: weatherData.daily.time[i].split('-')[2],
+            weather: getWeatherByCode(weatherData.daily.weathercode[i]),
+            precipitation: weatherData.daily.precipitation_sum[i],
+            temperatureMax: weatherData.daily.temperature_2m_max[i],
+            temperatureMin: weatherData.daily.temperature_2m_min[i]
           };
 
           i++;
@@ -115,36 +127,70 @@
 </script>
 
 <Page background="#E9F5FA">
+  <Header
+    slot="header"
+    heading="Weather"
+    subheading="What's the weather like today?"
+    completedDate="18 January 2023"
+  />
+
   <div class="container" slot="content">
-    {#each Object.keys(map) as day}
-      <div class="date-container">
-        <p class="day">{map[day].day}</p>
-        <p class="date">{map[day].date}</p>
-        <div class="info-container" style="--background: {map[day].weather.background}">
-          <img src={map[day].weather.icon} alt="Weather icon" class="weather-icon" />
-          <p class="temp-max" style="--color: {map[day].weather.temperatureText}">
-            {map[day].temperatureMax.toFixed(0)}<span class="degree">°</span>
-          </p>
-          <p class="prec" style="--color: {map[day].weather.contentText}">
-            <PrecipitationIcon /><span
-              >{map[day].precipitation.toFixed(0)} <span class="unit">mm</span></span
-            >
-          </p>
-          <p class="temp-min" style="--color: {map[day].weather.contentText}">
-            <TemperatureIcon /><span
-              >{map[day].temperatureMin.toFixed(0)}<span class="degree">°</span></span
-            >
-          </p>
-        </div>
+    {#if Object.keys(map).length > 0}
+      <div class="weather-container">
+        {#each Object.keys(map) as day}
+          <div class="date-container">
+            <p class="day">{map[day].day}</p>
+            <p class="date">{map[day].date}</p>
+            <div class="info-container" style="--background: {map[day].weather.background}">
+              <img src={map[day].weather.icon} alt="Weather icon" class="weather-icon" />
+              <p class="temp-max" style="--color: {map[day].weather.temperatureText}">
+                {map[day].temperatureMax.toFixed(0)}<span class="degree">°</span>
+              </p>
+              <p class="prec" style="--color: {map[day].weather.contentText}">
+                <PrecipitationIcon /><span
+                  >{map[day].precipitation.toFixed(0)} <span class="unit">mm</span></span
+                >
+              </p>
+              <p class="temp-min" style="--color: {map[day].weather.contentText}">
+                <TemperatureIcon /><span
+                  >{map[day].temperatureMin.toFixed(0)}<span class="degree">°</span></span
+                >
+              </p>
+            </div>
+          </div>
+        {/each}
       </div>
-    {/each}
+      <p class="loc">
+        <span class="loc-desc">Showing weather for</span>
+        {suburb}, {state}.
+      </p>
+    {:else}
+      <div class="lds-ring">
+        <div />
+        <div />
+        <div />
+        <div />
+      </div>
+    {/if}
   </div>
 </Page>
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Oswald&display=swap');
 
-  .container {
+  .loc {
+    font-size: 14px;
+    font-weight: 700;
+
+    margin: 32px 0;
+  }
+
+  .loc-desc {
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  .weather-container {
     font-family: 'Krona One', sans-serif;
 
     display: flex;
@@ -237,7 +283,7 @@
   }
 
   @media screen and (min-width: 768px) {
-    .container {
+    .weather-container {
       gap: 24px;
     }
 
@@ -299,4 +345,42 @@
       grid-template-columns: 1fr 2fr;
     }
   }
+
+  /* Loading icon by https://loading.io/css/ */
+  .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #cef;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #cef transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  /* End of loading icon by https://loading.io/css/ */
 </style>
