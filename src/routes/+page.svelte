@@ -4,6 +4,7 @@
   import keyboard from '$lib/assets/keyboard.png';
   import podcast from '$lib/assets/podcast.png';
   import tip from '$lib/assets/tip.png';
+  import weather from '$lib/assets/weather.png';
 
   const doodles = [
     {
@@ -20,6 +21,12 @@
       path: '/tip-calculator',
       name: 'Tip calculator',
       cover: tip
+    },
+
+    {
+      path: '/weather',
+      name: 'Weather forecast',
+      cover: weather
     }
   ];
 </script>

@@ -129,7 +129,7 @@
 <Page background="#E9F5FA">
   <Header
     slot="header"
-    heading="Weather"
+    heading="Weather forecast"
     subheading="What's the weather like today?"
     completedDate="18 January 2023"
   />
