@@ -178,6 +178,12 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Oswald&display=swap');
 
+  :global(:root) {
+    --weather-icon-dimension-mobile: 110px;
+    --weather-icon-dimension-tablet: 220px;
+    --weather-icon-dimension-desktop: 250px;
+  }
+
   .loc {
     font-size: 14px;
     font-weight: 700;
@@ -211,7 +217,7 @@
     border-radius: 12px;
 
     margin-top: 8px;
-    padding-top: 64px;
+    padding-top: var(--weather-icon-dimension-mobile);
     padding-bottom: 8px;
   }
 
@@ -232,10 +238,10 @@
 
   .weather-icon {
     position: absolute;
-    width: 72px;
-    height: 72px;
+    width: var(--weather-icon-dimension-mobile);
+    height: var(--weather-icon-dimension-mobile);
     top: 5%;
-    left: -10%;
+    left: -15%;
 
     background: transparent;
   }
@@ -298,17 +304,15 @@
 
     .info-container {
       margin-top: 16px;
-      padding-top: 180px;
+      padding-top: var(--weather-icon-dimension-tablet);
       padding-bottom: 24px;
 
       border-radius: 40px;
-
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 20px rgba(32, 77, 92, 0.7);
     }
 
     .weather-icon {
-      width: 180px;
-      height: 180px;
+      width: var(--weather-icon-dimension-tablet);
+      height: var(--weather-icon-dimension-tablet);
     }
 
     .temp-max {
@@ -338,6 +342,15 @@
   }
 
   @media screen and (min-width: 1024px) {
+    .info-container {
+      padding-top: var(--weather-icon-dimension-desktop);
+    }
+
+    .weather-icon {
+      width: var(--weather-icon-dimension-desktop);
+      height: var(--weather-icon-dimension-desktop);
+    }
+
     .prec,
     .temp-min {
       padding: 0 40px;
