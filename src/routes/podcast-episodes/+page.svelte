@@ -18,8 +18,8 @@
       <p class="title">Listen to all the Compressed.fm episodes</p>
       {#each ['Trailer', "James Q's Quick Origin Story", "Amy Dutton's Origin Story", 'Tech Behind the Podcast', 'Tech Behind SelfTeach.me', 'Freelancing (Part 1)'] as episode, i}
         <div>
-          <input type="checkbox" id={String(i)} />
-          <label for={String(i)}>{String(i + 1)} / {episode}</label>
+          <input type="checkbox" id={String(i)} class="checkbox" />
+          <label for={String(i)} class="checkbox-label">{String(i + 1)} / {episode}</label>
         </div>
       {/each}
     </div>
@@ -76,11 +76,11 @@
     color: #a7a7a7;
   }
 
-  :global(input) {
+  .checkbox {
     display: none;
   }
 
-  :global(input) + label::before {
+  .checkbox-label::before {
     content: '';
     background-image: url('$lib/assets/checkbox--unchecked.svg');
     background-size: cover;
@@ -92,12 +92,12 @@
     height: 24px;
   }
 
-  :global(input):checked + label::before {
+  .checkbox:checked + .checkbox-label::before {
     content: '';
     background-image: url('$lib/assets/checkbox--checked.svg');
   }
 
-  :global(input):checked + label {
+  .checkbox:checked + .checkbox-label {
     text-decoration: line-through;
     opacity: 0.5;
   }
@@ -127,7 +127,7 @@
       line-height: 33px;
     }
 
-    :global(input) + label::before {
+    .checkbox:checked + .checkbox-label::before {
       margin-right: 20px;
 
       width: 40px;
