@@ -1,17 +1,5 @@
-<script context="module">
-  /**
-   * @type {Record<string, any>}
-   */
-  let current = {};
-</script>
-
 <script>
-  import { getContext } from 'svelte';
-  import { page } from '$app/stores';
-
-  import prev from '$lib/assets/arrow-prev.png';
-  import next from '$lib/assets/arrow-next.png';
-  import HomeLink from './HomeLink.svelte';
+  import NavLink from './NavLink.svelte';
 
   /**
    * @type {string}
@@ -25,22 +13,10 @@
    * @type {string}
    */
   export let completedDate;
-
-  const doodles = getContext('doodles');
-
-  page.subscribe((p) => {
-    const doodle = doodles[p.url.pathname];
-    if (doodle && current.name !== doodle.name) {
-      current = doodle;
-    }
-  });
 </script>
 
 <div class="header">
-  {#if current.prev}<a href={current.prev} title="Link to previous doodle"
-      ><img src={prev} alt="Previous doodle" class="nav-link" /></a
-    >{:else}
-    <HomeLink />{/if}
+  <NavLink prev />
   <div class="sections">
     <div class="header-section">
       <h1 class="heading">{heading}</h1>
@@ -61,10 +37,7 @@
       </p>
     </div>
   </div>
-  {#if current.next}<a href={current.next} title="Link to next doodle"
-      ><img src={next} alt="Next doodle" class="nav-link" /></a
-    >{:else}
-    <HomeLink />{/if}
+  <NavLink />
 </div>
 
 <style>
@@ -78,17 +51,6 @@
     gap: 24px;
   }
 
-  .nav-link {
-    height: 32px;
-    border: 1px solid transparent;
-  }
-
-  .nav-link:hover,
-  .nav-link:focus,
-  .nav-link:focus-visible {
-    border: 1px solid var(--border-color);
-  }
-
   .sections {
     flex: 1;
 
@@ -96,7 +58,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 12px;
   }
 
   .header-section {
@@ -118,7 +80,6 @@
 
   .header-section:last-of-type {
     padding: 8px 0;
-    flex-direction: row;
     justify-content: space-between;
     width: 100%;
   }
@@ -197,14 +158,14 @@
       justify-content: unset;
       width: unset;
     }
+  }
 
+  @media screen and (min-width: 1024px) {
     .metadata {
       flex-direction: row;
       line-height: 10px;
     }
-  }
 
-  @media screen and (min-width: 1024px) {
     .metadata > *:last-child {
       flex: 5;
     }
