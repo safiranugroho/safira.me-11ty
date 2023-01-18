@@ -1,5 +1,6 @@
 <script>
   import Page from '$lib/Page.svelte';
+
   import cloudy from '$lib/assets/cloudy.svg';
   import partlyCloudy from '$lib/assets/partly-cloudy.svg';
   import rainy from '$lib/assets/rainy.svg';
@@ -7,7 +8,12 @@
   import snowy from '$lib/assets/snowy.svg';
   import stormy from '$lib/assets/stormy.svg';
 
+  import PrecipitationIcon from '$lib/assets/precipitation.svelte';
+  import TemperatureIcon from '$lib/assets/temperature.svelte';
+
   import { onMount } from 'svelte';
+
+  const weekday = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
   /** @type {Record<string, any>} */
   $: map = {};
@@ -81,43 +87,53 @@
     }
   };
 
-  onMount(async () => {
-    const res = await fetch(
-      'https://api.open-meteo.com/v1/forecast?latitude=40.71&longitude=-74.01&&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto'
+  onMount(() => {
+    navigator.geolocation.getCurrentPosition(
+      async (/** @type {{ coords: { latitude: any; longitude: any; }; }} */ position) => {
+        const res = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`
+        );
+
+        const data = await res.json();
+        let i = 0;
+
+        while (i < 7) {
+          map[data.daily.time[i]] = {
+            day: weekday[new Date(data.daily.time[i]).getDay()],
+            date: data.daily.time[i].split('-')[2],
+            weather: getWeatherByCode(data.daily.weathercode[i]),
+            precipitation: data.daily.precipitation_sum[i],
+            temperatureMax: data.daily.temperature_2m_max[i],
+            temperatureMin: data.daily.temperature_2m_min[i]
+          };
+
+          i++;
+        }
+      }
     );
-
-    const data = await res.json();
-    let i = 0;
-
-    while (i < 7) {
-      map[data.daily.time[i]] = {
-        date: data.daily.time[i].split('-')[2],
-        weather: getWeatherByCode(data.daily.weathercode[i]),
-        precipitation: data.daily.precipitation_sum[i],
-        temperatureMax: data.daily.temperature_2m_max[i],
-        temperatureMin: data.daily.temperature_2m_min[i]
-      };
-
-      i++;
-    }
   });
 </script>
 
 <Page background="#E9F5FA">
   <div class="container" slot="content">
     {#each Object.keys(map) as day}
-      <div>
+      <div class="date-container">
+        <p class="day">{map[day].day}</p>
         <p class="date">{map[day].date}</p>
         <div class="info-container" style="--background: {map[day].weather.background}">
           <img src={map[day].weather.icon} alt="Weather icon" class="weather-icon" />
           <p class="temp-max" style="--color: {map[day].weather.temperatureText}">
-            {map[day].temperatureMax.toFixed(0)}
+            {map[day].temperatureMax.toFixed(0)}<span class="degree">°</span>
           </p>
           <p class="prec" style="--color: {map[day].weather.contentText}">
-            {map[day].precipitation.toFixed(1)}
+            <PrecipitationIcon /><span
+              >{map[day].precipitation.toFixed(0)} <span class="unit">mm</span></span
+            >
           </p>
           <p class="temp-min" style="--color: {map[day].weather.contentText}">
-            {map[day].temperatureMin.toFixed(0)}
+            <TemperatureIcon /><span
+              >{map[day].temperatureMin.toFixed(0)}<span class="degree">°</span></span
+            >
           </p>
         </div>
       </div>
@@ -137,7 +153,7 @@
     text-align: center;
   }
 
-  .container > div {
+  .date-container {
     flex: 1;
     min-width: 0;
   }
@@ -148,20 +164,33 @@
 
     border-radius: 12px;
 
-    padding: 8px;
+    margin-top: 8px;
     padding-top: 64px;
+    padding-bottom: 8px;
+  }
+
+  .day,
+  .date {
+    color: #4db0d3;
+    margin: 0;
+  }
+
+  .day {
+    font-size: 10px;
+    letter-spacing: 0.2em;
   }
 
   .date {
-    color: #4db0d3;
+    font-size: 24px;
   }
 
   .weather-icon {
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     top: 5%;
-    left: -25%;
+    left: -10%;
+
     background: transparent;
   }
 
@@ -172,13 +201,39 @@
   }
 
   .temp-max {
+    margin: 16px;
     font-family: 'Oswald', sans-serif;
-    font-size: 24px;
+    font-size: 30px;
+  }
+
+  .temp-max > .degree {
+    font-size: 20px;
+    vertical-align: super;
   }
 
   .prec,
   .temp-min {
-    font-size: 10px;
+    padding: 0 12px;
+    margin: 2px 0;
+
+    font-size: 8px;
+    line-height: 8px;
+
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+    text-align: left;
+  }
+
+  .unit {
+    font-size: 0.75em;
+  }
+
+  :global(.prec > svg),
+  :global(.temp-min > svg) {
+    width: 8px;
+    height: 8px;
+    margin-right: 4px;
   }
 
   @media screen and (min-width: 768px) {
@@ -186,10 +241,23 @@
       gap: 24px;
     }
 
+    .day {
+      font-size: 20px;
+      letter-spacing: 0.2em;
+    }
+
+    .date {
+      font-size: 56px;
+    }
+
     .info-container {
-      padding: 32px;
-      padding-top: 150px;
+      margin-top: 16px;
+      padding-top: 180px;
+      padding-bottom: 24px;
+
       border-radius: 40px;
+
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 20px rgba(32, 77, 92, 0.7);
     }
 
     .weather-icon {
@@ -198,12 +266,37 @@
     }
 
     .temp-max {
-      font-size: 72px;
+      font-size: 90px;
+    }
+
+    .temp-max > .degree {
+      font-size: 48px;
+      vertical-align: super;
     }
 
     .prec,
     .temp-min {
-      font-size: 12px;
+      padding: 0 24px;
+      margin: 8px 0;
+
+      font-size: 16px;
+      line-height: 18px;
+    }
+
+    :global(.prec > svg),
+    :global(.temp-min > svg) {
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .prec,
+    .temp-min {
+      padding: 0 40px;
+
+      grid-template-columns: 1fr 2fr;
     }
   }
 </style>
