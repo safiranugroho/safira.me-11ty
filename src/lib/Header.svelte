@@ -57,8 +57,6 @@
     flex-direction: row;
     justify-content: center;
     gap: 24px;
-
-    margin-top: 60px;
   }
 
   .header-section {

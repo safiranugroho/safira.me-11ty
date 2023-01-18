@@ -3,7 +3,7 @@
 </script>
 
 <div class="page" style="--background: {background};">
-  <slot name="header" />
+  <div class="header"><slot name="header" /></div>
   <div class="content"><slot name="content" /></div>
 </div>
 
@@ -49,6 +49,10 @@
     height: fit-content;
 
     overflow: scroll;
+  }
+
+  .header {
+    margin-top: 60px;
   }
 
   .content {
