@@ -1,4 +1,37 @@
 <script>
+  import { setContext } from 'svelte';
+  import keyboard from '$lib/assets/keyboard.png';
+  import podcast from '$lib/assets/podcast.png';
+  import tip from '$lib/assets/tip.png';
+  import weather from '$lib/assets/weather.png';
+
+  const doodles = {
+    '/keyboard': {
+      name: 'Keyboard',
+      cover: keyboard,
+      next: '/podcast-episodes'
+    },
+    '/podcast-episodes': {
+      prev: '/keyboard',
+      name: 'Podcast episodes',
+      cover: podcast,
+      next: '/tip-calculator'
+    },
+    '/tip-calculator': {
+      prev: '/podcast-episodes',
+      name: 'Tip calculator',
+      cover: tip,
+      next: '/weather'
+    },
+    '/weather': {
+      prev: '/tip-calculator',
+      name: 'Weather forecast',
+      cover: weather
+    }
+  };
+
+  setContext('doodles', doodles);
+
   export let background = '#ffffff';
 </script>
 
@@ -32,7 +65,7 @@
   }
 
   .page {
-    padding: 0 24px;
+    padding: 0 36px;
 
     position: absolute;
     top: 0px;

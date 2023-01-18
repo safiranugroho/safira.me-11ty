@@ -1,4 +1,17 @@
+<script context="module">
+  /**
+   * @type {Record<string, any>}
+   */
+  let current = {};
+</script>
+
 <script>
+  import { getContext } from 'svelte';
+  import { page } from '$app/stores';
+
+  import prev from '$lib/assets/arrow-prev.png';
+  import next from '$lib/assets/arrow-next.png';
+
   /**
    * @type {string}
    */
@@ -11,33 +24,66 @@
    * @type {string}
    */
   export let completedDate;
+
+  const doodles = getContext('doodles');
+
+  page.subscribe((p) => {
+    console.log({ p: p.url.pathname });
+    const doodle = doodles[p.url.pathname];
+
+    if (current.name !== doodle.name) {
+      current = doodle;
+    }
+  });
 </script>
 
 <div class="header">
-  <a href="/" title="Back to home" class="home-link">🖍️</a>
-  <div class="header-section">
-    <h1 class="heading">{heading}</h1>
-    <h2 class="subheading">{subheading}</h2>
+  {#if current.prev}<a href={current.prev} title="Link to previous doodle"
+      ><img src={prev} alt="Previous doodle" class="nav-link" /></a
+    >{:else}
+    <a href="/" title="Back to home" class="home-link">🖍️</a>{/if}
+  <div class="sections">
+    <div class="header-section">
+      <h1 class="heading">{heading}</h1>
+      <h2 class="subheading">{subheading}</h2>
+    </div>
+    <div class="header-section">
+      <p class="metadata">
+        <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
+      </p>
+      <p class="metadata">
+        <span class="metadata-label">Prompt by:</span>
+        <a
+          href="https://www.adventofcss.com/"
+          class="external-link"
+          target="_blank"
+          rel="noreferrer">Advent of CSS</a
+        >
+      </p>
+    </div>
   </div>
-  <div class="header-section">
-    <p class="metadata">
-      <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
-    </p>
-    <p class="metadata">
-      <span class="metadata-label">Prompt by:</span>
-      <a href="https://www.adventofcss.com/" class="external-link" target="_blank" rel="noreferrer"
-        >Advent of CSS</a
-      >
-    </p>
-  </div>
+  {#if current.next}<a href={current.next} title="Link to next doodle"
+      ><img src={next} alt="Next doodle" class="nav-link" /></a
+    >{:else}
+    <a href="/" title="Back to home" class="home-link">🖍️</a>{/if}
 </div>
 
 <style>
+  .header {
+    min-height: 72px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-link {
+    height: 32px;
+  }
   .home-link {
     text-decoration: none;
-    position: absolute;
-    top: 24px;
-    left: 24px;
 
     font-size: 32px;
     padding: 4px;
@@ -50,12 +96,13 @@
     border: 1px solid var(--border-color);
   }
 
-  .header {
-    min-height: 72px;
+  .sections {
+    flex: 1;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 24px;
   }
 
@@ -72,9 +119,15 @@
   }
 
   .header-section:first-of-type {
-    text-align: right;
-    border-right: 1px solid var(--border-color);
-    padding: 0 24px;
+    border-bottom: 1px solid var(--border-color);
+    padding: 8px 0;
+  }
+
+  .header-section:last-of-type {
+    padding: 8px 0;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .heading {
@@ -128,6 +181,30 @@
   }
 
   @media screen and (min-width: 768px) {
+    .sections {
+      flex: 1;
+
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .header-section:first-of-type {
+      text-align: right;
+      border-bottom: none;
+      border-right: 1px solid var(--border-color);
+      padding: 0 24px;
+    }
+
+    .header-section:last-of-type {
+      padding: unset;
+      flex-direction: column;
+      justify-content: unset;
+      width: unset;
+    }
+
     .metadata {
       flex-direction: row;
       line-height: 10px;
