@@ -1,9 +1,11 @@
 <script>
   import Page from '$lib/Page.svelte';
 
+  import blog from '$lib/assets/blog-icon.png';
   import github from '$lib/assets/github.png';
   import twitter from '$lib/assets/twitter.png';
   import linkedin from '$lib/assets/linkedin.png';
+
   import DoodleList from '$lib/DoodleList.svelte';
 </script>
 
@@ -12,6 +14,9 @@
     <h1 class="title">Doodles by Safira 🖍️</h1>
     <p class="desc">doodle /ˈduːd(ə)l/ - <i>verb</i>: <u>scribble</u> absent-mindedly.</p>
     <div class="socials">
+      <a href="https://safira.me" title="Blog"
+        ><img src={blog} alt="Blog logo" class="social-icon" /></a
+      >
       <a
         href="https://github.com/safiranugroho/safira.me/tree/doodles"
         title="Source code on GitHub"><img src={github} alt="GitHub logo" class="social-icon" /></a
