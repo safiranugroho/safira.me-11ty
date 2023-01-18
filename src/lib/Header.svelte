@@ -11,6 +11,7 @@
 
   import prev from '$lib/assets/arrow-prev.png';
   import next from '$lib/assets/arrow-next.png';
+  import HomeLink from './HomeLink.svelte';
 
   /**
    * @type {string}
@@ -39,7 +40,7 @@
   {#if current.prev}<a href={current.prev} title="Link to previous doodle"
       ><img src={prev} alt="Previous doodle" class="nav-link" /></a
     >{:else}
-    <a href="/" title="Back to home" class="home-link">🖍️</a>{/if}
+    <HomeLink />{/if}
   <div class="sections">
     <div class="header-section">
       <h1 class="heading">{heading}</h1>
@@ -63,7 +64,7 @@
   {#if current.next}<a href={current.next} title="Link to next doodle"
       ><img src={next} alt="Next doodle" class="nav-link" /></a
     >{:else}
-    <a href="/" title="Back to home" class="home-link">🖍️</a>{/if}
+    <HomeLink />{/if}
 </div>
 
 <style>
@@ -79,18 +80,12 @@
 
   .nav-link {
     height: 32px;
-  }
-  .home-link {
-    text-decoration: none;
-
-    font-size: 32px;
-    padding: 4px;
     border: 1px solid transparent;
   }
 
-  .home-link:hover,
-  .home-link:focus,
-  .home-link:focus-visible {
+  .nav-link:hover,
+  .nav-link:focus,
+  .nav-link:focus-visible {
     border: 1px solid var(--border-color);
   }
 
