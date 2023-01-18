@@ -28,10 +28,8 @@
   const doodles = getContext('doodles');
 
   page.subscribe((p) => {
-    console.log({ p: p.url.pathname });
     const doodle = doodles[p.url.pathname];
-
-    if (current.name !== doodle.name) {
+    if (doodle && current.name !== doodle.name) {
       current = doodle;
     }
   });
