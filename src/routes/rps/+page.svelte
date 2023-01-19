@@ -1,44 +1,99 @@
 <script>
+  import { setContext } from 'svelte';
+
   import rock from '$lib/assets/rock.png';
   import paper from '$lib/assets/paper.png';
   import scissors from '$lib/assets/scissors.png';
+
   import Page from '$lib/Page.svelte';
+  import Result from './Result.svelte';
 
   /**
    * @type {Record<string, any>}
    */
   const hands = {
-    rock: rock,
-    paper: paper,
-    scissors: scissors
+    rock: { icon: rock, defeats: (/** @type {string} */ h) => h === 'scissors' },
+    paper: { icon: paper, defeats: (/** @type {string} */ h) => h === 'rock' },
+    scissors: { icon: scissors, defeats: (/** @type {string} */ h) => h === 'paper' }
   };
+
+  setContext('hands', hands);
 
   /**
    * @type {string | null}
    */
   let playerHand = null;
+
+  /**
+   * @type {string | null}
+   */
+  let computerHand = null;
+
+  /**
+   * @type {'player' | 'draw' | 'computer' | null}
+   */
+  let result = null;
+
+  $: {
+    if (playerHand) {
+      const randomIndex = Math.floor(Math.random() * 3);
+      computerHand = Object.keys(hands)[randomIndex];
+
+      result =
+        playerHand === computerHand
+          ? 'draw'
+          : hands[playerHand].defeats(computerHand)
+          ? 'player'
+          : 'computer';
+    }
+  }
+
+  function handleReset() {
+    playerHand = null;
+    computerHand = null;
+    result = null;
+  }
+
+  setContext('onReset', handleReset);
 </script>
 
 <Page>
-  <fieldset class="hands" slot="content">
-    {#each Object.keys(hands) as hand}
-      <input
-        class="hand-checkbox"
-        type="radio"
-        id={hand}
-        name="player-hand"
-        value={hand}
-        bind:group={playerHand}
-      />
-      <label for={hand} class="hand-container">
-        <img class="hand-icon" src={hands[hand]} alt={hand} />
-        <p class="hand-text">{hand}</p>
-      </label>
-    {/each}
-  </fieldset>
+  <div class="game-container" slot="content">
+    <p class="title">pick one</p>
+    <fieldset class="hands">
+      {#each Object.keys(hands) as hand}
+        <input
+          class="hand-checkbox"
+          type="radio"
+          id={hand}
+          name="player-hand"
+          value={hand}
+          bind:group={playerHand}
+        />
+        <label for={hand} class="hand-container">
+          <img class="hand-icon" src={hands[hand].icon} alt={hand} />
+          <p class="hand-text">{hand}</p>
+        </label>
+      {/each}
+    </fieldset>
+    <Result {result} {playerHand} {computerHand} />
+  </div>
 </Page>
 
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+  .game-container {
+    font-family: 'Roboto Mono', sans-serif;
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .title {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
   .hands {
     all: unset;
 
@@ -46,6 +101,7 @@
     gap: 64px;
 
     max-width: 1096px;
+    font-size: 18px;
   }
 
   .hand-checkbox {
