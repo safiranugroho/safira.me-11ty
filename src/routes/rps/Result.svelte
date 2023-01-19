@@ -29,7 +29,7 @@
 </script>
 
 {#if result && playerHand && computerHand}
-  <div class="result-container" transition:fly={{ delay: 0, x: transitionOffset, duration: 500 }}>
+  <div class="result-container" transition:fly={{ delay: 0, x: transitionOffset, duration: 250 }}>
     <img
       class="result-bg"
       src={background}
@@ -80,6 +80,8 @@
     font-family: 'Roboto Mono', sans-serif;
     font-weight: 700;
     font-size: 24px;
+
+    overflow: scroll;
   }
 
   .result-container > div {
@@ -91,7 +93,10 @@
     top: 0;
     right: var(--right);
     left: var(--left);
+
     z-index: -1;
+
+    height: 100%;
   }
 
   .hand-result-container {
@@ -109,6 +114,8 @@
     display: grid;
     grid-template-rows: 1fr 0.75fr 3fr;
     justify-items: center;
+
+    padding: 24px;
   }
 
   .hand-result-text {
@@ -119,6 +126,8 @@
   .hand-result-icon {
     mix-blend-mode: multiply;
     grid-row-start: 3;
+
+    max-width: 100%;
   }
 
   .hand-result-icon.computer {
@@ -135,5 +144,15 @@
     font-family: 'Roboto Mono', sans-serif;
     font-weight: 700;
     font-size: 24px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .hand-result {
+      padding: unset;
+    }
+
+    .hand-result-icon {
+      max-width: unset;
+    }
   }
 </style>

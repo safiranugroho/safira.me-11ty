@@ -106,6 +106,7 @@
     all: unset;
 
     display: flex;
+    flex-direction: column;
     gap: 64px;
 
     max-width: 1096px;
@@ -141,5 +142,11 @@
     margin: auto;
 
     object-fit: contain;
+  }
+
+  @media screen and (min-width: 768px) {
+    .hands {
+      flex-direction: row;
+    }
   }
 </style>
