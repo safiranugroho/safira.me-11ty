@@ -6,6 +6,7 @@
   import scissors from '$lib/assets/scissors.png';
 
   import Page from '$lib/Page.svelte';
+  import Header from '$lib/Header.svelte';
   import Result from './Result.svelte';
 
   /**
@@ -58,6 +59,13 @@
 </script>
 
 <Page>
+  <Header
+    slot="header"
+    heading="Rock paper scissors"
+    subheading="Shoot!"
+    completedDate="19 January 2023"
+  />
+
   <div class="game-container" slot="content">
     <p class="title">pick one</p>
     <fieldset class="hands">
