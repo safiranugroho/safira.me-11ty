@@ -18,7 +18,7 @@
    */
   export let result;
 
-  $: transitionOffset = result === 'computer' ? 2000 : -2000;
+  $: transitionOffset = result === 'computer' ? -2000 : 2000;
 
   $: background = result === 'computer' ? computerBg : playerBg;
   $: backgroundPositionLeft = result === 'computer' ? 'unset' : 0;
