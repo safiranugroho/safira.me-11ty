@@ -6,11 +6,12 @@
 </script>
 
 <script>
-  import { getContext } from 'svelte';
+  import { getContext, onMount } from 'svelte';
   import { page } from '$app/stores';
 
   import arrowPrev from '$lib/assets/arrow-prev.png';
   import arrowNext from '$lib/assets/arrow-next.png';
+  import { goto } from '$app/navigation';
 
   /** @type {boolean} */
   export let prev = false;
@@ -19,9 +20,8 @@
 
   page.subscribe((p) => {
     const doodle = doodles[p.url.pathname];
-    if (doodle && current.name !== doodle.name) {
-      current = doodle;
-    }
+    if (!doodle) current = {};
+    if (doodle && current.name !== doodle.name) current = doodle;
   });
 
   let url = prev ? current?.prev : current?.next;
@@ -31,6 +31,15 @@
   let alignText = prev ? 'left' : 'right';
   let alignItems = prev ? 'start' : 'end';
   let direction = prev ? 'row' : 'row-reverse';
+
+  onMount(() => {
+    if (current) {
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goto(current.prev ?? '/');
+        if (e.key === 'ArrowRight') goto(current.next ?? '/');
+      });
+    }
+  });
 </script>
 
 {#if url}

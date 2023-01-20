@@ -1,6 +1,8 @@
 fileignoreconfig:
 - filename: package-lock.json
   checksum: f067d286b3e051a720252a770e42137fab68dc4b75afbcd1dbd87f88c3fb61e2
+- filename: src/lib/NavLink.svelte
+  checksum: f0b361c057152d628291dfd2f09e4fa494130f707b0dfe4284bc46a2ac6a0632
 - filename: src/routes/keyboard/+page.svelte
   checksum: c12cd42f59c50fd35398f0760cb14ed6699a1f34c368cbdf6f5e197cc06f4e3c
 - filename: src/routes/weather/+page.svelte
