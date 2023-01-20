@@ -1,6 +1,4 @@
 <script>
-  import NavLink from './NavLink.svelte';
-
   /**
    * @type {string}
    */
@@ -16,11 +14,11 @@
 </script>
 
 <div class="header">
-  <div class="header-section">
+  <div class="heading-container">
     <h1 class="heading">{heading}</h1>
     <h2 class="subheading">{subheading}</h2>
   </div>
-  <div class="header-section">
+  <div class="metadata-container">
     <p class="metadata">
       <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
     </p>
@@ -43,31 +41,26 @@
     gap: 12px;
   }
 
-  .header-section {
+  .heading-container,
+  .metadata-container {
     flex: 1;
 
     display: flex;
     gap: 8px;
   }
 
-  .header-section > * {
-    margin: 0;
-  }
-
-  .header-section:first-of-type {
+  .heading-container {
     flex-direction: column;
     justify-content: center;
+    gap: 2px;
 
     border-bottom: 1px solid var(--border-color);
     padding: 16px 0;
   }
 
-  .header-section:last-of-type {
-    flex-direction: row;
-    gap: 24px;
-
-    padding: 8px 0;
-    width: 100%;
+  .heading,
+  .subheading {
+    margin: 0;
   }
 
   .heading {
@@ -84,7 +77,17 @@
     color: var(--secondary-text-color);
   }
 
+  .metadata-container {
+    flex-direction: row;
+    gap: 24px;
+
+    padding: 8px 0;
+    width: 100%;
+  }
+
   .metadata {
+    margin: 0;
+
     font-weight: 400;
     font-size: 12px;
     color: var(--secondary-text-color);
@@ -120,14 +123,14 @@
       gap: 24px;
     }
 
-    .header-section:first-of-type {
+    .heading-container {
       text-align: right;
       border-bottom: none;
       border-right: 1px solid var(--border-color);
       padding: 0 24px;
     }
 
-    .header-section:last-of-type {
+    .metadata-container {
       flex-direction: column;
       gap: 8px;
 

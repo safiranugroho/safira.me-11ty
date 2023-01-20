@@ -12,8 +12,6 @@
   import arrowPrev from '$lib/assets/arrow-prev.png';
   import arrowNext from '$lib/assets/arrow-next.png';
 
-  import HomeLink from './HomeLink.svelte';
-
   /** @type {boolean} */
   export let prev = false;
 

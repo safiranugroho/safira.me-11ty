@@ -5,6 +5,7 @@
   import weather from '$lib/assets/weather.png';
   import rps from '$lib/assets/rps.png';
   import Footer from './Footer.svelte';
+  import { page } from '$app/stores';
 
   const doodles = {
     '/keyboard': {
@@ -34,12 +35,15 @@
   setContext('doodles', doodles);
 
   export let background = '#ffffff';
+
+  let showFooter = false;
+  $: page.subscribe((p) => (showFooter = p.url.pathname !== '/'));
 </script>
 
 <div class="page" style="--background: {background};">
   <div class="header"><slot name="header" /></div>
   <div class="content"><slot name="content" /></div>
-  <Footer />
+  {#if showFooter}<Footer />{/if}
 </div>
 
 <style>
