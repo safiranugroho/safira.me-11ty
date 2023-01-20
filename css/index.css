@@ -53,6 +53,10 @@ body.dark {
   );
 }
 
+p {
+  line-height: 1.5em;
+}
+
 a {
   background-image: var(--hover-bg);
   background-position: -0% 0;
@@ -93,7 +97,6 @@ section > ol > li {
 
 section > p {
   margin: 2em 0;
-  line-height: 1.5em;
 }
 
 nav {
