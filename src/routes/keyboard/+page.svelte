@@ -61,7 +61,7 @@
   });
 </script>
 
-<Page>
+<Page background="#f6f6f6">
   <Header
     slot="header"
     heading="Keyboard"
