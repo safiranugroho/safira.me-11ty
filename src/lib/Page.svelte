@@ -4,6 +4,7 @@
   import tip from '$lib/assets/tip.png';
   import weather from '$lib/assets/weather.png';
   import rps from '$lib/assets/rps.png';
+  import Footer from './Footer.svelte';
 
   const doodles = {
     '/keyboard': {
@@ -20,7 +21,8 @@
     '/weather': {
       prev: '/tip-calculator',
       name: 'Weather forecast',
-      cover: weather
+      cover: weather,
+      next: '/rps'
     },
     '/rps': {
       prev: '/weather',
@@ -37,6 +39,7 @@
 <div class="page" style="--background: {background};">
   <div class="header"><slot name="header" /></div>
   <div class="content"><slot name="content" /></div>
+  <Footer />
 </div>
 
 <style>

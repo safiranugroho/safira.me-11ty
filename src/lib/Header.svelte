@@ -16,28 +16,21 @@
 </script>
 
 <div class="header">
-  <NavLink prev />
-  <div class="sections">
-    <div class="header-section">
-      <h1 class="heading">{heading}</h1>
-      <h2 class="subheading">{subheading}</h2>
-    </div>
-    <div class="header-section">
-      <p class="metadata">
-        <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
-      </p>
-      <p class="metadata">
-        <span class="metadata-label">Prompt by:</span>
-        <a
-          href="https://www.adventofcss.com/"
-          class="external-link"
-          target="_blank"
-          rel="noreferrer">Advent of CSS</a
-        >
-      </p>
-    </div>
+  <div class="header-section">
+    <h1 class="heading">{heading}</h1>
+    <h2 class="subheading">{subheading}</h2>
   </div>
-  <NavLink />
+  <div class="header-section">
+    <p class="metadata">
+      <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
+    </p>
+    <p class="metadata">
+      <span class="metadata-label">Prompt by:</span>
+      <a href="https://www.adventofcss.com/" class="external-link" target="_blank" rel="noreferrer"
+        >Advent of CSS</a
+      >
+    </p>
+  </div>
 </div>
 
 <style>
@@ -45,19 +38,8 @@
     min-height: 72px;
 
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .sections {
-    flex: 1;
-
-    display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 12px;
   }
 
@@ -65,22 +47,26 @@
     flex: 1;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 8px;
   }
 
   .header-section > * {
-    margin: 4px 0;
+    margin: 0;
   }
 
   .header-section:first-of-type {
+    flex-direction: column;
+    justify-content: center;
+
     border-bottom: 1px solid var(--border-color);
-    padding: 8px 0;
+    padding: 16px 0;
   }
 
   .header-section:last-of-type {
+    flex-direction: row;
+    gap: 24px;
+
     padding: 8px 0;
-    justify-content: space-between;
     width: 100%;
   }
 
@@ -103,17 +89,12 @@
     font-size: 12px;
     color: var(--secondary-text-color);
 
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
   }
 
-  .metadata > *:first-child {
-    flex: 1;
+  .metadata-label {
     font-weight: 700;
-  }
-
-  .metadata > *:last-child {
-    flex: 1;
   }
 
   .external-link::after {
@@ -128,14 +109,8 @@
     margin-left: 0.25em;
   }
 
-  @media screen and (min-width: 480px) {
-    .metadata > *:last-child {
-      flex: 2;
-    }
-  }
-
   @media screen and (min-width: 768px) {
-    .sections {
+    .header {
       flex: 1;
 
       display: flex;
@@ -153,21 +128,28 @@
     }
 
     .header-section:last-of-type {
-      padding: unset;
       flex-direction: column;
+      gap: 8px;
+
+      padding: unset;
       justify-content: unset;
       width: unset;
+    }
+
+    .metadata {
+      grid-template-rows: unset;
+      grid-template-columns: 1fr 2fr;
+      line-height: 10px;
+
+      gap: 12px;
     }
   }
 
   @media screen and (min-width: 1024px) {
-    .metadata {
-      flex-direction: row;
-      line-height: 10px;
-    }
-
-    .metadata > *:last-child {
-      flex: 5;
+    .header {
+      width: 50%;
+      margin-left: auto;
+      margin-right: auto;
     }
   }
 </style>

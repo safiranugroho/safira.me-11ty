@@ -32,7 +32,7 @@
 
   let alignText = prev ? 'left' : 'right';
   let alignItems = prev ? 'start' : 'end';
-  let direction = prev ? 'row-reverse' : 'row';
+  let direction = prev ? 'row' : 'row-reverse';
 </script>
 
 {#if url}
@@ -42,11 +42,19 @@
     class="nav-link"
     style="--align-text: {alignText}; --align-items: {alignItems}; --direction: {direction}"
   >
-    <p class="nav-text">{title}</p>
     <img src={icon} alt="Previous doodle" class="nav-icon" />
+    <p class="nav-text">{title}</p>
   </a>
 {:else}
-  <HomeLink />
+  <a
+    href="/"
+    title="Back to home"
+    class="nav-link"
+    style="--align-text: {alignText}; --align-items: {alignItems}; --direction: {direction}"
+  >
+    <img src={icon} alt="Back to home" class="nav-icon" />
+    <p class="nav-text">Home</p>
+  </a>
 {/if}
 
 <style>
