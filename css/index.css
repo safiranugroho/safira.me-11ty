@@ -100,7 +100,7 @@ nav {
   z-index: 999;
   width: 100%;
   text-align: left;
-  padding: 1.5rem 0 1rem;
+  padding: 1.5rem;
   position: fixed;
   left: 0;
   top: 0;
@@ -120,6 +120,7 @@ hr {
   box-sizing: border-box;
 }
 
+.highlight,
 *::selection {
   background: var(--highlight-bg);
   color: var(--highlight-text);
@@ -177,9 +178,11 @@ h6,
   width: max-content;
   padding: 0;
   margin: 0;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
   list-style-type: none;
   text-transform: uppercase;
   font-weight: 300;
@@ -189,6 +192,10 @@ h6,
 .nav-list > li {
   padding-left: 1.5rem;
   height: max-content;
+}
+
+.nav-list > li:first-of-type {
+  padding-left: 0;
 }
 
 .nav-list > li:first-of-type::before {
@@ -202,12 +209,19 @@ h6,
 }
 
 .theme-toggle {
-  padding: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;
+
+  vertical-align: text-top;
+  padding: 1.5rem;
+
   background: transparent;
   font-style: normal;
-  vertical-align: text-top;
+
   border: none;
-  font-size: 0.75rem;
+  font-size: 1rem;
 }
 
 .theme-toggle::before {
@@ -219,7 +233,9 @@ h6,
 }
 
 .post-list-item {
-  margin-bottom: 2.5em;
+  margin-bottom: 1em;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #dedede;
 }
 
 .post-title {
@@ -297,9 +313,7 @@ h6,
   }
 
   .theme-toggle {
-    vertical-align: middle;
-    line-height: 0;
-    font-size: 1.1rem;
+    font-size: 1.75rem;
   }
 
   .post-note {
@@ -334,5 +348,18 @@ h6,
   nav {
     background: transparent;
     backdrop-filter: unset;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-list > li {
+    padding-left: 0;
+  }
+
+  .nav-list > li::before {
+    content: none;
   }
 }

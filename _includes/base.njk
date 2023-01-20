@@ -40,18 +40,21 @@
     <script src="{{ '/js/setTheme.js' | url }}"></script>
     <script src="{{ '/js/onThemeChange.js' | url }}"></script>
     <script src="{{ '/js/onDocumentLoaded.js' | url }}"></script>
+    <script src="{{ '/js/highlightPath.js' | url }}"></script>
+
     <nav>
       <ul class="nav-list">
       {%- for entry in collections.all | eleventyNavigation %}
-        <li><a href="{{ entry.url | url }}">{{ entry.title }}</a></li>
+        <li><a href="{{ entry.url | url }}" class="nav-link" id={{ entry.title.toLowerCase() }}>{{ entry.title }}</a></li>
       {%- endfor %}
         <li><a href="https://doodles.safira.me">Doodles</a></li>
-        <li><button
-          title="Color theme toggle"
-          class="theme-toggle"
-          onclick="onThemeChange()"></button></li>
       </ul>
     </nav>
+
+    <button
+      title="Color theme toggle"
+      class="theme-toggle"
+      onclick="onThemeChange()"></button>
 
     <main>
       {{ content | safe }}

@@ -6,9 +6,6 @@ eleventyNavigation:
   key: Blog
   order: 2
 ---
-
-<h1>Blog</h1>
-
 {% for post in collections.posts | reverse %}
   <div class="post-list-item">
     <h2 class="post-title">{{ post.data.title }}</h2>
