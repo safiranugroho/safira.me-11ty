@@ -1,11 +1,14 @@
 <script>
   import { setContext } from 'svelte';
+  import { page } from '$app/stores';
+
   import keyboard from '$lib/assets/keyboard.png';
   import tip from '$lib/assets/tip.png';
   import weather from '$lib/assets/weather.png';
   import rps from '$lib/assets/rps.png';
+  import ball from '$lib/assets/ball.png';
+
   import Footer from './Footer.svelte';
-  import { page } from '$app/stores';
 
   const doodles = {
     '/keyboard': {
@@ -28,7 +31,13 @@
     '/rps': {
       prev: '/weather',
       name: 'Rock paper scissors',
-      cover: rps
+      cover: rps,
+      next: '/ball'
+    },
+    '/ball': {
+      prev: '/rps',
+      name: 'Ball',
+      cover: ball
     }
   };
 

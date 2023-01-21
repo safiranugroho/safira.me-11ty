@@ -67,7 +67,15 @@
     heading="Keyboard"
     subheading="My keyboard jiggle jiggles - press the key on your keyboard to stop the jiggle."
     completedDate="16 January 2023"
-  />
+  >
+    <a
+      slot="promptBy"
+      href="https://www.adventofcss.com/"
+      class="external-link"
+      target="_blank"
+      rel="noreferrer">Advent of CSS</a
+    ></Header
+  >
 
   <div class="keyboard" slot="content">
     <div class="row">

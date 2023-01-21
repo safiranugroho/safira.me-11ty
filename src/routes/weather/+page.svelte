@@ -132,7 +132,14 @@
     heading="Weather forecast"
     subheading="What's the weather like today?"
     completedDate="18 January 2023"
-  />
+    ><a
+      slot="promptBy"
+      href="https://www.adventofcss.com/"
+      class="external-link"
+      target="_blank"
+      rel="noreferrer">Advent of CSS</a
+    ></Header
+  >
 
   <div class="container" slot="content">
     {#if Object.keys(map).length > 0}

@@ -10,7 +10,14 @@
     heading="Podcast episodes"
     subheading="Mark each episode as watched!"
     completedDate="16 January 2023"
-  />
+    ><a
+      slot="promptBy"
+      href="https://www.adventofcss.com/"
+      class="external-link"
+      target="_blank"
+      rel="noreferrer">Advent of CSS</a
+    ></Header
+  >
 
   <div class="container" slot="content">
     <img class="cover" alt="Compressed.fm podcast cover" src={cover} />

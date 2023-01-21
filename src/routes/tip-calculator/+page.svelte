@@ -41,7 +41,14 @@
     heading="Tip calculator"
     subheading="Input the bill amount and number of people, and select a tip percentage."
     completedDate="17 January 2023"
-  />
+    ><a
+      slot="promptBy"
+      href="https://www.adventofcss.com/"
+      class="external-link"
+      target="_blank"
+      rel="noreferrer">Advent of CSS</a
+    ></Header
+  >
 
   <div class="bill" slot="content">
     <div class="output">

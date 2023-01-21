@@ -24,9 +24,7 @@
     </p>
     <p class="metadata">
       <span class="metadata-label">Prompt by:</span>
-      <a href="https://www.adventofcss.com/" class="external-link" target="_blank" rel="noreferrer"
-        >Advent of CSS</a
-      >
+      <slot name="promptBy">–</slot>
     </p>
   </div>
 </div>
