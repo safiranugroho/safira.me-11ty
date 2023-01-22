@@ -6,14 +6,6 @@
   import picture from '$lib/assets/filter-picture.jpeg';
   import Header from '$lib/Header.svelte';
 
-  /**
-   * TODO:
-   * 1. Slider for each filter
-   * 1a. Add box-shadow
-   * 2. Browser compatibility
-   * 3. Short description of what each filter is
-   */
-
   let dimension = 100;
 
   /** @type {Record<string, any>}*/
