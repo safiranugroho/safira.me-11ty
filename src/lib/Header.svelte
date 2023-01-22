@@ -98,18 +98,6 @@
     font-weight: 700;
   }
 
-  .external-link::after {
-    content: '';
-    background-image: url('$lib/assets/external-link.png');
-    display: inline-block;
-    height: 1em;
-    width: 1em;
-    vertical-align: middle;
-    background-size: 1em;
-    background-repeat: no-repeat;
-    margin-left: 0.25em;
-  }
-
   @media screen and (min-width: 768px) {
     .header {
       flex: 1;

@@ -7,6 +7,7 @@
 
   import Page from '$lib/Page.svelte';
   import Header from '$lib/Header.svelte';
+  import ExternalLink from '$lib/ExternalLink.svelte';
   import Result from './Result.svelte';
 
   /**
@@ -64,12 +65,7 @@
     heading="Rock paper scissors"
     subheading="Shoot!"
     completedDate="19 January 2023"
-    ><a
-      slot="promptBy"
-      href="https://www.adventofcss.com/"
-      class="external-link"
-      target="_blank"
-      rel="noreferrer">Advent of CSS</a
+    ><ExternalLink slot="promptBy" href="https://www.adventofcss.com/">Advent of CSS</ExternalLink
     ></Header
   >
 

@@ -1,6 +1,8 @@
 <script>
   import Page from '$lib/Page.svelte';
   import Header from '$lib/Header.svelte';
+  import ExternalLink from '$lib/ExternalLink.svelte';
+
   import dollarIcon from '$lib/assets/dollar.svg';
   import peopleIcon from '$lib/assets/people.svg';
 
@@ -41,12 +43,7 @@
     heading="Tip calculator"
     subheading="Input the bill amount and number of people, and select a tip percentage."
     completedDate="17 January 2023"
-    ><a
-      slot="promptBy"
-      href="https://www.adventofcss.com/"
-      class="external-link"
-      target="_blank"
-      rel="noreferrer">Advent of CSS</a
+    ><ExternalLink slot="promptBy" href="https://www.adventofcss.com/">Advent of CSS</ExternalLink
     ></Header
   >
 

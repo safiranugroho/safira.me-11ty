@@ -1,6 +1,10 @@
 <script>
+  import { onMount } from 'svelte';
   import { PUBLIC_OPENCAGE_API_KEY } from '$env/static/public';
+
   import Page from '$lib/Page.svelte';
+  import ExternalLink from '$lib/ExternalLink.svelte';
+  import Header from '$lib/Header.svelte';
 
   import cloudy from '$lib/assets/cloudy.svg';
   import partlyCloudy from '$lib/assets/partly-cloudy.svg';
@@ -11,9 +15,6 @@
 
   import PrecipitationIcon from '$lib/assets/precipitation.svelte';
   import TemperatureIcon from '$lib/assets/temperature.svelte';
-
-  import { onMount } from 'svelte';
-  import Header from '$lib/Header.svelte';
 
   const weekday = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
@@ -132,12 +133,7 @@
     heading="Weather forecast"
     subheading="What's the weather like today?"
     completedDate="18 January 2023"
-    ><a
-      slot="promptBy"
-      href="https://www.adventofcss.com/"
-      class="external-link"
-      target="_blank"
-      rel="noreferrer">Advent of CSS</a
+    ><ExternalLink slot="promptBy" href="https://www.adventofcss.com/">Advent of CSS</ExternalLink
     ></Header
   >
 
