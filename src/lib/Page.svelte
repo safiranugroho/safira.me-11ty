@@ -7,6 +7,7 @@
   import weather from '$lib/assets/weather.png';
   import rps from '$lib/assets/rps.png';
   import ball from '$lib/assets/ball.png';
+  import filter from '$lib/assets/filter.png';
 
   import Footer from './Footer.svelte';
 
@@ -37,7 +38,13 @@
     '/ball': {
       prev: '/rps',
       name: 'Ball',
-      cover: ball
+      cover: ball,
+      next: '/filter'
+    },
+    '/filter': {
+      prev: '/ball',
+      name: 'CSS filter',
+      cover: filter
     }
   };
 

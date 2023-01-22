@@ -4,6 +4,7 @@
 
   import Page from '$lib/Page.svelte';
   import picture from '$lib/assets/filter-picture.jpeg';
+  import Header from '$lib/Header.svelte';
 
   /**
    * TODO:
@@ -102,6 +103,12 @@
 </svelte:head>
 
 <Page>
+  <Header
+    slot="header"
+    heading="CSS filter"
+    subheading="Explore CSS filter() via the sliders."
+    completedDate={'22 January 2023'}
+  />
   <div class="container" slot="content">
     <div class="view-container">
       <div class="asset" style="--filter: {css};">
