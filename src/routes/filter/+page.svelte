@@ -115,14 +115,14 @@
       </div>
     </div>
     <div class="range-container">
-      <button class="range-reset-all" on:click={resetAllToDefault}>Reset all</button>
+      <button class="range-reset all" on:click={resetAllToDefault}>Reset all</button>
       {#each Object.entries(filters) as [s, a]}
         <div class="range">
           <p class="range-label">
             <span class="name">{s}</span><span class="value">{a.value}{a.unit}</span>
           </p>
           <div class="range-input">
-            <input type="range" bind:value={a.value} min={a.min} max={a.max} />
+            <input class="range-slider" type="range" bind:value={a.value} min={a.min} max={a.max} />
           </div>
           <button class="range-reset" on:click={resetToDefault(s)}>Reset</button>
         </div>
@@ -133,6 +133,25 @@
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Lato:wght@300;400;700;900&display=swap');
+
+  :root {
+    --primary-text-color: black;
+    --secondary-text-color: grey;
+
+    --primary-code-text-color: black;
+    --secondary-code-text-color: grey;
+
+    --button-background: #fff;
+    --button-border-color: var(--border-color);
+  }
+
+  :global(.token.property) {
+    color: var(--primary-code-text-color);
+  }
+
+  :global(.token.function) {
+    color: var(--secondary-code-text-color);
+  }
 
   .container {
     font-family: 'Lato', sans-serif;
@@ -187,6 +206,7 @@
     width: 100%;
 
     border: 1px solid var(--border-color);
+    color: var(--primary-code-text-color);
     border-radius: 8px;
 
     font-family: 'Fira Mono', monospace;
@@ -213,18 +233,25 @@
   .range-label {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 2px;
 
     margin: 0;
     padding: 8px 16px;
 
-    background: #eeeeee;
+    background: var(--button-background);
+    border: 1px solid var(--button-border-color);
     border-radius: 8px;
+
+    color: var(--primary-text-color);
   }
 
   .range-label .name {
     font-family: 'Fira Mono', monospace;
     font-weight: 700;
+  }
+
+  .range-label .value {
+    color: var(--secondary-text-color);
   }
 
   .range-input {
@@ -239,20 +266,28 @@
     width: 100%;
   }
 
-  .range-reset-all,
   .range-reset {
     all: unset;
 
-    background: #eeeeee;
+    background: var(--button-background);
+    border: 1px solid var(--button-border-color);
     border-radius: 8px;
 
     padding: 8px 16px;
-    font-weight: 700;
 
+    font-weight: 700;
     text-align: center;
+    color: var(--primary-text-color);
+
+    cursor: pointer;
   }
 
-  .range-reset-all {
+  .range-reset:hover,
+  .range-reset:focus-visible {
+    color: var(--secondary-text-color);
+  }
+
+  .range-reset.all {
     width: auto;
     margin: 12px 0;
   }
