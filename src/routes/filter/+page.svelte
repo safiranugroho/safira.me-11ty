@@ -108,8 +108,10 @@
         <div class="circle yellow" />
         <div class="circle blue" />
       </div>
-      <div class="code">
-        {@html Prism.highlight(`filter: ${css || 'none'};`, Prism.languages.css, 'css')}
+      <div class="code-container">
+        <div class="code">
+          {@html Prism.highlight(`filter: ${css || 'none'};`, Prism.languages.css, 'css')}
+        </div>
       </div>
     </div>
     <div class="range-container">
@@ -174,9 +176,15 @@
     background: blue;
   }
 
-  .code {
+  .code-container {
+    display: flex;
+    align-items: end;
     margin-top: 24px;
+  }
+
+  .code {
     padding: 16px;
+    width: 100%;
 
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -265,6 +273,10 @@
       grid-template-rows: 5.5fr 1fr;
 
       margin: auto;
+    }
+
+    .range-container {
+      margin-top: 0;
     }
   }
 </style>
