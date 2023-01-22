@@ -3,6 +3,7 @@
   import Prism from 'prismjs';
 
   import Page from '$lib/Page.svelte';
+  import picture from '$lib/assets/filter-picture.jpeg';
 
   /**
    * TODO:
@@ -103,10 +104,8 @@
 <Page>
   <div class="container" slot="content">
     <div class="view-container">
-      <div class="circles" style="--filter: {css}; --dimension: {dimension}px;">
-        <div class="circle red" />
-        <div class="circle yellow" />
-        <div class="circle blue" />
+      <div class="asset" style="--filter: {css};">
+        <img src={picture} class="asset-img" alt="Two people at the beach with a sun umbrella" />
       </div>
       <div class="code-container">
         <div class="code">
@@ -162,37 +161,28 @@
 
   .view-container {
     width: 100%;
-    height: 40vh;
 
     display: grid;
     grid-template-rows: 3fr 1fr;
   }
 
-  .circles {
+  .asset {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     gap: 24px;
 
+    height: fit-content;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  .asset-img {
     filter: var(--filter);
-  }
 
-  .circle {
-    height: var(--dimension);
-    width: var(--dimension);
-
-    border-radius: 50%;
-  }
-
-  .red {
-    background: red;
-  }
-  .yellow {
-    background: yellow;
-  }
-  .blue {
-    background: blue;
+    max-width: 100%;
+    object-fit: contain;
   }
 
   .code-container {
