@@ -128,9 +128,17 @@
             <span class="name">{s}</span><span class="value">{a.value}{a.unit}</span>
           </p>
           <div class="range-input">
-            <input class="range-slider" type="range" bind:value={a.value} min={a.min} max={a.max} />
+            <div class="range-slider-container">
+              <input
+                class="range-slider"
+                type="range"
+                bind:value={a.value}
+                min={a.min}
+                max={a.max}
+              />
+            </div>
+            <button class="range-reset" on:click={resetToDefault(s)}>Reset</button>
           </div>
-          <button class="range-reset" on:click={resetToDefault(s)}>Reset</button>
         </div>
       {/each}
     </div>
@@ -222,23 +230,19 @@
 
   .range {
     display: grid;
-    grid-template-columns: 3fr 6fr 1fr;
-    gap: 16px;
-    align-items: center;
+    grid-template-rows: repeat(2, 1fr);
+    align-items: end;
   }
 
   .range-label {
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    flex-direction: row;
+    gap: 8px;
 
     margin: 0;
-    padding: 8px 16px;
+    padding: 0;
 
     background: var(--button-background);
-    border: 1px solid var(--button-border-color);
-    border-radius: 8px;
-
     color: var(--primary-text-color);
   }
 
@@ -252,6 +256,11 @@
   }
 
   .range-input {
+    display: flex;
+    gap: 16px;
+  }
+
+  .range-slider-container {
     width: 100%;
 
     display: flex;
@@ -259,7 +268,7 @@
     gap: 12px;
   }
 
-  .range-input > input {
+  .range-slider {
     width: 100%;
   }
 
@@ -308,7 +317,12 @@
     }
 
     .range-container {
+      gap: 16px;
       margin-top: 0;
+    }
+
+    .range-reset {
+      margin-top: -8px;
     }
   }
 </style>
