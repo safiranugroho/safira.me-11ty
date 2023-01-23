@@ -1,7 +1,5 @@
 <script>
-  import { getContext } from 'svelte';
-
-  const doodles = getContext('doodles');
+  import { doodles } from './stores.js';
 </script>
 
 <div class="doodle-list">

@@ -6,17 +6,17 @@
 </script>
 
 <script>
-  import { getContext, onMount } from 'svelte';
+  import { onMount } from 'svelte';
   import { page } from '$app/stores';
 
   import arrowPrev from '$lib/assets/arrow-prev.png';
   import arrowNext from '$lib/assets/arrow-next.png';
   import { goto } from '$app/navigation';
 
+  import { doodles } from './stores.js';
+
   /** @type {boolean} */
   export let prev = false;
-
-  const doodles = getContext('doodles');
 
   page.subscribe((p) => {
     const doodle = doodles[p.url.pathname];
