@@ -113,7 +113,7 @@
     background: #f6f6f6;
     border-radius: 40px;
 
-    padding: 43px 50px;
+    padding: 36px 48px;
 
     display: flex;
     flex-direction: column;

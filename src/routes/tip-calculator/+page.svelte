@@ -189,7 +189,7 @@
 
   .input > div > input {
     all: unset;
-    font-size: 60px;
+    font-size: 64px;
     font-weight: 700;
     width: 100%;
     line-height: 56px;

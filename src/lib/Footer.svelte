@@ -13,7 +13,7 @@
   .footer {
     border-top: 1px solid var(--border-color);
     padding-top: 12px;
-    margin-bottom: 60px;
+    margin-bottom: 64px;
   }
 
   .link-container {

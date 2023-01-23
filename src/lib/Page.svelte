@@ -42,7 +42,7 @@
   }
 
   .header {
-    margin-top: 60px;
+    margin-top: 64px;
   }
 
   .content {
@@ -54,6 +54,6 @@
 
     margin: auto;
     margin-top: 32px;
-    margin-bottom: 60px;
+    margin-bottom: 64px;
   }
 </style>

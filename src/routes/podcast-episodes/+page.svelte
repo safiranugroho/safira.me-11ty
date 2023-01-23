@@ -56,8 +56,8 @@
 
     background: #ffffff;
 
-    margin: 0 25px;
-    padding: 60px;
+    margin: 0 24px;
+    padding: 56px;
 
     border-bottom-right-radius: 32px;
     border-bottom-left-radius: 32px;
@@ -125,7 +125,7 @@
       border-bottom-left-radius: 0;
       border-top-right-radius: 32px;
 
-      margin: 25px 0;
+      margin: 24px 0;
 
       font-size: 24px;
       line-height: 33px;
