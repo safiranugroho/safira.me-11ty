@@ -1,32 +1,21 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import filters from './filters';
 
-  /** @type {string} */
-  export let name;
+  export let name: string;
+  export let min: number;
+  export let max: number;
 
-  /** @type {number} */
-  export let min;
-
-  /** @type {number} */
-  export let max;
-
-  /** @type {number | null} */
-  $: value = null;
+  $: value = 0;
 
   onMount(() => {
-    filters.subscribe((/** @type {Record<string, any>} */ f) => {
+    filters.subscribe((f) => {
       value = f[name].value;
     });
   });
 
-  const handleInput = (
-    /**
-     * @event ChangeEvent<HTMLInputElement>
-     * @type {Event & { currentTarget: EventTarget & HTMLInputElement; }}
-     */ e
-  ) => {
-    filters.update((/** @type {Record<string, any>} */ f) => {
+  const handleInput: FormEventHandler<HTMLInputElement> = (e) => {
+    filters.update((f) => {
       f[name].update(Number(e.currentTarget.value));
       return f;
     });

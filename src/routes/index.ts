@@ -5,7 +5,15 @@ import rps from '$lib/assets/rps.png';
 import ball from '$lib/assets/ball.png';
 import filter from '$lib/assets/filter.png';
 
-/** @type {Record<string, any>} */
+export type Route = {
+  prev?: string;
+  name?: string;
+  cover?: string;
+  next?: string;
+};
+
+type Routes = { [key: string]: Route };
+
 export default {
   '/keyboard': {
     name: 'Keyboard',
@@ -41,4 +49,4 @@ export default {
     name: 'CSS filter',
     cover: filter
   }
-};
+} as Routes;

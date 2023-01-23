@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { setContext } from 'svelte';
 
   import rock from '$lib/assets/rock.png';
@@ -10,31 +10,26 @@
   import ExternalLink from '$lib/ExternalLink.svelte';
   import Result from './Result.svelte';
 
-  /**
-   * @type {Record<string, any>}
-   */
-  const hands = {
-    rock: { icon: rock, defeats: (/** @type {string} */ h) => h === 'scissors' },
-    paper: { icon: paper, defeats: (/** @type {string} */ h) => h === 'rock' },
-    scissors: { icon: scissors, defeats: (/** @type {string} */ h) => h === 'paper' }
+  type HandMetadata = {
+    icon: string;
+    defeats: (h: string | null) => boolean;
+  };
+
+  type Hands = {
+    [key: string]: HandMetadata;
+  };
+
+  const hands: Hands = {
+    rock: { icon: rock, defeats: (h) => h === 'scissors' },
+    paper: { icon: paper, defeats: (h) => h === 'rock' },
+    scissors: { icon: scissors, defeats: (h) => h === 'paper' }
   };
 
   setContext('hands', hands);
 
-  /**
-   * @type {string | null}
-   */
-  let playerHand = null;
-
-  /**
-   * @type {string | null}
-   */
-  let computerHand = null;
-
-  /**
-   * @type {'player' | 'draw' | 'computer' | null}
-   */
-  let result = null;
+  let playerHand: string | null = null;
+  let computerHand: string | null = null;
+  let result: 'player' | 'draw' | 'computer' | null = null;
 
   $: {
     if (playerHand) {

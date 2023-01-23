@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import Page from '$lib/Page.svelte';
   import Header from '$lib/Header.svelte';
@@ -20,9 +20,8 @@
     return randomIndex;
   };
 
-  /** @type {Record<string, string>} */
-  const map = {};
-  const getSelector = (/** @type {string} */ id) => {
+  const map: { [key: string]: string } = {};
+  const getSelector = (id: string) => {
     if (map[id]) return map[id];
 
     if (id.length > 1 || ('a' <= id && 'z' >= id)) {
@@ -44,7 +43,7 @@
     key?.classList.add('jiggle');
   };
 
-  const removeJiggle = (/** @type {string} */ id) => {
+  const removeJiggle = (id: string) => {
     const selector = getSelector(id);
     const prevKey = document.querySelector(selector);
     prevKey?.classList.remove('jiggle');

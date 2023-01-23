@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Page from '$lib/Page.svelte';
 
   import blog from '$lib/assets/blog-icon.png';

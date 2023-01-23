@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { PUBLIC_OPENCAGE_API_KEY } from '$env/static/public';
 
@@ -18,7 +18,7 @@
 
   const weekday = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-  const getWeatherByCode = (/** @type {string} */ code) => {
+  const getWeatherByCode = (code: string) => {
     switch (code.toString()) {
       case '0':
         return {
@@ -87,43 +87,40 @@
     }
   };
 
-  /** @type {Record<string, any>} */
-  $: map = {};
+  $: map = {} as { [key: string]: any };
   $: suburb = '';
   $: state = '';
 
   onMount(() => {
-    navigator.geolocation.getCurrentPosition(
-      async (/** @type {{ coords: { latitude: any; longitude: any; }; }} */ position) => {
-        const locRes = await fetch(
-          `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=${PUBLIC_OPENCAGE_API_KEY}`
-        );
+    navigator.geolocation.getCurrentPosition(async (position) => {
+      const locRes = await fetch(
+        `https://api.opencagedata.com/geocode/v1/json?q=${position.coords.latitude}+${position.coords.longitude}&key=${PUBLIC_OPENCAGE_API_KEY}`
+      );
 
-        const locData = await locRes.json();
-        suburb = locData.results[0].components.suburb;
-        state = locData.results[0].components.state;
+      const locData = await locRes.json();
+      suburb = locData.results[0].components.suburb;
+      state = locData.results[0].components.state;
 
-        const weatherRes = await fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`
-        );
+      const weatherRes = await fetch(
+        `https://api.open-meteo.com/v1/forecast?latitude=${position.coords.latitude}&longitude=${position.coords.longitude}&&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum&current_weather=true&timezone=auto`
+      );
 
-        const weatherData = await weatherRes.json();
-        let i = 0;
+      const weatherData = await weatherRes.json();
+      let i = 0;
 
-        while (i < 7) {
-          map[weatherData.daily.time[i]] = {
-            day: weekday[new Date(weatherData.daily.time[i]).getDay()],
-            date: weatherData.daily.time[i].split('-')[2],
-            weather: getWeatherByCode(weatherData.daily.weathercode[i]),
-            precipitation: weatherData.daily.precipitation_sum[i],
-            temperatureMax: weatherData.daily.temperature_2m_max[i],
-            temperatureMin: weatherData.daily.temperature_2m_min[i]
-          };
+      while (i < 7) {
+        map[weatherData.daily.time[i]] = {
+          day: weekday[new Date(weatherData.daily.time[i]).getDay()],
+          date: weatherData.daily.time[i].split('-')[2],
+          weather: getWeatherByCode(weatherData.daily.weathercode[i]),
+          precipitation: weatherData.daily.precipitation_sum[i],
+          temperatureMax: weatherData.daily.temperature_2m_max[i],
+          temperatureMin: weatherData.daily.temperature_2m_min[i]
+        };
 
-          i++;
-        }
+        i++;
       }
-    );
+    });
   });
 </script>
 

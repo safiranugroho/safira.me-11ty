@@ -1,12 +1,16 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: 4dd15ce9ec78f8ed5dccdcb8023e1870e7cf7df27d86b8a3d8a6c0d758549fbf
+  checksum: d5ede82d486a6c1b702ef4349c088d2821b2d818726082c9bc63f21e7bb3991f
 - filename: src/lib/NavLink.svelte
   checksum: f0b361c057152d628291dfd2f09e4fa494130f707b0dfe4284bc46a2ac6a0632
 - filename: src/routes/filter/+page.svelte
   checksum: 6365ce790ada4cb04f6159b437a9e23861c22a10249c3114f126b50ccf8d2f35
+- filename: src/routes/filter/InputRange.svelte
+  checksum: 6e6222efdd5fbca8fb8e0eb632152e7208fa43db2fdf2220370a88b1b98ca5cf
 - filename: src/routes/keyboard/+page.svelte
-  checksum: c12cd42f59c50fd35398f0760cb14ed6699a1f34c368cbdf6f5e197cc06f4e3c
+  checksum: ac118bb01e688af46bd95942f148613b64876c4296bacb5e47b6924f233a21cd
+- filename: src/routes/rps/+page.svelte
+  checksum: f6ed783206501cb5095939c2dce70a9dc64b1d2f992e4397223016a8494e00bd
 - filename: src/routes/weather/+page.svelte
-  checksum: 549fcbe534700baf565026c39aee5b27af670835ee45d05fab457f24a6c3ff21
+  checksum: 5ef8d884d1a59a589adf16feb5414908ded87c92ea9f8d34853cfc10a75bb93e
 version: "1.0"

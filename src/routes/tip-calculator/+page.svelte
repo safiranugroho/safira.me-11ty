@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import Page from '$lib/Page.svelte';
   import Header from '$lib/Header.svelte';
   import ExternalLink from '$lib/ExternalLink.svelte';
@@ -6,14 +6,8 @@
   import dollarIcon from '$lib/assets/dollar.svg';
   import peopleIcon from '$lib/assets/people.svg';
 
-  /**
-   * @type {number | null}
-   */
-  let billAmount = null;
-  /**
-   * @type {number | null}
-   */
-  let numberOfPeople = null;
+  let billAmount: number | null = null;
+  let numberOfPeople: number | null = null;
   let tipAmount = 0;
 
   let totalTipAmount = 0;

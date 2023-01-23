@@ -1,8 +1,5 @@
-<script>
-  /**
-   * @type {string | null}
-   */
-  export let href = null;
+<script lang="ts">
+  export let href: string | null = null;
 </script>
 
 <a {href} class="external-link" target="_blank" rel="noreferrer">

@@ -1,11 +1,8 @@
-<script context="module">
-  /**
-   * @type {Record<string, any>}
-   */
-  let current = {};
+<script lang="ts" context="module">
+  let current: Route = {};
 </script>
 
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
 
@@ -13,9 +10,8 @@
   import arrowNext from '$lib/assets/arrow-next.png';
   import { goto } from '$app/navigation';
 
-  import routes from '../routes';
+  import routes, { type Route } from '../routes';
 
-  /** @type {boolean} */
   export let prev = false;
 
   page.subscribe((p) => {

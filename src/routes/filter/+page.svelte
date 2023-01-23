@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import Prism from 'prismjs';
 
@@ -8,14 +8,11 @@
   import InputRange from './InputRange.svelte';
   import filters, { defaultFilters } from './filters';
 
-  /** @type {Record<string, any>}*/
   $: all = defaultFilters;
-
-  /** @type {string | null}*/
-  $: css = null;
+  $: css = '';
 
   onMount(() => {
-    filters.subscribe((/** @type {Record<string, any>}*/ f) => {
+    filters.subscribe((f) => {
       all = f;
       css = Object.entries(f).reduce(
         (a, [name, s]) => (s.value !== s.default ? `${a} ${name}(${s.value}${s.unit})` : a),
@@ -24,8 +21,8 @@
     });
   });
 
-  const reset = (/** @type {string} */ name) => () => {
-    filters.update((/** @type {Record<string, any>}*/ f) => {
+  const reset = (name: string) => () => {
+    filters.update((f) => {
       f[name].update(f[name].default);
       return f;
     });

@@ -1,11 +1,23 @@
 import { writable } from 'svelte/store';
 
-/** @param {number} v */
-function update(v) {
+type Filter = {
+  unit: string;
+  default: number;
+  value: number;
+  min: number;
+  max: number;
+  update: Function;
+};
+
+type Filters = {
+  [key: string]: Filter;
+};
+
+function update(this: Filter, v: number) {
   this.value = v;
 }
 
-export const defaultFilters = {
+export const defaultFilters: Filters = {
   blur: {
     unit: 'px',
     default: 0,
@@ -80,5 +92,4 @@ export const defaultFilters = {
   }
 };
 
-/** @type {Record<string, any>}*/
 export default writable(defaultFilters);

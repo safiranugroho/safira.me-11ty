@@ -1,16 +1,7 @@
-<script>
-  /**
-   * @type {string}
-   */
-  export let heading;
-  /**
-   * @type {string}
-   */
-  export let subheading;
-  /**
-   * @type {string}
-   */
-  export let completedDate;
+<script lang="ts">
+  export let heading = '';
+  export let subheading = '';
+  export let completedDate = '';
 </script>
 
 <div class="header">
