@@ -13,19 +13,19 @@
   import arrowNext from '$lib/assets/arrow-next.png';
   import { goto } from '$app/navigation';
 
-  import { doodles } from './stores.js';
+  import routes from '../routes';
 
   /** @type {boolean} */
   export let prev = false;
 
   page.subscribe((p) => {
-    const doodle = doodles[p.url.pathname];
+    const doodle = routes[p.url.pathname];
     if (!doodle) current = {};
     if (doodle && current.name !== doodle.name) current = doodle;
   });
 
   let url = prev ? current?.prev : current?.next;
-  let title = url && doodles[url].name;
+  let title = url && routes[url].name;
   let icon = prev ? arrowPrev : arrowNext;
 
   let alignText = prev ? 'left' : 'right';

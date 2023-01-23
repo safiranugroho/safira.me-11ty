@@ -3,14 +3,12 @@
 
   import Footer from './Footer.svelte';
   import Head from './Head.svelte';
-  import { pageName, doodles } from './stores';
 
   export let background = '#ffffff';
 
   let showFooter = false;
   $: page.subscribe((p) => {
     showFooter = p.url.pathname !== '/';
-    doodles[p.url.pathname] && pageName.update(() => doodles[p.url.pathname].name);
   });
 </script>
 

@@ -1,4 +1,3 @@
-import { writable } from 'svelte/store';
 import keyboard from '$lib/assets/keyboard.png';
 import tip from '$lib/assets/tip.png';
 import weather from '$lib/assets/weather.png';
@@ -7,7 +6,7 @@ import ball from '$lib/assets/ball.png';
 import filter from '$lib/assets/filter.png';
 
 /** @type {Record<string, any>} */
-export const doodles = {
+export default {
   '/keyboard': {
     name: 'Keyboard',
     cover: keyboard,
@@ -43,5 +42,3 @@ export const doodles = {
     cover: filter
   }
 };
-
-export const pageName = writable('Doodles by Safira');

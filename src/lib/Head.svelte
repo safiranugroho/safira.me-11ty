@@ -1,7 +1,15 @@
 <script>
+  import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { pageName } from './stores.js';
-  $: title = $pageName ? `${$pageName} | Doodles by Safira` : 'Doodles by Safira';
+  import routes from '../routes';
+
+  const defaultTitle = 'Doodles by Safira';
+  $: title = defaultTitle;
+  $: page.subscribe((p) => {
+    title = routes[p.url.pathname]
+      ? `${routes[p.url.pathname].name} | ${defaultTitle}`
+      : defaultTitle;
+  });
 
   onMount(() => {
     document.title = title;

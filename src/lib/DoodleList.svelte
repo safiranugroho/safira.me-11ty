@@ -1,12 +1,12 @@
 <script>
-  import { doodles } from './stores.js';
+  import routes from '../routes';
 </script>
 
 <div class="doodle-list">
-  {#each Object.keys(doodles) as path}
+  {#each Object.keys(routes) as path}
     <div class="doodle">
-      <img src={doodles[path].cover} alt={`Cover art for ${doodles[path].name}`} />
-      <a href={path}>{doodles[path].name}</a>
+      <img src={routes[path].cover} alt={`Cover art for ${routes[path].name}`} />
+      <a href={path}>{routes[path].name}</a>
     </div>
   {/each}
 </div>
