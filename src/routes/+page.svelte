@@ -6,7 +6,7 @@
   import twitter from '$lib/assets/twitter.png';
   import linkedin from '$lib/assets/linkedin.png';
 
-  import DoodleList from '$lib/DoodleList.svelte';
+  import Routes from '$lib/Routes.svelte';
 </script>
 
 <Page>
@@ -30,7 +30,7 @@
     </div>
   </div>
   <div slot="content" class="content">
-    <DoodleList />
+    <Routes />
   </div>
 </Page>
 

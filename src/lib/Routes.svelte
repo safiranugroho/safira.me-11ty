@@ -2,9 +2,9 @@
   import routes from '../routes';
 </script>
 
-<div class="doodle-list">
+<div class="container">
   {#each Object.keys(routes) as path}
-    <div class="doodle">
+    <div class="card">
       <img src={routes[path].cover} alt={`Cover art for ${routes[path].name}`} />
       <a href={path}>{routes[path].name}</a>
     </div>
@@ -12,13 +12,13 @@
 </div>
 
 <style>
-  .doodle-list {
+  .container {
     display: grid;
     grid-template-columns: 1fr;
     gap: 24px;
   }
 
-  .doodle {
+  .card {
     flex: 1;
 
     border: 1px solid var(--border-color);
@@ -34,25 +34,25 @@
     overflow: hidden;
   }
 
-  .doodle > img {
+  .card > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .doodle > a {
+  .card > a {
     border-top: 1px solid var(--border-color);
     padding: 24px;
   }
 
   @media screen and (min-width: 768px) {
-    .doodle-list {
+    .container {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media screen and (min-width: 1024px) {
-    .doodle-list {
+    .container {
       grid-template-columns: repeat(3, 1fr);
     }
   }

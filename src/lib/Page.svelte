@@ -21,29 +21,6 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Toto:wght@400;700&display=swap');
-
-  :global(html) {
-    height: 100%;
-  }
-
-  :global(body) {
-    font-family: 'Noto Serif Toto', serif;
-
-    min-height: 100%;
-    margin: 0;
-
-    color: var(--primary-text-color);
-  }
-
-  :global(a, a:visited) {
-    color: var(--primary-text-color);
-  }
-
-  :global(a:hover, a:focus, a:focus-visible) {
-    color: var(--secondary-text-color);
-  }
-
   .page {
     padding: 0 36px;
 
