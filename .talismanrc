@@ -4,7 +4,7 @@ fileignoreconfig:
 - filename: src/lib/NavLink.svelte
   checksum: f0b361c057152d628291dfd2f09e4fa494130f707b0dfe4284bc46a2ac6a0632
 - filename: src/routes/filter/+page.svelte
-  checksum: 6e62c131cfccb79d2c9e5b71deb9122f360636dc09ee017383c55c67f1c1d5e4
+  checksum: 6365ce790ada4cb04f6159b437a9e23861c22a10249c3114f126b50ccf8d2f35
 - filename: src/routes/keyboard/+page.svelte
   checksum: c12cd42f59c50fd35398f0760cb14ed6699a1f34c368cbdf6f5e197cc06f4e3c
 - filename: src/routes/weather/+page.svelte

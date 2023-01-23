@@ -1,90 +1,37 @@
 <script>
-  // @ts-nocheck
+  import { onMount } from 'svelte';
   import Prism from 'prismjs';
 
   import Page from '$lib/Page.svelte';
   import picture from '$lib/assets/filter-picture.jpeg';
   import Header from '$lib/Header.svelte';
-
-  let dimension = 100;
+  import InputRange from './InputRange.svelte';
+  import filters, { defaultFilters } from './filters';
 
   /** @type {Record<string, any>}*/
-  let filters = {
-    blur: {
-      unit: 'px',
-      default: 0,
-      value: 0,
-      min: 0,
-      max: dimension
-    },
-    brightness: {
-      unit: '%',
-      default: 100,
-      value: 100,
-      min: 0,
-      max: 200
-    },
-    contrast: {
-      unit: '%',
-      default: 100,
-      value: 100,
-      min: 0,
-      max: 200
-    },
-    grayscale: {
-      unit: '%',
-      default: 0,
-      value: 0,
-      min: 0,
-      max: 100
-    },
-    'hue-rotate': {
-      unit: 'deg',
-      default: 0,
-      value: 0,
-      min: 0,
-      max: 360
-    },
-    invert: {
-      unit: '%',
-      default: 0,
-      value: 0,
-      min: 0,
-      max: 100
-    },
-    opacity: {
-      unit: '%',
-      default: 100,
-      value: 100,
-      min: 0,
-      max: 100
-    },
-    saturate: {
-      unit: '%',
-      default: 100,
-      value: 100,
-      min: 0,
-      max: 200
-    },
-    sepia: {
-      unit: '%',
-      default: 0,
-      value: 0,
-      min: 0,
-      max: 100
-    }
+  $: all = defaultFilters;
+
+  /** @type {string | null}*/
+  $: css = null;
+
+  onMount(() => {
+    filters.subscribe((/** @type {Record<string, any>}*/ f) => {
+      all = f;
+      css = Object.entries(f).reduce(
+        (a, [name, s]) => (s.value !== s.default ? `${a} ${name}(${s.value}${s.unit})` : a),
+        ''
+      );
+    });
+  });
+
+  const reset = (/** @type {string} */ name) => () => {
+    filters.update((/** @type {Record<string, any>}*/ f) => {
+      f[name].update(f[name].default);
+      return f;
+    });
   };
 
-  $: css = Object.entries(filters).reduce(
-    (a, [name, s]) => (s.value !== s.default ? a + ' ' + `${name}(${s.value}${s.unit})` : a),
-    ''
-  );
-
-  const resetToDefault = (/** @type {string} */ s) => () => {
-    filters = { ...filters, [s]: { ...filters[s], value: filters[s].default } };
-  };
-
-  const resetAllToDefault = () => Object.keys(filters).forEach((s) => resetToDefault(s)());
+  const resetAll = () => Object.keys(all).forEach((s) => reset(s)());
 </script>
 
 <svelte:head>
@@ -113,23 +60,17 @@
       </div>
     </div>
     <div class="range-container">
-      <button class="range-reset all" on:click={resetAllToDefault}>Reset all</button>
-      {#each Object.entries(filters) as [s, a]}
+      <button class="range-reset all" on:click={resetAll}>Reset all</button>
+      {#each Object.entries(all) as [s, a]}
         <div class="range">
           <p class="range-label">
             <span class="name">{s}</span><span class="value">{a.value}{a.unit}</span>
           </p>
           <div class="range-input">
             <div class="range-slider-container">
-              <input
-                class="range-slider"
-                type="range"
-                bind:value={a.value}
-                min={a.min}
-                max={a.max}
-              />
+              <InputRange name={s} min={a.min} max={a.max} />
             </div>
-            <button class="range-reset" on:click={resetToDefault(s)}>Reset</button>
+            <button class="range-reset" on:click={reset(s)}>Reset</button>
           </div>
         </div>
       {/each}
@@ -258,10 +199,6 @@
     display: flex;
     align-items: center;
     gap: 12px;
-  }
-
-  .range-slider {
-    width: 100%;
   }
 
   .range-reset {
