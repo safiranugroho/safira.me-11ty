@@ -11,11 +11,10 @@
   </div>
   <div class="metadata-container">
     <p class="metadata">
-      <span class="metadata-label">Completed at:</span><span>{completedDate}</span>
+      {completedDate}
     </p>
     <p class="metadata">
-      <span class="metadata-label">Prompt by:</span>
-      <slot name="promptBy">–</slot>
+      <slot name="promptBy" />
     </p>
   </div>
 </div>
@@ -80,13 +79,6 @@
     font-weight: 400;
     font-size: 12px;
     color: var(--secondary-text-color);
-
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .metadata-label {
-    font-weight: 700;
   }
 
   @media screen and (min-width: 768px) {
@@ -109,19 +101,11 @@
 
     .metadata-container {
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
 
       padding: unset;
       justify-content: unset;
       width: unset;
-    }
-
-    .metadata {
-      grid-template-rows: unset;
-      grid-template-columns: 1fr 2fr;
-      line-height: 10px;
-
-      gap: 12px;
     }
   }
 

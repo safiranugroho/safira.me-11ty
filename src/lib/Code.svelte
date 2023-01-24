@@ -78,11 +78,18 @@
 
   .code-copy-tooltip {
     font-weight: 400;
+    font-size: 12px;
+
+    padding: 4px;
 
     display: var(--show);
     position: absolute;
     top: -32px;
-    right: 0;
+    left: 0;
+
+    background-color: #efefef;
+    border: 1px solid #efefef;
+    border-radius: var(--border-radius);
 
     animation: fade-in-out 0.2s ease-out;
   }
