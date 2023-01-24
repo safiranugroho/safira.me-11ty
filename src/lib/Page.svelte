@@ -46,6 +46,8 @@
   }
 
   .content {
+    font-family: var(--content-font-family);
+
     flex-grow: 1;
 
     display: flex;

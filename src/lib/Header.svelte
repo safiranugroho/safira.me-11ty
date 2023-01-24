@@ -43,7 +43,7 @@
     justify-content: center;
     gap: 2px;
 
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--primary-border-color);
     padding: 16px 0;
   }
 
@@ -103,7 +103,7 @@
     .heading-container {
       text-align: right;
       border-bottom: none;
-      border-right: 1px solid var(--border-color);
+      border-right: 1px solid var(--primary-border-color);
       padding: 0 24px;
     }
 

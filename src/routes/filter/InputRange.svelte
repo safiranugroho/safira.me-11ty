@@ -14,7 +14,7 @@
     });
   });
 
-  const handleInput: FormEventHandler<HTMLInputElement> = (e) => {
+  const handleInput = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
     filters.update((f) => {
       f[name].update(Number(e.currentTarget.value));
       return f;

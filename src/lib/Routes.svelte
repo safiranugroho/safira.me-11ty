@@ -5,8 +5,7 @@
 <div class="container">
   {#each Object.keys(routes) as path}
     <div class="card">
-      <img src={routes[path].cover} alt={`Cover art for ${routes[path].name}`} />
-      <a href={path}>{routes[path].name}</a>
+      <a href={path}><img src={routes[path].cover} alt={routes[path].name} /></a>
     </div>
   {/each}
 </div>
@@ -15,13 +14,11 @@
   .container {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 48px;
   }
 
   .card {
-    flex: 1;
-
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--primary-border-color);
     border-radius: 20px;
 
     text-align: center;
@@ -34,15 +31,18 @@
     overflow: hidden;
   }
 
-  .card > img {
+  .card > a,
+  .card > a > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  .card > a {
-    border-top: 1px solid var(--border-color);
-    padding: 24px;
+  .card:hover,
+  .card:focus,
+  .card:focus-visible,
+  .card:focus-within {
+    border-color: var(--secondary-border-color);
   }
 
   @media screen and (min-width: 768px) {

@@ -85,8 +85,9 @@
 
   .nav-link:hover,
   .nav-link:focus,
-  .nav-link:focus-visible {
-    border: 1px solid var(--border-color);
+  .nav-link:focus-visible,
+  .nav-link:focus-within {
+    border: 1px solid var(--primary-border-color);
   }
 
   @media screen and (min-width: 768px) {

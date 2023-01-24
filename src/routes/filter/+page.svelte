@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Prism from 'prismjs';
 
   import Page from '$lib/Page.svelte';
   import picture from '$lib/assets/filter-picture.jpeg';
   import Header from '$lib/Header.svelte';
   import InputRange from './InputRange.svelte';
   import filters, { defaultFilters } from './filters';
+  import Code from './Code.svelte';
 
   $: all = defaultFilters;
   $: css = '';
@@ -51,9 +51,7 @@
         <img src={picture} class="asset-img" alt="Two people at the beach with a sun umbrella" />
       </div>
       <div class="code-container">
-        <div class="code">
-          {@html Prism.highlight(`filter: ${css || 'none'};`, Prism.languages.css, 'css')}
-        </div>
+        <Code content={`filter: ${css || 'none'};`} language="css" />
       </div>
     </div>
     <div class="range-container">
@@ -64,9 +62,7 @@
             <span class="name">{s}</span><span class="value">{a.value}{a.unit}</span>
           </p>
           <div class="range-input">
-            <div class="range-slider-container">
-              <InputRange name={s} min={a.min} max={a.max} />
-            </div>
+            <InputRange name={s} min={a.min} max={a.max} />
             <button class="range-reset" on:click={reset(s)}>Reset</button>
           </div>
         </div>
@@ -76,30 +72,7 @@
 </Page>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Fira+Mono&family=Lato:wght@300;400;700;900&display=swap');
-
-  :root {
-    --primary-text-color: black;
-    --secondary-text-color: grey;
-
-    --primary-code-text-color: black;
-    --secondary-code-text-color: grey;
-
-    --button-background: #fff;
-    --button-border-color: var(--border-color);
-  }
-
-  :global(.token.property) {
-    color: var(--primary-code-text-color);
-  }
-
-  :global(.token.function) {
-    color: var(--secondary-code-text-color);
-  }
-
   .container {
-    font-family: 'Lato', sans-serif;
-
     display: grid;
     width: 100%;
   }
@@ -136,17 +109,6 @@
     margin-top: 24px;
   }
 
-  .code {
-    padding: 16px;
-    width: 100%;
-
-    border: 1px solid var(--border-color);
-    color: var(--primary-code-text-color);
-    border-radius: 8px;
-
-    font-family: 'Fira Mono', monospace;
-  }
-
   .range-container {
     width: 100%;
 
@@ -172,12 +134,11 @@
     margin: 0;
     padding: 0;
 
-    background: var(--button-background);
     color: var(--primary-text-color);
   }
 
   .range-label .name {
-    font-family: 'Fira Mono', monospace;
+    font-family: var(--code-font-family);
     font-weight: 700;
   }
 
@@ -188,35 +149,6 @@
   .range-input {
     display: flex;
     gap: 16px;
-  }
-
-  .range-slider-container {
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .range-reset {
-    all: unset;
-
-    background: var(--button-background);
-    border: 1px solid var(--button-border-color);
-    border-radius: 8px;
-
-    padding: 8px 16px;
-
-    font-weight: 700;
-    text-align: center;
-    color: var(--primary-text-color);
-
-    cursor: pointer;
-  }
-
-  .range-reset:hover,
-  .range-reset:focus-visible {
-    color: var(--secondary-text-color);
   }
 
   .range-reset.all {
