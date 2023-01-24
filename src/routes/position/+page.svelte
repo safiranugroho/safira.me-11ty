@@ -72,7 +72,14 @@
             sagittis massa vel, ultrices ligula. Aenean non ligula et libero viverra iaculis. Donec
             orci ex, maximus eu tincidunt non, tincidunt in neque. Nam iaculis ornare aliquet.
             Integer tempor lobortis efficitur. Donec dui nisi, venenatis sed bibendum sit amet,
-            finibus nec arcu. Nunc semper iaculis dui at faucibus.
+            finibus nec arcu. Nunc semper iaculis dui at faucibus. Lorem ipsum dolor sit amet,
+            consectetur adipiscing elit. Cras in ullamcorper velit. Curabitur eleifend, sapien id
+            porta vestibulum, leo mauris cursus eros, non pulvinar metus tellus a mauris. Sed in
+            viverra nulla, id bibendum nisi. Sed cursus felis auctor, sagittis massa vel, ultrices
+            ligula. Aenean non ligula et libero viverra iaculis. Donec orci ex, maximus eu tincidunt
+            non, tincidunt in neque. Nam iaculis ornare aliquet. Integer tempor lobortis efficitur.
+            Donec dui nisi, venenatis sed bibendum sit amet, finibus nec arcu. Nunc semper iaculis
+            dui at faucibus.
           </p>
         </div>
       </div>
@@ -88,9 +95,10 @@
           class="child-position"
         >
           <option value="static" class="static">as is</option>
-          <option value="relative" class="relative">following the natural box flow</option>
+          <option value="relative" class="relative">according to the normal flow</option>
           <option value="fixed" class="fixed">relative to the viewport</option>
-          <option value="absolute" class="absolute">relative to my parent</option>
+          <option value="absolute" class="absolute">relative to its parent</option>
+          <option value="sticky" class="sticky">to be sticky</option>
         </select>
       </div>
     </div>
@@ -128,7 +136,10 @@
   }
 
   .parent {
+    max-height: 420px;
     width: 420px;
+
+    overflow: scroll;
 
     padding: 16px;
     border-color: red;
