@@ -1,12 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import Page from '$lib/Page.svelte';
   import picture from '$lib/assets/filter-picture.jpeg';
+
+  import Page from '$lib/Page.svelte';
   import Header from '$lib/Header.svelte';
+  import Code from '$lib/Code.svelte';
+
   import InputRange from './InputRange.svelte';
   import filters, { defaultFilters } from './_filters';
-  import Code from './Code.svelte';
 
   $: all = defaultFilters;
   $: css = '';
@@ -50,7 +52,7 @@
       <div class="asset" style="--filter: {css};">
         <img src={picture} class="asset-img" alt="Two people at the beach with a sun umbrella" />
       </div>
-      <Code content={`filter: ${css || 'none'};`} language="css" />
+      <Code content={`filter:${css || ' none'};`} language="css" />
     </div>
     <div class="range-container">
       <button class="range-reset all" on:click={resetAll}>Reset all</button>
