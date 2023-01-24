@@ -26,22 +26,26 @@ body {
 }
 
 a,
-a:visited {
+a:visited,
+a:focus,
+a:active {
   color: var(--primary-text-color);
 }
 
 a:hover,
-a:focus,
-a:focus-visible,
-a:focus-within {
+a:focus-visible {
   outline: none;
   color: var(--secondary-text-color);
   text-decoration: underline;
 }
 
 button,
-button:visited {
-  all: unset;
+button:visited,
+button:focus,
+button:active {
+  font-family: inherit;
+  font-size: 16px;
+  background-color: transparent;
 
   border: 1px solid var(--primary-border-color);
   border-radius: 8px;
@@ -56,9 +60,9 @@ button:visited {
 }
 
 button:hover,
-button:focus,
-button:focus-visible,
-button:focus-within {
+button:focus-visible {
+  background-color: transparent;
+
   color: var(--secondary-text-color);
   border-color: var(--secondary-border-color);
   text-decoration: underline;
