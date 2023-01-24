@@ -4,6 +4,34 @@
   import Header from '$lib/Header.svelte';
   import { writable } from 'svelte/store';
 
+  const positions = {
+    static: {
+      text: 'as is',
+      moves: false,
+      stacks: 'never'
+    },
+    relative: {
+      text: 'following the normal flow',
+      moves: true,
+      stacks: 'when z-index is not auto'
+    },
+    absolute: {
+      text: 'relative to its parent',
+      moves: true,
+      stacks: 'when z-index is not auto'
+    },
+    fixed: {
+      text: 'relative to the viewport',
+      moves: true,
+      stacks: 'always'
+    },
+    sticky: {
+      text: 'so it sticks to its position',
+      moves: true,
+      stacks: 'always'
+    }
+  };
+
   const defaultStyle = {
     parent: {
       '--position': 'static'
@@ -94,11 +122,9 @@
           id="child-position"
           class="child-position"
         >
-          <option value="static" class="static">as is</option>
-          <option value="relative" class="relative">according to the normal flow</option>
-          <option value="fixed" class="fixed">relative to the viewport</option>
-          <option value="absolute" class="absolute">relative to its parent</option>
-          <option value="sticky" class="sticky">to be sticky</option>
+          {#each Object.entries(positions) as [name, { text }]}
+            <option value={name} class="child-position-option">{text}</option>
+          {/each}
         </select>
       </div>
     </div>
