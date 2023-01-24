@@ -109,7 +109,7 @@
 
     .metadata-container {
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
 
       padding: unset;
       justify-content: unset;

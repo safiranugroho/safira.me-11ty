@@ -7,10 +7,17 @@
   export let content: string;
   export let language: string;
 
+  let show = false;
+  const showTooltip = () => {
+    show = true;
+    setTimeout(() => (show = false), 2000);
+  };
+
   const dispatch = createEventDispatcher();
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(content);
+      showTooltip();
     } catch (e) {
       console.log(e);
     }
@@ -23,9 +30,10 @@
   <div class="code-content">
     {@html Prism.highlight(content, Prism.languages[language], language)}
   </div>
-  <button on:click={copy} class="code-copy-button"
-    ><img src={copyIcon} alt="Copy to clipboard" class="code-copy-icon" /></button
-  >
+  <button on:click={copy} class="code-copy-button">
+    <img src={copyIcon} alt="Copy to clipboard" class="code-copy-icon" />
+    <div class="code-copy-tooltip" style="--show: {show ? 'inline-block' : 'none'}">Copied!</div>
+  </button>
 </div>
 
 <style>
@@ -33,15 +41,18 @@
     position: relative;
 
     padding: 16px;
+    padding-right: 32px; /** To offset the copy button width. */
     width: 100%;
 
     border: 1px solid var(--primary-border-color);
     border-radius: 8px;
 
-    font-family: var(--code-font-family);
-
     display: flex;
     justify-content: space-between;
+  }
+
+  .code-content {
+    font-family: var(--code-font-family);
   }
 
   .code-copy-button {
@@ -56,5 +67,25 @@
     width: 20px;
     height: 20px;
     opacity: 0.8;
+  }
+
+  .code-copy-tooltip {
+    font-weight: 400;
+
+    display: var(--show);
+    position: absolute;
+    top: -32px;
+    right: 0;
+
+    animation: fade-in-out 0.2s ease-out;
+  }
+
+  @keyframes fade-in-out {
+    from {
+      top: -16px;
+    }
+    to {
+      top: -32px;
+    }
   }
 </style>
