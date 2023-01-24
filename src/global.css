@@ -69,3 +69,16 @@ button:focus-visible {
   border-color: var(--secondary-border-color);
   text-decoration: underline;
 }
+
+code,
+code > .token.selector {
+  color: #1d3557;
+}
+
+code > .token.property {
+  color: #e63946;
+}
+
+code > .token.function {
+  color: #457b9d;
+}

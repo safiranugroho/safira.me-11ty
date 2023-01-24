@@ -7,7 +7,7 @@
 
   import img from '$lib/assets/grace-hopper.jpg';
 
-  const positions = {
+  const positions: { [key: string]: any } = {
     static: {
       text: 'as is',
       moves: false,
@@ -37,21 +37,21 @@
 
   const defaultStyle = {
     parent: {
-      '--position': 'static'
+      position: 'static'
     },
     child: {
-      '--position': 'static',
-      '--top': '0px',
-      '--left': '0px',
-      '--bottom': '0px',
-      '--right': '0px'
+      position: 'static',
+      top: '0px',
+      left: '0px',
+      bottom: '0px',
+      right: '0px'
     }
-  };
+  } as { [key: string]: any };
 
   const style = writable(defaultStyle);
 
   const generateVars = (o: { [s: string]: string }) =>
-    Object.entries(o).reduce((a, [k, v]) => `${a}${k}: ${v};`, '');
+    Object.entries(o).reduce((a, [k, v]) => `${a}--${k}: ${v};`, '');
 
   $: parentVars = generateVars(defaultStyle.parent);
   $: childVars = generateVars(defaultStyle.child);
@@ -66,16 +66,34 @@
     ${childVars.replaceAll('--', '').replaceAll(';', ';\n' + ' '.repeat(4))}
   }`;
 
-  let childPosition = defaultStyle.child['--position'];
+  let childPosition = defaultStyle.child.position;
+
+  $: currentAnchors = {
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0
+  } as any;
+
+  const handleInput =
+    (name: string) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+      console.log({ currentAnchors });
+      currentAnchors[name] = Number(e.currentTarget.value);
+      currentAnchors = currentAnchors;
+    };
 
   $: {
     style.update((s) => {
+      Object.entries(currentAnchors).forEach(([name, value]) => {
+        s.child[name] = value + 'px';
+      });
+
       if (childPosition === 'absolute') {
-        s.parent['--position'] = 'relative';
-        s.child['--position'] = childPosition;
+        s.parent.position = 'relative';
+        s.child.position = childPosition;
       } else {
-        s.parent['--position'] = 'static';
-        s.child['--position'] = childPosition;
+        s.parent.position = 'static';
+        s.child.position = childPosition;
       }
 
       parentVars = generateVars(s.parent);
@@ -108,8 +126,8 @@
             </span>
             <span>
               Hopper popularized the term "debugging" to describe the process of removing errors
-              from a computer program. Her associates found a moth that was stuck in a relay,
-              impending operation, and hence they were "debugging" the system.
+              from a computer program. Her associates discovered a moth stuck in a relay and thereby
+              impeding operation, whereupon she remarked that they were "debugging" the system.
             </span>
             <span>
               She also helped develop COBOL, one of the first high-level programming languages.
@@ -130,17 +148,30 @@
     </div>
     <div class="input-container">
       <div>
-        <label for="child-position">I want to position the picture</label>
-        <select
-          bind:value={childPosition}
-          name="child-position"
-          id="child-position"
-          class="child-position"
-        >
+        <label for="position">I want to position the picture</label>
+        <select bind:value={childPosition} name="position" id="position" class="position">
           {#each Object.entries(positions) as [name, { text }]}
-            <option value={name} class="child-position-option">{text}</option>
+            <option value={name} class="position-option">{text}</option>
           {/each}
         </select>
+      </div>
+      <div>
+        {#if positions[childPosition].moves}
+          {#each Object.entries(currentAnchors) as [name, value]}
+            <div>
+              <label for={name}>{name}</label>
+              <input
+                {name}
+                id={name}
+                type="range"
+                min={-1000}
+                max={1000}
+                {value}
+                on:input={handleInput(name)}
+              />
+            </div>
+          {/each}
+        {/if}
       </div>
     </div>
   </div>
@@ -178,7 +209,7 @@
 
   .parent,
   .child {
-    border: 1px solid;
+    border: 4px solid;
   }
 
   .parent {
@@ -188,7 +219,7 @@
     overflow: scroll;
 
     padding: 24px;
-    border-color: var(--primary-border-color);
+    border-color: #1d3557;
     border-radius: var(--border-radius);
   }
 
@@ -196,7 +227,7 @@
     width: 150px;
     height: 150px;
 
-    border-color: transparent;
+    border-color: #e63946;
     border-radius: 50%;
 
     overflow: hidden;

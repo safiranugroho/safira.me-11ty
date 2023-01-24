@@ -9,6 +9,8 @@ fileignoreconfig:
   checksum: 6e6222efdd5fbca8fb8e0eb632152e7208fa43db2fdf2220370a88b1b98ca5cf
 - filename: src/routes/keyboard/+page.svelte
   checksum: ac118bb01e688af46bd95942f148613b64876c4296bacb5e47b6924f233a21cd
+- filename: src/routes/position/+page.svelte
+  checksum: 7d7c5e3d7b9a5923baa40cde08103d1eb79c38e3353dd10233b9d7450166f65d
 - filename: src/routes/rps/+page.svelte
   checksum: f6ed783206501cb5095939c2dce70a9dc64b1d2f992e4397223016a8494e00bd
 - filename: src/routes/weather/+page.svelte
