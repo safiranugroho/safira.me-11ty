@@ -5,7 +5,7 @@
   import picture from '$lib/assets/filter-picture.jpeg';
   import Header from '$lib/Header.svelte';
   import InputRange from './InputRange.svelte';
-  import filters, { defaultFilters } from './filters';
+  import filters, { defaultFilters } from './_filters';
   import Code from './Code.svelte';
 
   $: all = defaultFilters;

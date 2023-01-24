@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import filters from './filters';
+  import filters from './_filters';
 
   export let name: string;
   export let min: number;
