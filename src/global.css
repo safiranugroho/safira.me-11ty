@@ -7,6 +7,8 @@
   --primary-border-color: #dedede;
   --secondary-border-color: #a5a5a5;
 
+  --border-radius: 8px;
+
   --app-font-family: 'Noto Serif Toto', serif;
   --content-font-family: 'Lato', sans-serif;
   --code-font-family: 'Fira Mono', monospace;
@@ -48,7 +50,7 @@ button:active {
   background-color: transparent;
 
   border: 1px solid var(--primary-border-color);
-  border-radius: 8px;
+  border-radius: var(--border-radius);
 
   padding: 8px 16px;
 

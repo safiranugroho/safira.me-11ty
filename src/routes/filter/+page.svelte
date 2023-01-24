@@ -50,9 +50,7 @@
       <div class="asset" style="--filter: {css};">
         <img src={picture} class="asset-img" alt="Two people at the beach with a sun umbrella" />
       </div>
-      <div class="code-container">
-        <Code content={`filter: ${css || 'none'};`} language="css" />
-      </div>
+      <Code content={`filter: ${css || 'none'};`} language="css" />
     </div>
     <div class="range-container">
       <button class="range-reset all" on:click={resetAll}>Reset all</button>
@@ -82,6 +80,7 @@
 
     display: grid;
     grid-template-rows: 3fr 1fr;
+    gap: 24px;
   }
 
   .asset {
@@ -101,12 +100,6 @@
 
     max-width: 100%;
     object-fit: contain;
-  }
-
-  .code-container {
-    display: flex;
-    align-items: end;
-    margin-top: 24px;
   }
 
   .range-container {

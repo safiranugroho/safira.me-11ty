@@ -26,17 +26,24 @@
   };
 </script>
 
-<div class="code">
-  <div class="code-content">
-    {@html Prism.highlight(content, Prism.languages[language], language)}
+<div class="code-container">
+  <div class="code">
+    <code class="code-content">
+      {@html Prism.highlight(content, Prism.languages[language], language)}
+    </code>
+    <button on:click={copy} class="code-copy-button">
+      <img src={copyIcon} alt="Copy to clipboard" class="code-copy-icon" />
+      <div class="code-copy-tooltip" style="--show: {show ? 'inline-block' : 'none'}">Copied!</div>
+    </button>
   </div>
-  <button on:click={copy} class="code-copy-button">
-    <img src={copyIcon} alt="Copy to clipboard" class="code-copy-icon" />
-    <div class="code-copy-tooltip" style="--show: {show ? 'inline-block' : 'none'}">Copied!</div>
-  </button>
 </div>
 
 <style>
+  .code-container {
+    display: flex;
+    align-items: end;
+  }
+
   .code {
     position: relative;
 
@@ -45,7 +52,7 @@
     width: 100%;
 
     border: 1px solid var(--primary-border-color);
-    border-radius: 8px;
+    border-radius: var(--border-radius);
 
     display: flex;
     justify-content: space-between;
