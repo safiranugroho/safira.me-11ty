@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { writable } from 'svelte/store';
+
   import Page from '$lib/Page.svelte';
   import Code from '$lib/Code.svelte';
   import Header from '$lib/Header.svelte';
-  import { writable } from 'svelte/store';
+
+  import img from '$lib/assets/grace-hopper.jpg';
 
   const positions = {
     static: {
@@ -11,7 +14,7 @@
       stacks: 'never'
     },
     relative: {
-      text: 'following the normal flow',
+      text: 'relative to itself',
       moves: true,
       stacks: 'when z-index is not auto'
     },
@@ -26,7 +29,7 @@
       stacks: 'always'
     },
     sticky: {
-      text: 'so it sticks to its position',
+      text: 'so it keeps its position on scroll',
       moves: true,
       stacks: 'always'
     }
@@ -39,8 +42,8 @@
     child: {
       '--position': 'static',
       '--top': '0px',
-      '--bottom': '0px',
       '--left': '0px',
+      '--bottom': '0px',
       '--right': '0px'
     }
   };
@@ -48,13 +51,14 @@
   const style = writable(defaultStyle);
 
   const generateVars = (o: { [s: string]: string }) =>
-    Object.entries(o).reduce((a, [k, v]) => `${a} ${k}: ${v};`, '');
+    Object.entries(o).reduce((a, [k, v]) => `${a}${k}: ${v};`, '');
 
   $: parentVars = generateVars(defaultStyle.parent);
   $: childVars = generateVars(defaultStyle.child);
 
   $: css = `
   .parent {
+    overflow: scroll;
     ${parentVars.replaceAll('--', '').replaceAll(';', ';\n' + ' '.repeat(4))}
   }
 
@@ -92,22 +96,33 @@
     <div class="view-container">
       <div class="asset">
         <div class="parent" style={parentVars}>
-          <div class="child" style={childVars} />
+          <div class="child" style={childVars}>
+            <img class="image" src={img} alt="Grace Hopper" />
+          </div>
           <p class="text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras in ullamcorper velit.
-            Curabitur eleifend, sapien id porta vestibulum, leo mauris cursus eros, non pulvinar
-            metus tellus a mauris. Sed in viverra nulla, id bibendum nisi. Sed cursus felis auctor,
-            sagittis massa vel, ultrices ligula. Aenean non ligula et libero viverra iaculis. Donec
-            orci ex, maximus eu tincidunt non, tincidunt in neque. Nam iaculis ornare aliquet.
-            Integer tempor lobortis efficitur. Donec dui nisi, venenatis sed bibendum sit amet,
-            finibus nec arcu. Nunc semper iaculis dui at faucibus. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Cras in ullamcorper velit. Curabitur eleifend, sapien id
-            porta vestibulum, leo mauris cursus eros, non pulvinar metus tellus a mauris. Sed in
-            viverra nulla, id bibendum nisi. Sed cursus felis auctor, sagittis massa vel, ultrices
-            ligula. Aenean non ligula et libero viverra iaculis. Donec orci ex, maximus eu tincidunt
-            non, tincidunt in neque. Nam iaculis ornare aliquet. Integer tempor lobortis efficitur.
-            Donec dui nisi, venenatis sed bibendum sit amet, finibus nec arcu. Nunc semper iaculis
-            dui at faucibus.
+            <span>
+              Grace Hopper was a pioneering computer scientist and United States Navy rear admiral.
+              She was one of the first programmers of the Harvard Mark I computer, and invented the
+              first compiler, an important tool that translates written code into machine language
+              that a computer can understand.
+            </span>
+            <span>
+              Hopper popularized the term "debugging" to describe the process of removing errors
+              from a computer program. Her associates found a moth that was stuck in a relay,
+              impending operation, and hence they were "debugging" the system.
+            </span>
+            <span>
+              She also helped develop COBOL, one of the first high-level programming languages.
+              Hopper's contributions to computer science and technology were significant and she is
+              often referred to as the "mother of computing."
+            </span>
+            <span>
+              Hopper was known to carry around a piece of wire that was exactly one foot long, which
+              she called her "standard." She would use this wire to help explain the concept of a
+              "nanosecond" (one billionth of a second) to her colleagues. It was a way to physically
+              show them how small a nanosecond is and help them understand the speed at which
+              computers worked.
+            </span>
           </p>
         </div>
       </div>
@@ -115,7 +130,7 @@
     </div>
     <div class="input-container">
       <div>
-        <label for="child-position">I want to position my element</label>
+        <label for="child-position">I want to position the picture</label>
         <select
           bind:value={childPosition}
           name="child-position"
@@ -152,7 +167,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    gap: 48px;
+    gap: 36px;
   }
 
   .input-container {
@@ -161,30 +176,46 @@
     gap: 48px;
   }
 
+  .parent,
+  .child {
+    border: 1px solid;
+  }
+
   .parent {
     max-height: 420px;
     width: 420px;
 
     overflow: scroll;
 
-    padding: 16px;
-    border-color: red;
+    padding: 24px;
+    border-color: var(--primary-border-color);
     border-radius: var(--border-radius);
   }
 
   .child {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 
-    border-color: blue;
+    border-color: transparent;
     border-radius: 50%;
-    background-color: blue;
+
+    overflow: hidden;
+  }
+
+  .image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+  }
+  .text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .parent,
   .child {
-    border: 1px solid;
-
     position: var(--position);
     top: var(--top);
     bottom: var(--bottom);
