@@ -85,7 +85,7 @@
     display: var(--show);
     position: absolute;
     top: -32px;
-    left: 0;
+    left: -20px;
 
     background-color: #efefef;
     border: 1px solid #efefef;
