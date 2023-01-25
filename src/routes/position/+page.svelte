@@ -13,15 +13,16 @@
     type Positions,
     type Styles
   } from './_styles';
+  import { onMount } from 'svelte';
 
   $: cssVars = generateCssVars(defaultStyles);
   $: cssText = generateCssText(defaultStyles);
   $: currentPositionName = defaultStyles.child.position;
 
   const positionNames = ['top', 'bottom', 'left', 'right'] as Array<keyof Positions>;
-  const updateStyles = (callback: (n: Styles) => void) => {
+  const updateStyles = (update: (n: Styles) => void) => {
     styles.update((s: Styles) => {
-      callback(s);
+      update(s);
       cssVars = generateCssVars(s);
       cssText = generateCssText(s);
       return s;
@@ -43,6 +44,20 @@
       s.child.position.update(currentPositionName.value);
     });
   }
+
+  $: dynamicSize = '';
+  onMount(() => {
+    const selectEl = document.querySelector('.position-select') as HTMLElement;
+    const helperEl = document.querySelector('.position-select-helper') as HTMLElement;
+
+    dynamicSize = `${helperEl.offsetWidth}px`;
+
+    selectEl?.addEventListener('change', (event) => {
+      // @ts-ignore
+      helperEl.innerHTML = event.target.querySelector('option:checked').innerText;
+      dynamicSize = `${helperEl.offsetWidth}px`;
+    });
+  });
 </script>
 
 <Page>
@@ -89,35 +104,25 @@
       <Code content={cssText} language="css" />
     </div>
     <div class="input-container">
-      <div>
-        <label for="position">I want to position the picture</label>
-        <select
-          bind:value={currentPositionName.value}
-          name="position"
-          id="position"
-          class="position"
-        >
-          {#each Object.entries(rules) as [name, { text }]}
-            <option value={name} class="position-option">{text}</option>
-          {/each}
-        </select>
-      </div>
-      <div>
-        {#if rules[currentPositionName.value]?.moves}
-          {#each positionNames as name}
-            <div>
-              <label for={name}>{name}</label>
-              <input
-                {name}
-                id={name}
-                type="number"
-                on:input={handleInput(name)}
-                placeholder="auto"
-              />
-            </div>
-          {/each}
-        {/if}
-      </div>
+      <label for="position">I want to position the picture</label>
+      <select
+        bind:value={currentPositionName.value}
+        name="position"
+        id="position"
+        class="position-select"
+        style="--size: {dynamicSize}"
+      >
+        {#each Object.entries(rules) as [name, { text }]}
+          <option value={name} class="position-option">{text}</option>
+        {/each}
+      </select>
+      <strong class="position-select-helper" aria-hidden="true">{currentPositionName.value}</strong>
+      {#if rules[currentPositionName.value]?.moves}
+        {#each positionNames as name}
+          <label for={name}>{name}</label>
+          <input {name} id={name} type="number" on:input={handleInput(name)} placeholder="auto" />
+        {/each}
+      {/if}
     </div>
   </div>
 </Page>
@@ -128,14 +133,14 @@
 
     width: 100%;
 
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 48px;
   }
 
   .view-container,
   .input-container {
-    flex: 1;
+    width: 100%;
   }
 
   .view-container {
@@ -146,10 +151,10 @@
     gap: 36px;
   }
 
-  .input-container {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
+  .input-container > * {
+    display: inline;
+    line-height: 2em;
+    margin-right: 4px;
   }
 
   .parent,
@@ -159,8 +164,6 @@
 
   .parent {
     max-height: 420px;
-    width: 420px;
-
     overflow: scroll;
 
     padding: 24px;
@@ -190,6 +193,31 @@
     gap: 12px;
   }
 
+  .position-select-helper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -99999;
+  }
+
+  .position-select {
+    border: 1px solid var(--primary-border-color);
+    border-radius: var(--border-radius);
+
+    font-weight: 700;
+    padding: 0.5em;
+
+    width: var(--size);
+    box-sizing: content-box;
+  }
+
+  .position-select:hover,
+  .position-select:focus-visible {
+    color: var(--secondary-text-color);
+    border-color: var(--secondary-border-color);
+    text-decoration: underline;
+  }
+
   .parent,
   .child {
     position: var(--position);
@@ -202,6 +230,7 @@
   @media screen and (min-width: 1024px) {
     .container {
       max-width: 70%;
+      margin: auto;
     }
   }
 </style>
