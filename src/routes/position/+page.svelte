@@ -1,75 +1,33 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-
   import Page from '$lib/Page.svelte';
   import Code from '$lib/Code.svelte';
   import Header from '$lib/Header.svelte';
 
   import img from '$lib/assets/grace-hopper.jpg';
 
+  import rules from './_rules';
   import styles, {
     defaultStyles,
     generateCssText,
     generateCssVars,
-    generateCssVarsForClass,
     type Positions
   } from './_styles';
 
-  const rules: { [key: string]: any } = {
-    static: {
-      text: 'as is',
-      moves: false,
-      stacks: 'never'
-    },
-    relative: {
-      text: 'relative to itself',
-      moves: true,
-      stacks: 'when z-index is not auto'
-    },
-    absolute: {
-      text: 'relative to its parent',
-      moves: true,
-      stacks: 'when z-index is not auto'
-    },
-    fixed: {
-      text: 'relative to the viewport',
-      moves: true,
-      stacks: 'always'
-    },
-    sticky: {
-      text: 'so it keeps its position on scroll',
-      moves: true,
-      stacks: 'always'
-    }
-  };
-
-  $: cssVars = {
-    parent: generateCssVarsForClass(defaultStyles.parent),
-    child: generateCssVarsForClass(defaultStyles.child)
-  };
-
+  $: cssVars = generateCssVars(defaultStyles);
   $: cssText = generateCssText(defaultStyles);
+  $: currentPositionName = defaultStyles.child.position;
 
-  const { position, ...positions } = defaultStyles.child;
-  $: currentPositionName = position;
-  $: currentPositions = positions;
-  $: positionNames = Object.keys(currentPositions) as Array<keyof Positions>;
+  const positionNames = ['top', 'bottom', 'left', 'right'] as Array<keyof Positions>;
 
-  onMount(() => {
-    styles.subscribe((s) => {
-      const { position, ...positions } = s.child;
-      currentPositionName = position;
-      currentPositions = positions;
-    });
-  });
-
-  const handlePositionInput =
+  const handleInput =
     (name: keyof Positions) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
       styles.update((s) => {
         e.currentTarget.value.length === 0
           ? s.child[name]?.update('auto')
           : s.child[name]?.update(Number(e.currentTarget.value), 'px');
 
+        cssVars = generateCssVars(s);
+        cssText = generateCssText(s);
         return s;
       });
     };
@@ -78,9 +36,6 @@
     styles.update((s) => {
       s.parent.position.update(currentPositionName.value === 'absolute' ? 'relative' : 'static');
       s.child.position.update(currentPositionName.value);
-
-      cssVars = generateCssVars(s);
-      cssText = generateCssText(s);
       return s;
     });
   }
@@ -152,7 +107,7 @@
                 {name}
                 id={name}
                 type="number"
-                on:input={handlePositionInput(name)}
+                on:input={handleInput(name)}
                 placeholder="auto"
               />
             </div>

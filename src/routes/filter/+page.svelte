@@ -7,7 +7,6 @@
   import Header from '$lib/Header.svelte';
   import Code from '$lib/Code.svelte';
 
-  import InputRange from './InputRange.svelte';
   import filters, { defaultFilters } from './_filters';
 
   $: all = defaultFilters;
@@ -22,6 +21,14 @@
       );
     });
   });
+
+  const handleInput =
+    (name: string) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+      filters.update((f) => {
+        f[name].update(Number(e.currentTarget.value));
+        return f;
+      });
+    };
 
   const reset = (name: string) => () => {
     filters.update((f) => {
@@ -55,7 +62,14 @@
             <span class="name">{s}</span><span class="value">{a.value}{a.unit}</span>
           </p>
           <div class="range-input">
-            <InputRange name={s} min={a.min} max={a.max} />
+            <input
+              class="range-slider"
+              type="range"
+              on:input={handleInput(s)}
+              value={a.value}
+              min={a.min}
+              max={a.max}
+            />
             <button class="range-reset" on:click={reset(s)}>Reset</button>
           </div>
         </div>
@@ -112,6 +126,10 @@
     display: grid;
     grid-template-rows: repeat(2, 1fr);
     align-items: end;
+  }
+
+  .range-slider {
+    width: 100%;
   }
 
   .range-label {

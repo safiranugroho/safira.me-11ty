@@ -11,6 +11,8 @@ fileignoreconfig:
   checksum: ac118bb01e688af46bd95942f148613b64876c4296bacb5e47b6924f233a21cd
 - filename: src/routes/position/+page.svelte
   checksum: 1afb0ba412f4b605f3ba75f81ebbbe7cfc96f410eef2f715077169ce17b4213c
+- filename: src/routes/position/_rules.ts
+  checksum: 949c8faed72cd1146ba191164b685d438782ea3cccbc63176e9d747a72b02a4a
 - filename: src/routes/rps/+page.svelte
   checksum: f6ed783206501cb5095939c2dce70a9dc64b1d2f992e4397223016a8494e00bd
 - filename: src/routes/weather/+page.svelte
