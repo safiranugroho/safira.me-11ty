@@ -26,7 +26,7 @@ export default {
     stacks: 'always'
   },
   sticky: {
-    text: 'so it keeps its original position on scroll,',
+    text: 'to stick to its scrollable parent boundary,',
     moves: true,
     stacks: 'always'
   }

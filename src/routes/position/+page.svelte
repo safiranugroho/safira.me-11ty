@@ -108,21 +108,23 @@
       <Code content={cssText} language="css" />
     </div>
     <div class="input-container">
-      <label for="position">I want to position the picture</label>
-      <select
-        bind:value={currentPosition.value}
-        name="position"
-        id="position"
-        class="position-select"
-        style="--size: {dynamicSize}"
-      >
-        {#each Object.entries(rules) as [name, { text }]}
-          <option value={name} class="position-option">{text}</option>
-        {/each}
-      </select>
+      <div class="position-select-container">
+        <label for="position">I want to position the picture</label>
+        <select
+          bind:value={currentPosition.value}
+          name="position"
+          id="position"
+          class="position-select"
+          style="--size: {dynamicSize}"
+        >
+          {#each Object.entries(rules) as [name, { text }]}
+            <option value={name} class="position-option">{text}</option>
+          {/each}
+        </select>
+      </div>
       <strong class="position-select-helper" aria-hidden="true">{currentPosition.value}</strong>
       {#if rules[currentPosition.value]?.moves}
-        <span>and offset it </span>
+        <p>and offset it</p>
         {#each positions as name, i}
           <div class="position-offset-input-container">
             <input
@@ -149,10 +151,11 @@
     flex: 1;
 
     width: 100%;
+    padding: 48px 0;
 
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 48px;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 36px;
   }
 
   .view-container,
@@ -205,6 +208,26 @@
     gap: 12px;
   }
 
+  .input-container {
+    border: 1px solid var(--primary-border-color);
+    border-radius: var(--border-radius);
+
+    padding: 2rem;
+    font-size: 1rem;
+
+    box-sizing: border-box;
+  }
+
+  .input-container p {
+    margin-bottom: 0.25em;
+  }
+
+  .position-select-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+  }
+
   .position-select-helper {
     position: absolute;
     top: 0;
@@ -219,10 +242,9 @@
 
     font-weight: 700;
     padding: 0.5em;
-    margin: 8px;
 
-    width: var(--size);
-    box-sizing: content-box;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .position-select:hover,
@@ -233,9 +255,9 @@
   }
 
   .position-offset-input-container {
-    margin: 8px 0;
+    margin: 0.5em 0;
     display: flex;
-    gap: 8px;
+    gap: 0.5em;
     align-items: center;
   }
 
@@ -262,8 +284,22 @@
 
   @media screen and (min-width: 1024px) {
     .container {
+      grid-template-rows: unset;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+
       max-width: 70%;
       margin: auto;
+    }
+
+    .input-container {
+      padding: 3rem;
+      font-size: 1.25rem;
+    }
+
+    .position-select {
+      width: var(--size);
+      box-sizing: content-box;
     }
   }
 </style>
