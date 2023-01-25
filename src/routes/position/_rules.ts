@@ -11,22 +11,22 @@ export default {
     stacks: 'never'
   },
   relative: {
-    text: 'relative to itself.',
+    text: 'relative to its original position,',
     moves: true,
     stacks: 'when z-index is not auto'
   },
   absolute: {
-    text: 'relative to its parent.',
+    text: 'relative to its parent,',
     moves: true,
     stacks: 'when z-index is not auto'
   },
   fixed: {
-    text: 'relative to the viewport.',
+    text: 'relative to the viewport,',
     moves: true,
     stacks: 'always'
   },
   sticky: {
-    text: 'so it keeps its position on scroll.',
+    text: 'so it keeps its original position on scroll,',
     moves: true,
     stacks: 'always'
   }

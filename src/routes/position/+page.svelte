@@ -6,23 +6,27 @@
   import img from '$lib/assets/grace-hopper.jpg';
 
   import rules from './_rules';
-  import styles, {
+  import writableStyles, {
     defaultStyles,
     generateCssText,
     generateCssVars,
-    type Positions,
+    type Offsets,
     type Styles
   } from './_styles';
   import { onMount } from 'svelte';
 
-  $: cssVars = generateCssVars(defaultStyles);
-  $: cssText = generateCssText(defaultStyles);
-  $: currentPositionName = defaultStyles.child.position;
+  $: currentStyles = defaultStyles;
+  $: currentPosition = defaultStyles.child.position;
 
-  const positionNames = ['top', 'bottom', 'left', 'right'] as Array<keyof Positions>;
+  $: cssVars = generateCssVars(currentStyles);
+  $: cssText = generateCssText(currentStyles);
+
+  const positions = ['top', 'bottom', 'left', 'right'] as Array<keyof Offsets>;
+
   const updateStyles = (update: (n: Styles) => void) => {
-    styles.update((s: Styles) => {
+    writableStyles.update((s: Styles) => {
       update(s);
+      currentStyles = s;
       cssVars = generateCssVars(s);
       cssText = generateCssText(s);
       return s;
@@ -30,7 +34,7 @@
   };
 
   const handleInput =
-    (name: keyof Positions) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+    (name: keyof Offsets) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
       updateStyles((s) => {
         e.currentTarget.value.length === 0
           ? s.child[name]?.update('auto')
@@ -40,8 +44,8 @@
 
   $: {
     updateStyles((s) => {
-      s.parent.position.update(currentPositionName.value === 'absolute' ? 'relative' : 'static');
-      s.child.position.update(currentPositionName.value);
+      s.parent.position.update(currentPosition.value === 'absolute' ? 'relative' : 'static');
+      s.child.position.update(currentPosition.value);
     });
   }
 
@@ -106,7 +110,7 @@
     <div class="input-container">
       <label for="position">I want to position the picture</label>
       <select
-        bind:value={currentPositionName.value}
+        bind:value={currentPosition.value}
         name="position"
         id="position"
         class="position-select"
@@ -116,11 +120,24 @@
           <option value={name} class="position-option">{text}</option>
         {/each}
       </select>
-      <strong class="position-select-helper" aria-hidden="true">{currentPositionName.value}</strong>
-      {#if rules[currentPositionName.value]?.moves}
-        {#each positionNames as name}
-          <label for={name}>{name}</label>
-          <input {name} id={name} type="number" on:input={handleInput(name)} placeholder="auto" />
+      <strong class="position-select-helper" aria-hidden="true">{currentPosition.value}</strong>
+      {#if rules[currentPosition.value]?.moves}
+        <span>and offset it </span>
+        {#each positions as name, i}
+          <div class="position-offset-input-container">
+            <input
+              {name}
+              id={name}
+              type="number"
+              placeholder="auto"
+              class="position-offset-input"
+              on:input={handleInput(name)}
+              value={currentStyles.child[name]}
+            />
+            <label for={name}>
+              pixels from the {name}{i === positions.length - 1 ? '.' : ','}
+            </label>
+          </div>
         {/each}
       {/if}
     </div>
@@ -149,12 +166,6 @@
     justify-content: space-between;
 
     gap: 36px;
-  }
-
-  .input-container > * {
-    display: inline;
-    line-height: 2em;
-    margin-right: 4px;
   }
 
   .parent,
@@ -187,6 +198,7 @@
 
     object-fit: contain;
   }
+
   .text {
     display: flex;
     flex-direction: column;
@@ -194,10 +206,11 @@
   }
 
   .position-select-helper {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     z-index: -99999;
+    color: transparent;
   }
 
   .position-select {
@@ -206,6 +219,7 @@
 
     font-weight: 700;
     padding: 0.5em;
+    margin: 8px;
 
     width: var(--size);
     box-sizing: content-box;
@@ -216,6 +230,25 @@
     color: var(--secondary-text-color);
     border-color: var(--secondary-border-color);
     text-decoration: underline;
+  }
+
+  .position-offset-input-container {
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .position-offset-input {
+    all: unset;
+
+    border: 1px solid var(--primary-border-color);
+    border-radius: var(--border-radius);
+
+    font-weight: 700;
+    padding: 0.5em;
+
+    width: 4em;
   }
 
   .parent,

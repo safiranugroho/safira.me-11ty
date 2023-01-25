@@ -82,6 +82,8 @@ code > .token.function {
 }
 
 select {
+  all: unset;
+
   appearance: none;
 
   background-color: transparent;

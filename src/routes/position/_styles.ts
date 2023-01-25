@@ -28,14 +28,14 @@ export interface Property {
   update: Function;
 }
 
-export interface Positions {
+export interface Offsets {
   top?: Property;
   bottom?: Property;
   left?: Property;
   right?: Property;
 }
 
-export type Style = Positions & {
+export type Style = Offsets & {
   position: Property;
 };
 
