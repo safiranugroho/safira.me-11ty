@@ -10,7 +10,8 @@
     defaultStyles,
     generateCssText,
     generateCssVars,
-    type Positions
+    type Positions,
+    type Styles
   } from './_styles';
 
   $: cssVars = generateCssVars(defaultStyles);
@@ -18,25 +19,28 @@
   $: currentPositionName = defaultStyles.child.position;
 
   const positionNames = ['top', 'bottom', 'left', 'right'] as Array<keyof Positions>;
+  const updateStyles = (callback: (n: Styles) => void) => {
+    styles.update((s: Styles) => {
+      callback(s);
+      cssVars = generateCssVars(s);
+      cssText = generateCssText(s);
+      return s;
+    });
+  };
 
   const handleInput =
     (name: keyof Positions) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
-      styles.update((s) => {
+      updateStyles((s) => {
         e.currentTarget.value.length === 0
           ? s.child[name]?.update('auto')
           : s.child[name]?.update(Number(e.currentTarget.value), 'px');
-
-        cssVars = generateCssVars(s);
-        cssText = generateCssText(s);
-        return s;
       });
     };
 
   $: {
-    styles.update((s) => {
+    updateStyles((s) => {
       s.parent.position.update(currentPositionName.value === 'absolute' ? 'relative' : 'static');
       s.child.position.update(currentPositionName.value);
-      return s;
     });
   }
 </script>
