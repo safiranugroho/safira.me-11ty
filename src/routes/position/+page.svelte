@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { writable } from 'svelte/store';
+  import { onMount } from 'svelte';
 
   import Page from '$lib/Page.svelte';
   import Code from '$lib/Code.svelte';
@@ -7,7 +7,15 @@
 
   import img from '$lib/assets/grace-hopper.jpg';
 
-  const positions: { [key: string]: any } = {
+  import styles, {
+    defaultStyles,
+    generateCssText,
+    generateCssVars,
+    generateCssVarsForClass,
+    type Positions
+  } from './_styles';
+
+  const rules: { [key: string]: any } = {
     static: {
       text: 'as is',
       moves: false,
@@ -35,69 +43,44 @@
     }
   };
 
-  const defaultStyle = {
-    parent: {
-      position: 'static'
-    },
-    child: {
-      position: 'static',
-      top: '0px',
-      left: '0px',
-      bottom: '0px',
-      right: '0px'
-    }
-  } as { [key: string]: any };
+  $: cssVars = {
+    parent: generateCssVarsForClass(defaultStyles.parent),
+    child: generateCssVarsForClass(defaultStyles.child)
+  };
 
-  const style = writable(defaultStyle);
+  $: cssText = generateCssText(defaultStyles);
 
-  const generateVars = (o: { [s: string]: string }) =>
-    Object.entries(o).reduce((a, [k, v]) => `${a}--${k}: ${v};`, '');
+  const { position, ...positions } = defaultStyles.child;
+  $: currentPositionName = position;
+  $: currentPositions = positions;
+  $: positionNames = Object.keys(currentPositions) as Array<keyof Positions>;
 
-  $: parentVars = generateVars(defaultStyle.parent);
-  $: childVars = generateVars(defaultStyle.child);
+  onMount(() => {
+    styles.subscribe((s) => {
+      const { position, ...positions } = s.child;
+      currentPositionName = position;
+      currentPositions = positions;
+    });
+  });
 
-  $: css = `
-  .parent {
-    overflow: scroll;
-    ${parentVars.replaceAll('--', '').replaceAll(';', ';\n' + ' '.repeat(4))}
-  }
+  const handlePositionInput =
+    (name: keyof Positions) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+      styles.update((s) => {
+        e.currentTarget.value.length === 0
+          ? s.child[name]?.update('auto')
+          : s.child[name]?.update(Number(e.currentTarget.value), 'px');
 
-  .child {
-    ${childVars.replaceAll('--', '').replaceAll(';', ';\n' + ' '.repeat(4))}
-  }`;
-
-  let childPosition = defaultStyle.child.position;
-
-  $: currentAnchors = {
-    top: 0,
-    left: 0,
-    bottom: 0,
-    right: 0
-  } as any;
-
-  const handleInput =
-    (name: string) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
-      console.log({ currentAnchors });
-      currentAnchors[name] = Number(e.currentTarget.value);
-      currentAnchors = currentAnchors;
+        return s;
+      });
     };
 
   $: {
-    style.update((s) => {
-      Object.entries(currentAnchors).forEach(([name, value]) => {
-        s.child[name] = value + 'px';
-      });
+    styles.update((s) => {
+      s.parent.position.update(currentPositionName.value === 'absolute' ? 'relative' : 'static');
+      s.child.position.update(currentPositionName.value);
 
-      if (childPosition === 'absolute') {
-        s.parent.position = 'relative';
-        s.child.position = childPosition;
-      } else {
-        s.parent.position = 'static';
-        s.child.position = childPosition;
-      }
-
-      parentVars = generateVars(s.parent);
-      childVars = generateVars(s.child);
+      cssVars = generateCssVars(s);
+      cssText = generateCssText(s);
       return s;
     });
   }
@@ -113,8 +96,8 @@
   <div class="container" slot="content">
     <div class="view-container">
       <div class="asset">
-        <div class="parent" style={parentVars}>
-          <div class="child" style={childVars}>
+        <div class="parent" style={cssVars.parent}>
+          <div class="child" style={cssVars.child}>
             <img class="image" src={img} alt="Grace Hopper" />
           </div>
           <p class="text">
@@ -144,30 +127,33 @@
           </p>
         </div>
       </div>
-      <Code content={css} language="css" />
+      <Code content={cssText} language="css" />
     </div>
     <div class="input-container">
       <div>
         <label for="position">I want to position the picture</label>
-        <select bind:value={childPosition} name="position" id="position" class="position">
-          {#each Object.entries(positions) as [name, { text }]}
+        <select
+          bind:value={currentPositionName.value}
+          name="position"
+          id="position"
+          class="position"
+        >
+          {#each Object.entries(rules) as [name, { text }]}
             <option value={name} class="position-option">{text}</option>
           {/each}
         </select>
       </div>
       <div>
-        {#if positions[childPosition].moves}
-          {#each Object.entries(currentAnchors) as [name, value]}
+        {#if rules[currentPositionName.value]?.moves}
+          {#each positionNames as name}
             <div>
               <label for={name}>{name}</label>
               <input
                 {name}
                 id={name}
-                type="range"
-                min={-1000}
-                max={1000}
-                {value}
-                on:input={handleInput(name)}
+                type="number"
+                on:input={handlePositionInput(name)}
+                placeholder="auto"
               />
             </div>
           {/each}
