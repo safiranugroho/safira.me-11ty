@@ -155,7 +155,7 @@
 
     display: grid;
     grid-template-rows: repeat(2, 1fr);
-    gap: 36px;
+    gap: 48px;
   }
 
   .view-container,
@@ -168,7 +168,7 @@
     flex-direction: column;
     justify-content: space-between;
 
-    gap: 36px;
+    gap: 48px;
   }
 
   .parent,
@@ -286,7 +286,6 @@
     .container {
       grid-template-rows: unset;
       grid-template-columns: repeat(2, 1fr);
-      gap: 48px;
 
       max-width: 70%;
       margin: auto;
