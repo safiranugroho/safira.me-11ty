@@ -10,16 +10,13 @@
   import filters, { defaultFilters } from './_filters';
 
   $: all = defaultFilters;
-  $: css = '';
+  $: css = Object.entries(all).reduce(
+    (a, [name, s]) => (s.value !== s.default ? `${a} ${name}(${s.value}${s.unit})` : a),
+    ''
+  );
 
   onMount(() => {
-    filters.subscribe((f) => {
-      all = f;
-      css = Object.entries(f).reduce(
-        (a, [name, s]) => (s.value !== s.default ? `${a} ${name}(${s.value}${s.unit})` : a),
-        ''
-      );
-    });
+    filters.subscribe((f) => (all = f));
   });
 
   const handleInput =
