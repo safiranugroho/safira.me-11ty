@@ -17,7 +17,7 @@
   .container {
     font-size: 1rem;
 
-    background: #b5daf1;
+    background: #efefef;
     border-radius: var(--border-radius);
 
     padding: 16px;

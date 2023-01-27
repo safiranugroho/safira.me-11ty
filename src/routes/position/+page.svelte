@@ -50,17 +50,36 @@
     });
   }
 
-  $: dynamicSize = '';
+  $: selectWidth = '';
+  $: showPanel = false;
+  $: showPanelTimeout = null;
+
+  const togglePanel = () => {
+    showPanel =
+      currentStyles.child['top']?.value !== 'auto' &&
+      currentStyles.child['bottom']?.value !== 'auto';
+  };
+
   onMount(() => {
     const selectEl = document.querySelector('.position-select') as HTMLElement;
     const helperEl = document.querySelector('.position-select-helper') as HTMLElement;
 
-    dynamicSize = `${helperEl.offsetWidth}px`;
+    selectWidth = `${helperEl.offsetWidth}px`;
 
     selectEl?.addEventListener('change', (event) => {
       // @ts-ignore
       helperEl.innerHTML = event.target.querySelector('option:checked').innerText;
-      dynamicSize = `${helperEl.offsetWidth}px`;
+      selectWidth = `${helperEl.offsetWidth}px`;
+    });
+
+    document.addEventListener('mousedown', () => {
+      if (showPanelTimeout) {
+        clearTimeout(showPanelTimeout);
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      showPanelTimeout = setTimeout(togglePanel, 3000);
     });
   });
 </script>
@@ -116,7 +135,7 @@
           name="position"
           id="position"
           class="position-select"
-          style="--size: {dynamicSize}"
+          style="--size: {selectWidth}"
         >
           {#each Object.entries(rules) as [name, { text }]}
             <option value={name} class="position-option">{text}</option>
@@ -143,7 +162,7 @@
           </div>
         {/each}
       {/if}
-      {#if currentStyles.child['top']?.value !== 'auto' && currentStyles.child['bottom']?.value !== 'auto'}
+      {#if showPanel}
         <VerticalOffsetPanel />
       {/if}
     </div>
