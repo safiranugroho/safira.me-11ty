@@ -4,6 +4,7 @@
   import Header from '$lib/Header.svelte';
 
   import img from '$lib/assets/grace-hopper.jpg';
+  import infoIcon from '$lib/assets/info-icon.png';
 
   import rules from './_rules';
   import writableStyles, {
@@ -52,13 +53,8 @@
 
   $: selectWidth = '';
   $: showPanel = false;
-  $: showPanelTimeout = null;
 
-  const togglePanel = () => {
-    showPanel =
-      currentStyles.child['top']?.value !== 'auto' &&
-      currentStyles.child['bottom']?.value !== 'auto';
-  };
+  const togglePanel = () => (showPanel = !showPanel);
 
   onMount(() => {
     const selectEl = document.querySelector('.position-select') as HTMLElement;
@@ -70,16 +66,6 @@
       // @ts-ignore
       helperEl.innerHTML = event.target.querySelector('option:checked').innerText;
       selectWidth = `${helperEl.offsetWidth}px`;
-    });
-
-    document.addEventListener('mousedown', () => {
-      if (showPanelTimeout) {
-        clearTimeout(showPanelTimeout);
-      }
-    });
-
-    document.addEventListener('mouseup', () => {
-      showPanelTimeout = setTimeout(togglePanel, 3000);
     });
   });
 </script>
@@ -159,6 +145,9 @@
             <label for={name}>
               pixels from the {name}{i === positions.length - 1 ? '.' : ','}
             </label>
+            <button class="position-offset-button" on:click={togglePanel}>
+              <img class="position-offset-icon" src={infoIcon} alt="Show more info" />
+            </button>
           </div>
         {/each}
       {/if}
@@ -294,6 +283,19 @@
     padding: 0.5em;
 
     width: 4em;
+  }
+
+  .position-offset-button {
+    border-radius: 50%;
+    padding: 2px;
+    align-self: center;
+    display: flex;
+  }
+
+  .position-offset-icon {
+    width: 1.25em;
+    height: 1.25em;
+    align-self: center;
   }
 
   .parent,
