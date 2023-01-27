@@ -14,6 +14,7 @@
     type Styles
   } from './_styles';
   import { onMount } from 'svelte';
+  import VerticalOffsetPanel from './VerticalOffsetPanel.svelte';
 
   $: currentStyles = defaultStyles;
   $: currentPosition = defaultStyles.child.position;
@@ -141,6 +142,9 @@
             </label>
           </div>
         {/each}
+      {/if}
+      {#if currentStyles.child['top']?.value !== 'auto' && currentStyles.child['bottom']?.value !== 'auto'}
+        <VerticalOffsetPanel />
       {/if}
     </div>
   </div>
