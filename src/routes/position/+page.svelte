@@ -16,6 +16,8 @@
 
   import PositionInput from './PositionInput.svelte';
   import OffsetInput from './OffsetInput.svelte';
+  import InfoButton from './InfoButton.svelte';
+  import InfoPanel from './InfoPanel.svelte';
 
   $: currentStyles = defaultStyles;
   $: currentPosition = defaultStyles.child.position;
@@ -45,6 +47,8 @@
         ? resetOffset(name)
         : updateOffset(name, Number(e.currentTarget.value));
     };
+
+  $: showButton = currentPosition.value === 'absolute';
 
   $: {
     updateStyles((s) => {
@@ -110,6 +114,35 @@
             onUpdate={updateStyles}
           />
         {/each}
+      {/if}
+      {#if showButton}
+        <InfoPanel>
+          <svelte:fragment slot="title">A brief note about the term "parent".</svelte:fragment>
+          <svelte:fragment slot="description">
+            <span>
+              More accurately, the element's position is calculated relative from its
+              <em>containing block</em>. If the element's position is "absolute", the element's
+              containing block is formed by the edge of the padding box of the nearest ancestor
+              element that has a position value other than "static". In this case, the child's
+              containing block happens to be the parent element, whose position is set to
+              "relative".
+            </span>
+            <span>
+              Watch what happens to the child element when we reset the <button
+                class="inline-button"
+                on:click={() => updateStyles((s) => s.parent.position?.update('static'))}
+                >parent's position to "static".
+              </button>
+              (Spoiler alert: it anchors itself to {'<body>'} as it has no other positioned block ancestors!
+              <button
+                class="inline-button"
+                on:click={() => updateStyles((s) => s.parent.position?.update('relative'))}
+              >
+                Set the parent's position back to "relative".
+              </button>)
+            </span>
+          </svelte:fragment>
+        </InfoPanel>
       {/if}
     </div>
   </div>
@@ -189,6 +222,14 @@
 
   .input-container p {
     margin-bottom: 0.25em;
+  }
+
+  .inline-button {
+    border: none;
+    padding: 0;
+    text-decoration: underline;
+    text-align: inherit;
+    display: inline;
   }
 
   .parent,

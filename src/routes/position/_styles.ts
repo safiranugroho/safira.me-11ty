@@ -14,11 +14,11 @@ export const generateCssTextForClass = (s: Style) =>
 export const generateCssText = (s: Styles) => `
 .parent {
   overflow: scroll;
-  ${generateCssTextForClass(s.parent)}
+  ${generateCssTextForClass(s.parent).trimEnd()}
 }
 
 .child {
-  ${generateCssTextForClass(s.child)}
+  ${generateCssTextForClass(s.child).trimEnd()}
 }`;
 
 export interface Property {

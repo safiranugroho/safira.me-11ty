@@ -18,12 +18,13 @@
   onMount(() => {
     writeableStyles.subscribe((s) => {
       if (name === 'bottom' && typeof value === 'number') {
-        showButton = typeof s.child.left?.value === 'number' || showPanel;
+        showButton = typeof s.child.top?.value === 'number' || showPanel;
       }
 
       if (name === 'right' && typeof value === 'number') {
         showButton = typeof s.child.left?.value === 'number' || showPanel;
-        showDirectionAlt = s.child.position?.value === 'absolute';
+        showDirectionAlt =
+          s.child.position?.value === 'absolute' || s.child.position?.value === 'sticky';
       }
     });
   });
@@ -61,11 +62,10 @@
   <InfoPanel>
     <svelte:fragment slot="title">Why isn't the right value being respected?</svelte:fragment>
     <svelte:fragment slot="description">
-      <span
-        >This is because the text you're reading is written in English, which directionality that
-        your user agent decides is left-to-right ("ltr"). In this text directionality, if both left
-        and right are specified (not "auto"), the left value wins and the right value is ignored.
-        Try
+      <span>
+        This is because the text you're reading is written in English, which has a directionality of
+        left-to-right ("ltr"), set by your user agent. In this text directionality, if both left and
+        right are specified (not "auto"), the left value wins and the right value is ignored. Try
         <button
           class="inline-button"
           on:click={() => onUpdate((s) => s.child.left?.update('auto'))}
@@ -76,20 +76,20 @@
       </span>
       {#if showDirectionAlt}
         <span>
-          Alternatively, keep both left and right values set, and try setting the containing block's
-          text direction to
+          Alternatively, while it's not recommended to do this, watch what happens if both left and
+          right values stay set, and the containing block's text direction is set to
           <button
             class="inline-button"
             on:click={() => onUpdate((s) => (s.parent.direction = P('rtl')))}
           >
             right-to-left ("rtl")
-          </button>. (
+          </button>.
           <button
             class="inline-button"
             on:click={() => onUpdate((s) => s.parent.direction?.update('ltr'))}
           >
-            Reset back to "ltr".
-          </button>)
+            (Reset back to "ltr".)
+          </button>
         </span>
       {/if}
     </svelte:fragment>
@@ -120,5 +120,7 @@
     border: none;
     padding: 0;
     text-decoration: underline;
+    text-align: inherit;
+    display: inline;
   }
 </style>
