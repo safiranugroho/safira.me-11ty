@@ -4,7 +4,6 @@
   import Header from '$lib/Header.svelte';
 
   import img from '$lib/assets/grace-hopper.jpg';
-  import infoIcon from '$lib/assets/info-icon.png';
 
   import rules from './_rules';
   import writableStyles, {
@@ -14,8 +13,10 @@
     type Offsets,
     type Styles
   } from './_styles';
-  import { onMount } from 'svelte';
-  import VerticalOffsetPanel from './VerticalOffsetPanel.svelte';
+
+  import InfoPanel from './InfoPanel.svelte';
+  import Select from './PositionInput.svelte';
+  import OffsetInput from './OffsetInput.svelte';
 
   $: currentStyles = defaultStyles;
   $: currentPosition = defaultStyles.child.position;
@@ -51,23 +52,8 @@
     });
   }
 
-  $: selectWidth = '';
   $: showPanel = false;
-
   const togglePanel = () => (showPanel = !showPanel);
-
-  onMount(() => {
-    const selectEl = document.querySelector('.position-select') as HTMLElement;
-    const helperEl = document.querySelector('.position-select-helper') as HTMLElement;
-
-    selectWidth = `${helperEl.offsetWidth}px`;
-
-    selectEl?.addEventListener('change', (event) => {
-      // @ts-ignore
-      helperEl.innerHTML = event.target.querySelector('option:checked').innerText;
-      selectWidth = `${helperEl.offsetWidth}px`;
-    });
-  });
 </script>
 
 <Page>
@@ -114,45 +100,21 @@
       <Code content={cssText} language="css" />
     </div>
     <div class="input-container">
-      <div class="position-select-container">
-        <label for="position">I want to position the picture</label>
-        <select
-          bind:value={currentPosition.value}
-          name="position"
-          id="position"
-          class="position-select"
-          style="--size: {selectWidth}"
-        >
-          {#each Object.entries(rules) as [name, { text }]}
-            <option value={name} class="position-option">{text}</option>
-          {/each}
-        </select>
-      </div>
-      <strong class="position-select-helper" aria-hidden="true">{currentPosition.value}</strong>
+      <Select bind:currentPosition />
       {#if rules[currentPosition.value]?.moves}
         <p>and offset it</p>
-        {#each positions as name, i}
-          <div class="position-offset-input-container">
-            <input
-              {name}
-              id={name}
-              type="number"
-              placeholder="auto"
-              class="position-offset-input"
-              on:input={handleInput(name)}
-              value={currentStyles.child[name]}
-            />
-            <label for={name}>
-              pixels from the {name}{i === positions.length - 1 ? '.' : ','}
-            </label>
-            <button class="position-offset-button" on:click={togglePanel}>
-              <img class="position-offset-icon" src={infoIcon} alt="Show more info" />
-            </button>
-          </div>
+        {#each positions as name}
+          <OffsetInput
+            {name}
+            value={currentStyles.child[name]?.value}
+            label={`pixels from the ${name}`}
+            onInput={handleInput(name)}
+            onShowMore={togglePanel}
+          />
         {/each}
       {/if}
       {#if showPanel}
-        <VerticalOffsetPanel />
+        <InfoPanel />
       {/if}
     </div>
   </div>
@@ -234,70 +196,6 @@
     margin-bottom: 0.25em;
   }
 
-  .position-select-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5em;
-  }
-
-  .position-select-helper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -99999;
-    color: transparent;
-  }
-
-  .position-select {
-    border: 1px solid var(--primary-border-color);
-    border-radius: var(--border-radius);
-
-    font-weight: 700;
-    padding: 0.5em;
-
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  .position-select:hover,
-  .position-select:focus-visible {
-    color: var(--secondary-text-color);
-    border-color: var(--secondary-border-color);
-    text-decoration: underline;
-  }
-
-  .position-offset-input-container {
-    margin: 0.5em 0;
-    display: flex;
-    gap: 0.5em;
-    align-items: center;
-  }
-
-  .position-offset-input {
-    all: unset;
-
-    border: 1px solid var(--primary-border-color);
-    border-radius: var(--border-radius);
-
-    font-weight: 700;
-    padding: 0.5em;
-
-    width: 4em;
-  }
-
-  .position-offset-button {
-    border-radius: 50%;
-    padding: 2px;
-    align-self: center;
-    display: flex;
-  }
-
-  .position-offset-icon {
-    width: 1.25em;
-    height: 1.25em;
-    align-self: center;
-  }
-
   .parent,
   .child {
     position: var(--position);
@@ -319,11 +217,6 @@
     .input-container {
       padding: 3rem;
       font-size: 1.25rem;
-    }
-
-    .position-select {
-      width: var(--size);
-      box-sizing: content-box;
     }
   }
 </style>
