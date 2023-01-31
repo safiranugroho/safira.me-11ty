@@ -1,12 +1,16 @@
 <script lang="ts">
   import InfoButton from './InfoButton.svelte';
+  import InfoPanel from './InfoPanel.svelte';
   import type { Offsets } from './_styles';
 
   export let name: keyof Offsets;
   export let value: string | number | undefined;
   export let label: string;
   export let onInput: (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => void;
-  export let onShowMore: () => void;
+
+  $: showButton = typeof value === 'number';
+  $: showPanel = false;
+  const togglePanel = () => (showPanel = !showPanel);
 </script>
 
 <div class="position-offset-input-container">
@@ -20,8 +24,10 @@
     {value}
   />
   <label for={name}>{label}</label>
-  <InfoButton onClick={onShowMore} />
+  {#if showButton}<InfoButton onClick={togglePanel} />{/if}
 </div>
+
+{#if showPanel}<InfoPanel />{/if}
 
 <style>
   .position-offset-input-container {

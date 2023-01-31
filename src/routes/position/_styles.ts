@@ -28,12 +28,10 @@ export interface Property {
   update: Function;
 }
 
-export interface Offsets {
-  top?: Property;
-  bottom?: Property;
-  left?: Property;
-  right?: Property;
-}
+export type OffsetName = 'top' | 'bottom' | 'left' | 'right';
+export type Offsets = {
+  [key in OffsetName]?: Property;
+};
 
 export type Style = Offsets & {
   position: Property;

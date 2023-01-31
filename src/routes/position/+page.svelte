@@ -10,11 +10,11 @@
     defaultStyles,
     generateCssText,
     generateCssVars,
+    type OffsetName,
     type Offsets,
     type Styles
   } from './_styles';
 
-  import InfoPanel from './InfoPanel.svelte';
   import Select from './PositionInput.svelte';
   import OffsetInput from './OffsetInput.svelte';
 
@@ -24,7 +24,7 @@
   $: cssVars = generateCssVars(currentStyles);
   $: cssText = generateCssText(currentStyles);
 
-  const positions = ['top', 'bottom', 'left', 'right'] as Array<keyof Offsets>;
+  const positions = ['top', 'bottom', 'left', 'right'] as Array<OffsetName>;
 
   const updateStyles = (update: (n: Styles) => void) => {
     writableStyles.update((s: Styles) => {
@@ -51,9 +51,6 @@
       s.child.position.update(currentPosition.value);
     });
   }
-
-  $: showPanel = false;
-  const togglePanel = () => (showPanel = !showPanel);
 </script>
 
 <Page>
@@ -109,12 +106,8 @@
             value={currentStyles.child[name]?.value}
             label={`pixels from the ${name}`}
             onInput={handleInput(name)}
-            onShowMore={togglePanel}
           />
         {/each}
-      {/if}
-      {#if showPanel}
-        <InfoPanel />
       {/if}
     </div>
   </div>
