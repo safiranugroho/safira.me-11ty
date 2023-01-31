@@ -11,11 +11,10 @@
     generateCssText,
     generateCssVars,
     type OffsetName,
-    type Offsets,
     type Styles
   } from './_styles';
 
-  import Select from './PositionInput.svelte';
+  import PositionInput from './PositionInput.svelte';
   import OffsetInput from './OffsetInput.svelte';
 
   $: currentStyles = defaultStyles;
@@ -36,13 +35,15 @@
     });
   };
 
-  const handleInput =
-    (name: keyof Offsets) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
-      updateStyles((s) => {
-        e.currentTarget.value.length === 0
-          ? s.child[name]?.update('auto')
-          : s.child[name]?.update(Number(e.currentTarget.value), 'px');
-      });
+  const resetOffset = (name: OffsetName) => updateStyles((s) => s.child[name]?.update('auto'));
+  const updateOffset = (name: OffsetName, value: number) =>
+    updateStyles((s) => s.child[name]?.update(value, 'px'));
+
+  const handleOffsetInput =
+    (name: OffsetName) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+      e.currentTarget.value.length === 0
+        ? resetOffset(name)
+        : updateOffset(name, Number(e.currentTarget.value));
     };
 
   $: {
@@ -97,7 +98,7 @@
       <Code content={cssText} language="css" />
     </div>
     <div class="input-container">
-      <Select bind:currentPosition />
+      <PositionInput bind:currentPosition />
       {#if rules[currentPosition.value]?.moves}
         <p>and offset it</p>
         {#each positions as name}
@@ -105,7 +106,8 @@
             {name}
             value={currentStyles.child[name]?.value}
             label={`pixels from the ${name}`}
-            onInput={handleInput(name)}
+            onInput={handleOffsetInput(name)}
+            onUpdate={updateStyles}
           />
         {/each}
       {/if}

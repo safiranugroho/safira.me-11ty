@@ -35,6 +35,7 @@ export type Offsets = {
 
 export type Style = Offsets & {
   position: Property;
+  direction?: Property;
 };
 
 export interface Styles {

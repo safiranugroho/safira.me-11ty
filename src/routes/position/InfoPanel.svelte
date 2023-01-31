@@ -1,15 +1,12 @@
-<script>
+<script lang="ts">
   import infoIcon from '$lib/assets/info-icon.png';
 </script>
 
 <div class="container">
   <img src={infoIcon} alt="" class="title-icon" />
   <div class="content-container">
-    <h3 class="title">Why isn't the <code>bottom</code> value being respected?</h3>
-    <p class="description">
-      If both <code>top</code> and <code>bottom</code> are specified (not "auto"), <code>top</code>
-      wins. Try resetting the <code>top</code> value and see what happens!
-    </p>
+    <h3 class="title"><slot name="title" /></h3>
+    <p class="description"><slot name="description" /></p>
   </div>
 </div>
 
