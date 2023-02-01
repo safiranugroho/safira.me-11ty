@@ -3,27 +3,12 @@
 </script>
 
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import writeableStyles, { type OffsetName } from './_styles';
+  import type { OffsetName } from './_styles';
 
   export let name: OffsetName;
   export let value: string | number | undefined;
   export let label: string;
   export let onInput: OnInput;
-
-  $: showPanel = false;
-
-  onMount(() => {
-    writeableStyles.subscribe((s) => {
-      if (name === 'bottom' && typeof value === 'number') {
-        showPanel = typeof s.child.top?.value === 'number' || showPanel;
-      }
-
-      if (name === 'right' && typeof value === 'number') {
-        showPanel = typeof s.child.left?.value === 'number' || showPanel;
-      }
-    });
-  });
 </script>
 
 <div class="position-offset-input-container">
@@ -38,7 +23,6 @@
   />
   <label for={name}>{label}</label>
 </div>
-{#if showPanel}<slot />{/if}
 
 <style>
   .position-offset-input-container {
