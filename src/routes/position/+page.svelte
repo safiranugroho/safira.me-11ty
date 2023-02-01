@@ -62,15 +62,18 @@
         : updateOffset(name, Number(e.currentTarget.value));
     };
 
+  $: imageOnTop = true;
+  const switchImagePositionInMarkup = () => (imageOnTop = !imageOnTop);
+
   $: {
     updateStyles((s) => {
+      delete s.parent.direction;
+      imageOnTop = true;
+
       s.parent.position.update(currentPosition.value === 'absolute' ? 'relative' : 'static');
       s.child.position.update(currentPosition.value);
     });
   }
-
-  $: imageOnTop = true;
-  const switchImagePositionInMarkup = () => (imageOnTop = !imageOnTop);
 </script>
 
 <Page>

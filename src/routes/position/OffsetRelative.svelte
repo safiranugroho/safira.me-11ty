@@ -24,6 +24,7 @@
           right-to-left ("rtl")
         </button>.
       </span>
+      <span>(Spoiler alert: the right value wins!)</span>
       <button class="inline-button" on:click={() => onUpdate((s) => delete s.parent.direction)}>
         Reset back to default ("ltr").
       </button>
