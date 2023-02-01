@@ -56,6 +56,9 @@
       s.child.position.update(currentPosition.value);
     });
   }
+
+  $: imageOnTop = true;
+  const switchImagePositionInMarkup = () => (imageOnTop = !imageOnTop);
 </script>
 
 <Page>
@@ -69,9 +72,11 @@
     <div class="view-container">
       <div class="asset">
         <div class="parent" style={cssVars.parent}>
-          <div class="child" style={cssVars.child}>
-            <img class="image" src={img} alt="Grace Hopper" />
-          </div>
+          {#if imageOnTop === true}
+            <div class="child" style={cssVars.child}>
+              <img class="image" src={img} alt="Grace Hopper" />
+            </div>
+          {/if}
           <p class="text">
             <span>
               Grace Hopper was a pioneering computer scientist and United States Navy rear admiral.
@@ -97,6 +102,11 @@
               computers worked.
             </span>
           </p>
+          {#if imageOnTop === false}
+            <div class="child" style={cssVars.child}>
+              <img class="image" src={img} alt="Grace Hopper" />
+            </div>
+          {/if}
         </div>
       </div>
       <Code content={cssText} language="css" />
@@ -112,6 +122,7 @@
             label={`pixels from the ${name}`}
             onInput={handleOffsetInput(name)}
             onUpdate={updateStyles}
+            onSwitchImagePosition={switchImagePositionInMarkup}
           />
         {/each}
       {/if}
@@ -208,6 +219,8 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+
+    width: 150%;
   }
 
   .input-container {
@@ -232,14 +245,14 @@
     display: inline;
   }
 
-  .parent,
+  /* .parent,
   .child {
     position: var(--position);
     top: var(--top);
     bottom: var(--bottom);
     left: var(--left);
     right: var(--right);
-  }
+  } */
 
   @media screen and (min-width: 1024px) {
     .container {
