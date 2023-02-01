@@ -27,7 +27,7 @@
   .title-container {
     display: flex;
     gap: 8px;
-    align-items: start;
+    align-items: center;
 
     cursor: pointer;
 
