@@ -1,6 +1,6 @@
 <script lang="ts">
   import HorizontalOffsetInfoPanel from './HorizontalOffsetInfoPanel.svelte';
-  import OffsetInput, { type OnInput } from './OffsetInput.svelte';
+  import InputOffset, { type OnInput } from './InputOffset.svelte';
   import VerticalOffsetInfoPanel from './VerticalOffsetInfoPanel.svelte';
   import type { OffsetName, Styles } from './_styles';
 
@@ -12,7 +12,7 @@
 </script>
 
 {#each positions as name}
-  <OffsetInput
+  <InputOffset
     {name}
     value={currentStyles.child[name]?.value}
     label={`pixels from the ${name}`}
@@ -20,5 +20,5 @@
   >
     {#if name === 'bottom'}<VerticalOffsetInfoPanel {onUpdate} />{/if}
     {#if name === 'right'}<HorizontalOffsetInfoPanel {onUpdate} />{/if}
-  </OffsetInput>
+  </InputOffset>
 {/each}

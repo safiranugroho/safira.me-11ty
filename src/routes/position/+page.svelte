@@ -14,7 +14,7 @@
     type Styles
   } from './_styles';
 
-  import PositionInput from './PositionInput.svelte';
+  import InputPosition from './InputPosition.svelte';
 
   import InfoPanel from './InfoPanel.svelte';
   import OffsetAbsolute from './OffsetAbsolute.svelte';
@@ -56,7 +56,7 @@
   const updateOffset = (name: OffsetName, value: number) =>
     updateStyles((s) => s.child[name]?.update(value, 'px'));
 
-  const handleOffsetInput =
+  const handleInputOffset =
     (name: OffsetName) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
       e.currentTarget.value.length === 0
         ? resetOffset(name)
@@ -102,13 +102,13 @@
       <Code content={cssText} language="css" />
     </div>
     <div class="input-container">
-      <PositionInput bind:currentPosition />
+      <InputPosition bind:currentPosition />
       {#if rules[currentPosition.value]?.moves}
         <p>and offset it</p>
         <svelte:component
           this={components[currentPosition.value]}
           bind:currentStyles
-          onInput={handleOffsetInput}
+          onInput={handleInputOffset}
           onUpdate={updateStyles}
           onSwitchImagePosition={switchImagePositionInMarkup}
         />
