@@ -44,6 +44,8 @@
   }
 
   .code {
+    background: white;
+
     position: relative;
 
     padding: 16px;
