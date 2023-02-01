@@ -68,6 +68,14 @@ button:focus-visible {
   text-decoration: underline;
 }
 
+button.inline-button {
+  border: none;
+  padding: 0;
+  text-decoration: underline;
+  text-align: inherit;
+  display: inline;
+}
+
 code,
 code > .token.selector {
   color: #1d3557;

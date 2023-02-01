@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { SvelteComponent } from 'svelte';
   import Page from '$lib/Page.svelte';
   import Code from '$lib/Code.svelte';
   import Header from '$lib/Header.svelte';
@@ -8,31 +9,44 @@
   import rules from './_rules';
   import writableStyles, {
     defaultStyles,
-    generateCssText,
-    generateCssVars,
+    generateCss,
     type OffsetName,
     type Styles
   } from './_styles';
 
   import PositionInput from './PositionInput.svelte';
-  import OffsetInput from './OffsetInput.svelte';
-  import InfoButton from './InfoButton.svelte';
+
   import InfoPanel from './InfoPanel.svelte';
+  import OffsetAbsolute from './OffsetAbsolute.svelte';
+  import OffsetRelative from './OffsetRelative.svelte';
+  import OffsetFixed from './OffsetFixed.svelte';
+  import OffsetSticky from './OffsetSticky.svelte';
+
+  const components = {
+    relative: OffsetRelative,
+    absolute: OffsetAbsolute,
+    fixed: OffsetFixed,
+    sticky: OffsetSticky
+  } as { [key: string]: typeof SvelteComponent };
 
   $: currentStyles = defaultStyles;
   $: currentPosition = defaultStyles.child.position;
 
-  $: cssVars = generateCssVars(currentStyles);
-  $: cssText = generateCssText(currentStyles);
+  $: css = generateCss(currentStyles);
+  $: cssText = `
+.parent {
+  overflow: scroll;
+  ${css.parent}
+}
 
-  const positions = ['top', 'bottom', 'left', 'right'] as Array<OffsetName>;
+.child {
+  ${css.child}
+}`;
 
   const updateStyles = (update: (n: Styles) => void) => {
     writableStyles.update((s: Styles) => {
       update(s);
       currentStyles = s;
-      cssVars = generateCssVars(s);
-      cssText = generateCssText(s);
       return s;
     });
   };
@@ -48,7 +62,7 @@
         : updateOffset(name, Number(e.currentTarget.value));
     };
 
-  $: showButton = currentPosition.value === 'absolute';
+  $: showPanel = currentPosition.value === 'absolute';
 
   $: {
     updateStyles((s) => {
@@ -71,9 +85,9 @@
   <div class="container" slot="content">
     <div class="view-container">
       <div class="asset">
-        <div class="parent" style={cssVars.parent}>
+        <div class="parent" style={css.parent}>
           {#if imageOnTop === true}
-            <div class="child" style={cssVars.child}>
+            <div class="child" style={css.child}>
               <img class="image" src={img} alt="Grace Hopper" />
             </div>
           {/if}
@@ -103,7 +117,7 @@
             </span>
           </p>
           {#if imageOnTop === false}
-            <div class="child" style={cssVars.child}>
+            <div class="child" style={css.child}>
               <img class="image" src={img} alt="Grace Hopper" />
             </div>
           {/if}
@@ -115,18 +129,15 @@
       <PositionInput bind:currentPosition />
       {#if rules[currentPosition.value]?.moves}
         <p>and offset it</p>
-        {#each positions as name}
-          <OffsetInput
-            {name}
-            value={currentStyles.child[name]?.value}
-            label={`pixels from the ${name}`}
-            onInput={handleOffsetInput(name)}
-            onUpdate={updateStyles}
-            onSwitchImagePosition={switchImagePositionInMarkup}
-          />
-        {/each}
+        <svelte:component
+          this={components[currentPosition.value]}
+          bind:currentStyles
+          onInput={handleOffsetInput}
+          onUpdate={updateStyles}
+          onSwitchImagePosition={switchImagePositionInMarkup}
+        />
       {/if}
-      {#if showButton}
+      {#if showPanel}
         <InfoPanel>
           <svelte:fragment slot="title">A brief note about the term "parent".</svelte:fragment>
           <svelte:fragment slot="description">

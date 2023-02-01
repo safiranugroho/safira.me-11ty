@@ -1,25 +1,14 @@
 import { writable } from 'svelte/store';
 
-export const generateCssVarsForClass = (s: Style) =>
-  Object.entries(s).reduce((a, [k, v]) => `${a}--${k}: ${v.toText()};`, '');
+export const generateCssForClass = (s: Style) =>
+  Object.entries(s)
+    .reduce((a, [k, v]) => `${a}${k}: ${v.toText()};\n${' '.repeat(2)}`, '')
+    .trimEnd();
 
-export const generateCssVars = (s: Styles) => ({
-  parent: generateCssTextForClass(s.parent),
-  child: generateCssTextForClass(s.child)
+export const generateCss = (s: Styles) => ({
+  parent: generateCssForClass(s.parent),
+  child: generateCssForClass(s.child)
 });
-
-export const generateCssTextForClass = (s: Style) =>
-  Object.entries(s).reduce((a, [k, v]) => `${a}${k}: ${v.toText()};\n${' '.repeat(2)}`, '');
-
-export const generateCssText = (s: Styles) => `
-.parent {
-  overflow: scroll;
-  ${generateCssTextForClass(s.parent).trimEnd()}
-}
-
-.child {
-  ${generateCssTextForClass(s.child).trimEnd()}
-}`;
 
 export interface Property {
   value: string | number;

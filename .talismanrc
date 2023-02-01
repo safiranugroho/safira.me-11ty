@@ -10,7 +10,7 @@ fileignoreconfig:
 - filename: src/routes/keyboard/+page.svelte
   checksum: ac118bb01e688af46bd95942f148613b64876c4296bacb5e47b6924f233a21cd
 - filename: src/routes/position/+page.svelte
-  checksum: 722670b7a49c5805225cfb8703338285d6c5a720246fb5735aa6ea91de3d9485
+  checksum: 29c2f41ca8f5b43a86d5f20b76a0a9173328e3d6ae1c49eff8093377dd6415b5
 - filename: src/routes/position/_rules.ts
   checksum: 949c8faed72cd1146ba191164b685d438782ea3cccbc63176e9d747a72b02a4a
 - filename: src/routes/position/_styles.ts
