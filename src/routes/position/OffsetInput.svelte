@@ -1,13 +1,16 @@
+<script lang="ts" context="module">
+  export type OnInput = (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => void;
+</script>
+
 <script lang="ts">
   import { onMount } from 'svelte';
   import InfoButton from './InfoButton.svelte';
-  import InfoPanel from './InfoPanel.svelte';
-  import writeableStyles, { P, type OffsetName, type Styles } from './_styles';
+  import writeableStyles, { type OffsetName } from './_styles';
 
   export let name: OffsetName;
   export let value: string | number | undefined;
   export let label: string;
-  export let onInput: (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => void;
+  export let onInput: OnInput;
 
   $: showButton = false;
   $: showPanel = false;

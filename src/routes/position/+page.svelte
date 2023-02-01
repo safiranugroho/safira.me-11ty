@@ -62,8 +62,6 @@
         : updateOffset(name, Number(e.currentTarget.value));
     };
 
-  $: showPanel = currentPosition.value === 'absolute';
-
   $: {
     updateStyles((s) => {
       s.parent.position.update(currentPosition.value === 'absolute' ? 'relative' : 'static');
@@ -71,6 +69,7 @@
     });
   }
 
+  $: showPanel = currentPosition.value === 'absolute';
   $: imageOnTop = true;
   const switchImagePositionInMarkup = () => (imageOnTop = !imageOnTop);
 </script>

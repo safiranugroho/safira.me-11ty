@@ -1,11 +1,9 @@
 <script lang="ts">
-  import OffsetInput from './OffsetInput.svelte';
+  import OffsetInput, { type OnInput } from './OffsetInput.svelte';
   import type { OffsetName, Styles } from './_styles';
 
   export let currentStyles: Styles;
-  export let onInput: (
-    name: OffsetName
-  ) => (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => void;
+  export let onInput: (name: string) => OnInput;
 
   const positions = ['top', 'bottom', 'left', 'right'] as Array<OffsetName>;
 </script>
