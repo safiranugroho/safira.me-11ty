@@ -16,11 +16,11 @@
   onMount(() => {
     writeableStyles.subscribe((s) => {
       if (name === 'bottom' && typeof value === 'number') {
-        showPanel = typeof s.child.top?.value === 'number';
+        showPanel = typeof s.child.top?.value === 'number' || showPanel;
       }
 
       if (name === 'right' && typeof value === 'number') {
-        showPanel = typeof s.child.left?.value === 'number';
+        showPanel = typeof s.child.left?.value === 'number' || showPanel;
       }
     });
   });
