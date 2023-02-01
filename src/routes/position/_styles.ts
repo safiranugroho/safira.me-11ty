@@ -25,6 +25,7 @@ export type Offsets = {
 export type Style = Offsets & {
   position: Property;
   direction?: Property;
+  overflow?: Property;
 };
 
 export interface Styles {
@@ -46,7 +47,8 @@ export const P = (value: string | number, unit: string = '') => ({
 
 export const defaultStyles: Styles = {
   parent: {
-    position: P('static')
+    position: P('static'),
+    overflow: P('scroll')
   },
   child: {
     position: P('static'),

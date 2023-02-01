@@ -36,7 +36,6 @@
   $: css = generateCss(currentStyles);
   $: cssText = `
 .parent {
-  overflow: scroll;
   ${css.parent}
 }
 
@@ -179,7 +178,6 @@
 
   .parent {
     max-height: 420px;
-    overflow: scroll;
 
     padding: 24px;
     border-color: #1d3557;
