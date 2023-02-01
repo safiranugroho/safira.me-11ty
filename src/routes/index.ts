@@ -4,6 +4,7 @@ import weather from '$lib/assets/weather.png';
 import rps from '$lib/assets/rps.png';
 import ball from '$lib/assets/ball.png';
 import filter from '$lib/assets/filter.png';
+import position from '$lib/assets/position.png';
 
 export type Route = {
   prev?: string;
@@ -47,6 +48,12 @@ export default {
   '/filter': {
     prev: '/ball',
     name: 'CSS filter',
-    cover: filter
+    cover: filter,
+    next: '/position'
+  },
+  '/position': {
+    prev: '/filter',
+    name: 'CSS position',
+    cover: position
   }
 } as Routes;

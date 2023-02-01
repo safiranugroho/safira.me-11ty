@@ -80,7 +80,7 @@
     slot="header"
     heading="CSS position"
     subheading="No flex, no grid, just position."
-    completedDate="24 January 2023"
+    completedDate="1 February 2023"
   />
   <div class="container" slot="content">
     <div class="view-container">
