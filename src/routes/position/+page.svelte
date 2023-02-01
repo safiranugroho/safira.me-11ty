@@ -21,6 +21,7 @@
   import OffsetRelative from './OffsetRelative.svelte';
   import OffsetFixed from './OffsetFixed.svelte';
   import OffsetSticky from './OffsetSticky.svelte';
+  import FillerText from './FillerText.svelte';
 
   const components = {
     relative: OffsetRelative,
@@ -90,31 +91,7 @@
               <img class="image" src={img} alt="Grace Hopper" />
             </div>
           {/if}
-          <p class="text">
-            <span>
-              Grace Hopper was a pioneering computer scientist and United States Navy rear admiral.
-              She was one of the first programmers of the Harvard Mark I computer, and invented the
-              first compiler, an important tool that translates written code into machine language
-              that a computer can understand.
-            </span>
-            <span>
-              Hopper popularized the term "debugging" to describe the process of removing errors
-              from a computer program. Her associates discovered a moth stuck in a relay and thereby
-              impeding operation, whereupon she remarked that they were "debugging" the system.
-            </span>
-            <span>
-              She also helped develop COBOL, one of the first high-level programming languages.
-              Hopper's contributions to computer science and technology were significant and she is
-              often referred to as the "mother of computing."
-            </span>
-            <span>
-              Hopper was known to carry around a piece of wire that was exactly one foot long, which
-              she called her "standard." She would use this wire to help explain the concept of a
-              "nanosecond" (one billionth of a second) to her colleagues. It was a way to physically
-              show them how small a nanosecond is and help them understand the speed at which
-              computers worked.
-            </span>
-          </p>
+          <FillerText />
           {#if imageOnTop === false}
             <div class="child" style={css.child}>
               <img class="image" src={img} alt="Grace Hopper" />
@@ -138,7 +115,7 @@
       {/if}
       {#if showPanel}
         <InfoPanel>
-          <svelte:fragment slot="title">A brief note about the term "parent".</svelte:fragment>
+          <svelte:fragment slot="title">A note about the term "parent".</svelte:fragment>
           <svelte:fragment slot="description">
             <span>
               More accurately, the element's position is calculated relative from its
@@ -154,14 +131,16 @@
                 on:click={() => updateStyles((s) => s.parent.position?.update('static'))}
                 >parent's position to "static".
               </button>
-              (Spoiler alert: it anchors itself to {'<body>'} as it has no other positioned block ancestors!
-              <button
-                class="inline-button"
-                on:click={() => updateStyles((s) => s.parent.position?.update('relative'))}
-              >
-                Set the parent's position back to "relative".
-              </button>)
             </span>
+            <span>
+              (Spoiler alert: it anchors itself to {'<body>'} as it has no other positioned block ancestors!)
+            </span>
+            <button
+              class="inline-button"
+              on:click={() => updateStyles((s) => s.parent.position?.update('relative'))}
+            >
+              Set the parent's position back to "relative".
+            </button>
           </svelte:fragment>
         </InfoPanel>
       {/if}
@@ -189,7 +168,6 @@
   .view-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 
     gap: 48px;
   }
@@ -225,20 +203,11 @@
     object-fit: contain;
   }
 
-  .text {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    width: 150%;
-  }
-
   .input-container {
     border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
 
     padding: 2rem;
-    font-size: 1rem;
 
     box-sizing: border-box;
   }
@@ -255,15 +224,6 @@
     display: inline;
   }
 
-  /* .parent,
-  .child {
-    position: var(--position);
-    top: var(--top);
-    bottom: var(--bottom);
-    left: var(--left);
-    right: var(--right);
-  } */
-
   @media screen and (min-width: 1024px) {
     .container {
       grid-template-rows: unset;
@@ -275,7 +235,6 @@
 
     .input-container {
       padding: 3rem;
-      font-size: 1.25rem;
     }
   }
 </style>

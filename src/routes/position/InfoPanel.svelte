@@ -2,13 +2,13 @@
   import infoIcon from '$lib/assets/info-icon.png';
 </script>
 
-<div class="container">
-  <img src={infoIcon} alt="" class="title-icon" />
-  <div class="content-container">
-    <h3 class="title"><slot name="title" /></h3>
-    <p class="description"><slot name="description" /></p>
-  </div>
-</div>
+<details class="container">
+  <summary class="title-container">
+    <img src={infoIcon} alt="" class="title-icon" />
+    <p class="title"><slot name="title" /></p>
+  </summary>
+  <p class="description"><slot name="description" /></p>
+</details>
 
 <style>
   .container {
@@ -17,24 +17,26 @@
     background: #efefef;
     border-radius: var(--border-radius);
 
-    padding: 16px;
+    padding: 24px;
     margin: 24px 0;
 
     display: flex;
     gap: 8px;
   }
 
-  .content-container {
+  .title-container {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    gap: 8px;
+    align-items: start;
+
+    cursor: pointer;
   }
 
   .title-icon {
-    width: 1.25em;
-    height: 1.25em;
+    width: 1em;
+    height: 1em;
 
-    margin: 2px;
+    margin: 4px 0;
   }
 
   .title,
@@ -44,9 +46,15 @@
 
   .title {
     color: var(--primary-text-color);
+    font-weight: 700;
   }
 
   .description {
+    padding-top: 16px;
     color: var(--secondary-text-color);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 </style>

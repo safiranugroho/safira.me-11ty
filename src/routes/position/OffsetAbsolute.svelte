@@ -1,11 +1,11 @@
 <script lang="ts">
   import InfoPanel from './InfoPanel.svelte';
   import OffsetInput, { type OnInput } from './OffsetInput.svelte';
-  import type { OffsetName, Styles } from './_styles';
+  import { P, type OffsetName, type Styles } from './_styles';
 
   export let currentStyles: Styles;
   export let onInput: (name: string) => OnInput;
-  export let onUpdate: (f: (s: Styles) => void) => void | undefined;
+  export let onUpdate: (f: (s: Styles) => void) => void;
 
   const positions = ['top', 'bottom', 'left', 'right'] as Array<OffsetName>;
 </script>
@@ -20,7 +20,7 @@
     {#if name === 'bottom'}
       <InfoPanel>
         <svelte:fragment slot="title">Why isn't the bottom value being respected?</svelte:fragment>
-        <svelte:fragment slot="description">
+        <span slot="description">
           If both top and bottom are specified (not "auto"), the top value wins and the bottom value
           is ignored. Try
           <button
@@ -30,7 +30,7 @@
             resetting the top value
           </button>
           and see what happens!
-        </svelte:fragment>
+        </span>
       </InfoPanel>
     {/if}
     {#if name === 'right'}
@@ -59,13 +59,10 @@
             >
               right-to-left ("rtl")
             </button>.
-            <button
-              class="inline-button"
-              on:click={() => onUpdate((s) => s.parent.direction?.update('ltr'))}
-            >
-              (Reset back to "ltr".)
-            </button>
           </span>
+          <button class="inline-button" on:click={() => onUpdate((s) => delete s.parent.direction)}>
+            Reset back to default ("ltr").
+          </button>
         </svelte:fragment>
       </InfoPanel>
     {/if}

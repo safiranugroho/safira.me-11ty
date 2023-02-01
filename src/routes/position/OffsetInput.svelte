@@ -4,7 +4,6 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import InfoButton from './InfoButton.svelte';
   import writeableStyles, { type OffsetName } from './_styles';
 
   export let name: OffsetName;
@@ -12,18 +11,16 @@
   export let label: string;
   export let onInput: OnInput;
 
-  $: showButton = false;
   $: showPanel = false;
-  const togglePanel = () => (showPanel = !showPanel);
 
   onMount(() => {
     writeableStyles.subscribe((s) => {
       if (name === 'bottom' && typeof value === 'number') {
-        showButton = typeof s.child.top?.value === 'number' || showPanel;
+        showPanel = typeof s.child.top?.value === 'number';
       }
 
       if (name === 'right' && typeof value === 'number') {
-        showButton = typeof s.child.left?.value === 'number' || showPanel;
+        showPanel = typeof s.child.left?.value === 'number';
       }
     });
   });
@@ -40,7 +37,6 @@
     {value}
   />
   <label for={name}>{label}</label>
-  {#if showButton}<InfoButton onClick={togglePanel} />{/if}
 </div>
 {#if showPanel}<slot />{/if}
 
