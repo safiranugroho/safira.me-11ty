@@ -155,7 +155,6 @@
     padding: 48px 0;
 
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
     gap: 48px;
   }
 
@@ -224,7 +223,6 @@
 
   @media screen and (min-width: 1024px) {
     .container {
-      grid-template-rows: unset;
       grid-template-columns: repeat(2, 1fr);
 
       max-width: 70%;
