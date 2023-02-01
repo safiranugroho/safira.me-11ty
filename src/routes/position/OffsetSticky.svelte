@@ -15,13 +15,14 @@
     <svelte:fragment slot="description">
       <span>
         With position set to "sticky", the element is treated as relatively positioned until its
-        containing block crosses a specified threshold, in which case it will stick to that
-        threshold.
+        containing block crosses a specified threshold, at which point its position is fixed to that
+        threshold point.
       </span>
       <span>
-        This element is naturally positioned at the top in the markup. It will never stick to the
-        bottom with this setting, as once the scroll position is back to initial, the element will
-        be re-positioned back to its relative position.
+        This child element is naturally positioned on top of its siblings in the markup, so even
+        after scrolling its parent all the way to the bottom, the containing block will never cross
+        the threshold set by the bottom value. Hence, the child element stays sticky to the top
+        threshold point.
       </span>
       <span>
         Try moving the element
@@ -30,8 +31,12 @@
         </button> and see what happens!
       </span>
       <span>
+        Once the scroll position is back to initial, the element will be re-positioned back to its
+        relative position.
+      </span>
+      <span>
         <button class="inline-button" on:click={onSwitchImagePosition}>
-          (Switch it back to the top.)</button
+          (Move it back to the top.)</button
         >
       </span>
     </svelte:fragment>
@@ -41,14 +46,18 @@
     <svelte:fragment slot="description">
       <span>
         With position set to "sticky", the element is treated as relatively positioned until its
-        containing block crosses a specified threshold, in which case it will stick to that
-        threshold.
+        containing block crosses a specified threshold, at which point its position is fixed to that
+        threshold point.
       </span>
-
       <span>
-        This element is naturally positioned on the left in the markup. It will never stick to the
-        right side with this setting, as once the scroll position is back to initial, the element
-        will be re-positioned back to its relative position.
+        This child element is naturally positioned on left of its siblings in the markup, so even
+        after scrolling its parent all the way to the right, the containing block will never cross
+        the threshold set by the right value. Hence, the child element sticky to the left threshold
+        point.
+      </span>
+      <span>
+        Once the scroll position is back to initial, the element will be re-positioned back to its
+        relative position.
       </span>
     </svelte:fragment>
   </InfoPanel>

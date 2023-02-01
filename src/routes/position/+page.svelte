@@ -184,14 +184,6 @@
     margin-bottom: 0.25em;
   }
 
-  .inline-button {
-    border: none;
-    padding: 0;
-    text-decoration: underline;
-    text-align: inherit;
-    display: inline;
-  }
-
   @media screen and (min-width: 1024px) {
     .container {
       grid-template-columns: repeat(2, 1fr);
