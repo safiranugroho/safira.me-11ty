@@ -1,7 +1,7 @@
 <script lang="ts">
   import InfoPanel from './InfoPanel.svelte';
   import OffsetInput, { type OnInput } from './OffsetInput.svelte';
-  import type { OffsetName, Styles } from './_styles';
+  import { P, type OffsetName, type Styles } from './_styles';
 
   export let currentStyles: Styles;
   export let onInput: (name: string) => OnInput;
@@ -31,6 +31,39 @@
           </button>
           and see what happens!
         </span>
+      </InfoPanel>
+    {/if}
+    {#if name === 'right'}
+      <InfoPanel>
+        <svelte:fragment slot="title">Why isn't the right value being respected?</svelte:fragment>
+        <svelte:fragment slot="description">
+          <span>
+            This is because the text you're reading is written in English, which has a
+            directionality of left-to-right ("ltr"), set by your user agent. In this text
+            directionality, if both left and right are specified (not "auto"), the left value wins
+            and the right value is ignored. Try
+            <button
+              class="inline-button"
+              on:click={() => onUpdate((s) => s.child.left?.update('auto'))}
+            >
+              resetting the left value
+            </button>
+            and see what happens!
+          </span>
+          <span>
+            Alternatively, while it's not recommended to do this, watch what happens if both left
+            and right values stay set, and the containing block's text direction is set to
+            <button
+              class="inline-button"
+              on:click={() => onUpdate((s) => (s.parent.direction = P('rtl')))}
+            >
+              right-to-left ("rtl")
+            </button>.
+          </span>
+          <button class="inline-button" on:click={() => onUpdate((s) => delete s.parent.direction)}>
+            Reset back to default ("ltr").
+          </button>
+        </svelte:fragment>
       </InfoPanel>
     {/if}
   </OffsetInput>
