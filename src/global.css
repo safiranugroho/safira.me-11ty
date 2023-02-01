@@ -20,7 +20,6 @@ html {
 
 body {
   font-family: var(--app-font-family);
-  line-height: 1.25em;
 
   min-height: 100%;
   margin: 0;
@@ -111,4 +110,8 @@ select {
 
 select::-ms-expand {
   display: none;
+}
+
+p {
+  line-height: 1.25em;
 }
