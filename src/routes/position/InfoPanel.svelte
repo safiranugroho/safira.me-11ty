@@ -30,6 +30,12 @@
     align-items: start;
 
     cursor: pointer;
+
+    list-style: none;
+  }
+
+  .title-container::-webkit-details-marker {
+    display: none;
   }
 
   .title-icon {
