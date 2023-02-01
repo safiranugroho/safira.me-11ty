@@ -69,7 +69,6 @@
     });
   }
 
-  $: showPanel = currentPosition.value === 'absolute';
   $: imageOnTop = true;
   const switchImagePositionInMarkup = () => (imageOnTop = !imageOnTop);
 </script>
@@ -111,37 +110,6 @@
           onUpdate={updateStyles}
           onSwitchImagePosition={switchImagePositionInMarkup}
         />
-      {/if}
-      {#if showPanel}
-        <InfoPanel>
-          <svelte:fragment slot="title">A note about the term "parent".</svelte:fragment>
-          <svelte:fragment slot="description">
-            <span>
-              More accurately, the element's position is calculated relative from its
-              <em>containing block</em>. If the element's position is "absolute", the element's
-              containing block is formed by the edge of the padding box of the nearest ancestor
-              element that has a position value other than "static". In this case, the child's
-              containing block happens to be the parent element, whose position is set to
-              "relative".
-            </span>
-            <span>
-              Watch what happens to the child element when we reset the <button
-                class="inline-button"
-                on:click={() => updateStyles((s) => s.parent.position?.update('static'))}
-                >parent's position to "static".
-              </button>
-            </span>
-            <span>
-              (Spoiler alert: it anchors itself to {'<body>'} as it has no other positioned block ancestors!)
-            </span>
-            <button
-              class="inline-button"
-              on:click={() => updateStyles((s) => s.parent.position?.update('relative'))}
-            >
-              Set the parent's position back to "relative".
-            </button>
-          </svelte:fragment>
-        </InfoPanel>
       {/if}
     </div>
   </div>
