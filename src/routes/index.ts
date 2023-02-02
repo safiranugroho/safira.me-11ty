@@ -16,44 +16,44 @@ export type Route = {
 type Routes = { [key: string]: Route };
 
 export default {
+  '/position': {
+    next: '/filter',
+    name: 'CSS position',
+    cover: position
+  },
+  '/filter': {
+    next: '/ball',
+    name: 'CSS filter',
+    cover: filter,
+    prev: '/position'
+  },
+  '/ball': {
+    next: '/rps',
+    name: 'Ball',
+    cover: ball,
+    prev: '/filter'
+  },
+  '/rps': {
+    next: '/weather',
+    name: 'Rock paper scissors',
+    cover: rps,
+    prev: '/ball'
+  },
+  '/weather': {
+    next: '/tip-calculator',
+    name: 'Weather forecast',
+    cover: weather,
+    prev: '/rps'
+  },
+  '/tip-calculator': {
+    next: '/keyboard',
+    name: 'Tip calculator',
+    cover: tip,
+    prev: '/weather'
+  },
   '/keyboard': {
     name: 'Keyboard',
     cover: keyboard,
-    next: '/tip-calculator'
-  },
-  '/tip-calculator': {
-    prev: '/keyboard',
-    name: 'Tip calculator',
-    cover: tip,
-    next: '/weather'
-  },
-  '/weather': {
-    prev: '/tip-calculator',
-    name: 'Weather forecast',
-    cover: weather,
-    next: '/rps'
-  },
-  '/rps': {
-    prev: '/weather',
-    name: 'Rock paper scissors',
-    cover: rps,
-    next: '/ball'
-  },
-  '/ball': {
-    prev: '/rps',
-    name: 'Ball',
-    cover: ball,
-    next: '/filter'
-  },
-  '/filter': {
-    prev: '/ball',
-    name: 'CSS filter',
-    cover: filter,
-    next: '/position'
-  },
-  '/position': {
-    prev: '/filter',
-    name: 'CSS position',
-    cover: position
+    prev: '/tip-calculator'
   }
 } as Routes;
