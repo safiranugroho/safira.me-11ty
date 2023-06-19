@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Page from '$lib/Page.svelte';
+  import Page from '$lib/components/Page.svelte';
 
   let value: string;
   $: colors = [] as string[];
