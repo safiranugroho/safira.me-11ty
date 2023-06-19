@@ -5,7 +5,7 @@
 
   import Page from '$lib/Page.svelte';
   import Header from '$lib/Header.svelte';
-  import Code from '$lib/Code.svelte';
+  import Code from '$lib/components/Code.svelte';
 
   import filters, { defaultFilters } from './_filters';
 

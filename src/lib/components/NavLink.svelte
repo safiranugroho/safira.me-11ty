@@ -10,7 +10,7 @@
   import arrowNext from '$lib/assets/arrow-next.png';
   import { goto } from '$app/navigation';
 
-  import routes, { type Route } from '../routes';
+  import routes, { type Route } from '../../routes';
 
   export let prev = false;
 

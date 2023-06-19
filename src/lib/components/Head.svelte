@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import routes from '../routes';
+  import routes from '../../routes';
 
   const defaultTitle = 'Doodles by Safira';
   $: title = defaultTitle;
