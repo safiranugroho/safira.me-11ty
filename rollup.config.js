@@ -7,7 +7,9 @@ import sveltePreprocess from 'svelte-preprocess'
 import alias from '@rollup/plugin-alias';
 import image from '@rollup/plugin-image';
 import autoprefixer from 'autoprefixer';
-import css from "rollup-plugin-import-css";
+import atImport from 'postcss-import';
+import atImportUrl from 'postcss-import-url';
+import cssVariables from 'postcss-css-variables';
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -30,7 +32,7 @@ export default {
       preprocess: sveltePreprocess({
         sourceMap: !production,
         postcss: {
-          plugins: [autoprefixer()]
+          plugins: [cssVariables(), atImport({ plugins: [cssVariables(), atImport(), atImportUrl(), autoprefixer()] }), atImportUrl(), autoprefixer()]
         }
       }),
       // We just make sure that no global CSS is injeced
@@ -48,7 +50,6 @@ export default {
       ]
     }),
     image(),
-    css(),
     // Minify the production build (npm run build)
     production && terser(),
   ],
