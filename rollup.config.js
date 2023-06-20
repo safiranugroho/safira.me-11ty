@@ -35,7 +35,7 @@ export default {
       preprocess: sveltePreprocess({
         sourceMap: !production,
         postcss: {
-          plugins: [cssImport(), cssImportUrl(), cssVariables(), cssRemoveRoot(), cssAutoprefixer()]
+          plugins: [cssImport({ plugins: [cssImportUrl()] }), cssImportUrl(), cssVariables(), cssRemoveRoot(), cssAutoprefixer()]
         }
       }),
       // We just make sure that no global CSS is injeced
@@ -47,8 +47,9 @@ export default {
     }),
     resolve(),
     postcss({
-      include: [path.resolve('src/imports.css')],
-      extract: path.resolve('static/web-components.css'),
+      minify: Boolean(production),
+      include: [path.resolve('src/fonts.css')],
+      extract: path.resolve('static/web-components-fonts.css'),
       plugins: [cssImport(), cssImportUrl()]
     }),
     commonjs(),

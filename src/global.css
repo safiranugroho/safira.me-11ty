@@ -1,4 +1,5 @@
-@import './imports.css';
+@import './fonts.css';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism.min.css');
 
 :root {
   --primary-text-color: #242629;
@@ -12,6 +13,8 @@
   --app-font-family: 'Noto Serif Toto', serif;
   --content-font-family: 'Lato', sans-serif;
   --code-font-family: 'Fira Mono', monospace;
+
+  --interactive-opacity: 0.8;
 }
 
 html {
@@ -27,17 +30,31 @@ body {
   color: var(--primary-text-color);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+strong,
+em {
+  color: currentColor;
+}
+
 a,
 a:visited,
 a:focus,
 a:active {
-  color: var(--primary-text-color);
+  color: currentColor;
 }
 
 a:hover,
 a:focus-visible {
   outline: none;
-  color: var(--secondary-text-color);
+  color: currentColor;
+  opacity: var(--interactive-opacity);
   text-decoration: underline;
 }
 
@@ -49,22 +66,23 @@ button:active {
   font-size: 16px;
   background-color: transparent;
 
-  border: 1px solid var(--primary-border-color);
+  border: 1px solid currentColor;
   border-radius: var(--border-radius);
 
   padding: 8px 16px;
 
   font-weight: 700;
   text-align: center;
-  color: var(--primary-text-color);
+  color: currentColor;
 
   cursor: pointer;
 }
 
 button:hover,
 button:focus-visible {
-  color: var(--secondary-text-color);
-  border-color: var(--secondary-border-color);
+  color: currentColor;
+  border-color: currentColor;
+  opacity: var(--interactive-opacity);
   text-decoration: underline;
 }
 

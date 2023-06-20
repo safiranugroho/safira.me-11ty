@@ -8,7 +8,7 @@ import TipCalculator from './lib/doodles/TipCalculator/index.svelte'
 import Weather from './lib/doodles/Weather/index.svelte'
 import type { SvelteComponent } from 'svelte'
 
-import './imports.css';
+import './fonts.css';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function defineCustomElement(name: string, Component: any) {
