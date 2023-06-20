@@ -3,7 +3,7 @@ import Filter from './lib/doodles/Filter/index.svelte'
 import Keyboard from './lib/doodles/Keyboard/index.svelte'
 import PodcastEpisodes from './lib/doodles/PodcastEpisodes/index.svelte'
 import Position from './lib/doodles/Position/index.svelte'
-// import Rps from './lib/doodles/Rps/index.svelte'
+import Rps from './lib/doodles/Rps/index.svelte'
 import TipCalculator from './lib/doodles/TipCalculator/index.svelte'
 import Weather from './lib/doodles/Weather/index.svelte'
 import type { SvelteComponent } from 'svelte'
@@ -45,6 +45,6 @@ defineCustomElement('doodle-filter', Filter)
 defineCustomElement('doodle-keyboard', Keyboard)
 defineCustomElement('doodle-podcast-episodes', PodcastEpisodes)
 defineCustomElement('doodle-position', Position)
-// defineCustomElement('doodle-rps', Rps)
+defineCustomElement('doodle-rps', Rps)
 defineCustomElement('doodle-tip-calculator', TipCalculator)
 defineCustomElement('doodle-weather', Weather)
