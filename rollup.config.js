@@ -6,10 +6,11 @@ import { terser } from 'rollup-plugin-terser'
 import sveltePreprocess from 'svelte-preprocess'
 import alias from '@rollup/plugin-alias';
 import image from '@rollup/plugin-image';
-import autoprefixer from 'autoprefixer';
-import atImport from 'postcss-import';
-import atImportUrl from 'postcss-import-url';
+import cssAutoprefixer from 'autoprefixer';
+import cssImport from 'postcss-import';
+import cssImportUrl from 'postcss-import-url';
 import cssVariables from 'postcss-css-variables';
+import cssRemoveRoot from 'postcss-remove-root';
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -32,7 +33,7 @@ export default {
       preprocess: sveltePreprocess({
         sourceMap: !production,
         postcss: {
-          plugins: [cssVariables(), atImport({ plugins: [cssVariables(), atImport(), atImportUrl(), autoprefixer()] }), atImportUrl(), autoprefixer()]
+          plugins: [cssImport(), cssImportUrl(), cssVariables(), cssRemoveRoot(), cssAutoprefixer()]
         }
       }),
       // We just make sure that no global CSS is injeced

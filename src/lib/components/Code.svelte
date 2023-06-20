@@ -32,12 +32,14 @@
     </code>
     <button on:click={copy} class="code-copy-button">
       <img src={copyIcon} alt="Copy to clipboard" class="code-copy-icon" />
-      <div class="code-copy-tooltip" style="--show: {show ? 'inline-block' : 'none'}">Copied!</div>
+      <div class={`code-copy-tooltip${show ? ' show' : ''}`}>Copied!</div>
     </button>
   </div>
 </div>
 
 <style>
+  @import '../../global.css';
+
   .code-container {
     display: flex;
     align-items: end;
@@ -64,7 +66,10 @@
     white-space: pre-wrap;
   }
 
-  .code-copy-button {
+  .code-copy-button,
+  .code-copy-button:visited,
+  .code-copy-button:focus,
+  .code-copy-button:active {
     position: absolute;
     top: -1px;
     right: -1px;
@@ -79,12 +84,12 @@
   }
 
   .code-copy-tooltip {
+    display: none;
     font-weight: 400;
     font-size: 12px;
 
     padding: 4px;
 
-    display: var(--show);
     position: absolute;
     top: -32px;
     left: -20px;
@@ -94,6 +99,10 @@
     border-radius: var(--border-radius);
 
     animation: fade-in-out 0.2s ease-out;
+  }
+
+  .code-copy-tooltip.show {
+    display: inline;
   }
 
   @keyframes fade-in-out {
