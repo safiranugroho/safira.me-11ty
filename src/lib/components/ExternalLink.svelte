@@ -7,6 +7,8 @@
 </a>
 
 <style>
+  @import '../../global.css';
+
   .external-link::after {
     content: '';
     background-image: url('$lib/assets/external-link.png');

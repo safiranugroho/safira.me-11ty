@@ -11,6 +11,8 @@ import cssImport from 'postcss-import';
 import cssImportUrl from 'postcss-import-url';
 import cssVariables from 'postcss-css-variables';
 import cssRemoveRoot from 'postcss-remove-root';
+import postcss from 'rollup-plugin-postcss';
+import path from 'path';
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -44,6 +46,11 @@ export default {
       },
     }),
     resolve(),
+    postcss({
+      include: [path.resolve('src/imports.css')],
+      extract: path.resolve('static/web-components.css'),
+      plugins: [cssImport(), cssImportUrl()]
+    }),
     commonjs(),
     alias({
       entries: [
