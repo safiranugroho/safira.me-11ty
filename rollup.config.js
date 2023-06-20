@@ -14,21 +14,20 @@ import cssRemoveRoot from 'postcss-remove-root';
 import postcss from 'rollup-plugin-postcss';
 import path from 'path';
 
-const production = !process.env.ROLLUP_WATCH
+const production = process.env.NODE_ENV !== 'dev';
 
 export default {
-  // The file we created with our web component wrapper.
+  // The file that creates all web components.
   input: 'src/web-components.ts',
   output: {
     sourcemap: !production,
     format: 'iife',
     name: 'app',
-    // We output it to public. This way, our svelte kit
+    // Output it to public. This way, the SvelteKit
     // app will also host the web components.
     file: 'static/web-components.js',
   },
-  // Normal rollup svelte configuration. Nothing fancy
-  // happening here.
+  watch: !production,
   plugins: [
     typescript(),
     svelte({
@@ -38,16 +37,13 @@ export default {
           plugins: [cssImport({ plugins: [cssImportUrl()] }), cssImportUrl(), cssVariables(), cssRemoveRoot(), cssAutoprefixer()]
         }
       }),
-      // We just make sure that no global CSS is injeced
+      // Make sure that no global CSS is injeced
       // into the page that imports this script.
       emitCss: false,
-      compilerOptions: {
-        dev: !production,
-      },
     }),
     resolve(),
     postcss({
-      minify: Boolean(production),
+      minify: production,
       include: [path.resolve('src/fonts.css')],
       extract: path.resolve('static/web-components-fonts.css'),
       plugins: [cssImport(), cssImportUrl()]
@@ -59,7 +55,7 @@ export default {
       ]
     }),
     image(),
-    // Minify the production build (npm run build)
+    // Minify the build
     production && terser(),
   ],
 }

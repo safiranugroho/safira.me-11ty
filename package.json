@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "yarn build:components && vite dev",
+    "dev": "concurrently \"NODE_ENV=dev yarn build:components --watch\" \"vite dev\"",
     "build": "yarn build:components && vite build",
     "build:components": "rollup --config",
     "preview": "vite preview",
@@ -25,6 +25,7 @@
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "autoprefixer": "^10.4.14",
+    "concurrently": "^8.2.0",
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-svelte3": "^4.0.0",
