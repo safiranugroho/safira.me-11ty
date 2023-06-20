@@ -25,6 +25,8 @@
 </div>
 
 <style>
+  @import '../../../global.css';
+
   .position-offset-input-container {
     margin: 0.5em 0;
     display: flex;

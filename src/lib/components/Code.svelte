@@ -46,7 +46,7 @@
   }
 
   .code {
-    background: var(--primary-background-color);
+    background: var(--background-color-50);
 
     position: relative;
 
@@ -94,7 +94,7 @@
     top: -32px;
     left: -20px;
 
-    background-color: var(--primary-background-color);
+    background-color: var(--background-color-50);
     border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
 

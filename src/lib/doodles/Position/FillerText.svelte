@@ -21,6 +21,8 @@
 </p>
 
 <style>
+  @import '../../../global.css';
+
   .text {
     display: flex;
     flex-direction: column;

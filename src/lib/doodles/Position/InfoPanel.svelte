@@ -11,10 +11,13 @@
 </details>
 
 <style>
+  @import '../../../global.css';
+
   .container {
     font-size: 1rem;
 
-    background: #efefef;
+    background-color: var(--background-color-50);
+    border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
 
     padding: 24px;
@@ -39,6 +42,8 @@
   }
 
   .title-icon {
+    align-self: flex-start;
+  
     width: 1em;
     height: 1em;
 
@@ -51,13 +56,13 @@
   }
 
   .title {
-    color: var(--primary-text-color);
+    color: currentColor;
     font-weight: 700;
   }
 
   .description {
     padding-top: 16px;
-    color: var(--secondary-text-color);
+    color: currentColor;
 
     display: flex;
     flex-direction: column;

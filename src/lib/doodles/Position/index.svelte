@@ -107,6 +107,8 @@
 </div>
 
 <style>
+  @import '../../../global.css';
+
   .container {
     flex: 1;
 

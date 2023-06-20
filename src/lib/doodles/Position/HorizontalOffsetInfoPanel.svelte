@@ -20,3 +20,7 @@
     <slot />
   </svelte:fragment>
 </InfoPanel>
+
+<style>
+  @import '../../../global.css';
+</style>

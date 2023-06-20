@@ -14,3 +14,7 @@
   <VerticalOffsetInfoPanel slot="vertical-offset-info" {onUpdate} />
   <HorizontalOffsetInfoPanel slot="horizontal-offset-info" {onUpdate} />
 </Offsets>
+
+<style>
+  @import '../../../global.css';
+</style>

@@ -62,3 +62,7 @@
     </svelte:fragment>
   </InfoPanel>
 </Offsets>
+
+<style>
+  @import '../../../global.css';
+</style>

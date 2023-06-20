@@ -16,3 +16,7 @@
     and see what happens!
   </span>
 </InfoPanel>
+
+<style>
+  @import '../../../global.css';
+</style>

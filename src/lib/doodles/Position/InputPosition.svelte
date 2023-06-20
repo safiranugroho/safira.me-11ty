@@ -1,24 +1,8 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import rules from './_rules';
   import type { Property } from './_styles';
 
   export let currentPosition: Property;
-
-  $: selectWidth = '';
-
-  onMount(() => {
-    const selectEl = document.querySelector('.position-select') as HTMLElement;
-    const helperEl = document.querySelector('.position-select-helper') as HTMLElement;
-
-    selectWidth = `${helperEl.offsetWidth}px`;
-
-    selectEl?.addEventListener('change', (event) => {
-      // @ts-ignore
-      helperEl.innerHTML = event.target.querySelector('option:checked').innerText;
-      selectWidth = `${helperEl.offsetWidth}px`;
-    });
-  });
 </script>
 
 <div class="position-select-container">
@@ -28,7 +12,6 @@
     name="position"
     id="position"
     class="position-select"
-    style="--size: {selectWidth}"
   >
     {#each Object.entries(rules) as [name, { text }]}
       <option value={name} class="position-option">{text}</option>
@@ -39,6 +22,8 @@
 <strong class="position-select-helper" aria-hidden="true">{currentPosition.value}</strong>
 
 <style>
+  @import '../../../global.css';
+
   .position-select-container {
     display: flex;
     flex-direction: column;
@@ -58,7 +43,7 @@
 
   .position-select:hover,
   .position-select:focus-visible {
-    color: var(--secondary-text-color);
+    color: currentColor;
     border-color: var(--secondary-border-color);
     text-decoration: underline;
   }
@@ -69,12 +54,5 @@
     left: 0;
     z-index: -99999;
     color: transparent;
-  }
-
-  @media screen and (min-width: 1024px) {
-    .position-select {
-      width: var(--size);
-      box-sizing: content-box;
-    }
   }
 </style>

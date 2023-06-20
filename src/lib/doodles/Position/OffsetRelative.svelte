@@ -31,3 +31,7 @@
     </svelte:fragment>
   </HorizontalOffsetInfoPanel>
 </Offsets>
+
+<style>
+  @import '../../../global.css';
+</style>

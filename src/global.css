@@ -5,7 +5,8 @@
   --primary-text-color: #242629;
   --secondary-text-color: #525252;
 
-  --primary-background-color: color-mix(in srgb, currentColor 1%, transparent);
+  --background-color-50: color-mix(in srgb, white 5%, transparent);
+  --background-color-100: color-mix(in srgb, black 5%, transparent);
 
   --primary-border-color: color-mix(in srgb, currentColor 10%, transparent);
   --secondary-border-color: color-mix(in srgb, currentColor 20%, transparent);
@@ -42,7 +43,9 @@ p,
 pre,
 strong,
 em,
-input {
+input,
+select,
+label {
   color: currentColor;
 }
 
@@ -67,7 +70,7 @@ button:focus,
 button:active {
   font-family: inherit;
   font-size: 16px;
-  background-color: var(--primary-background-color);
+  background-color: var(--background-color-50);
 
   border: 1px solid var(--primary-border-color);
   border-radius: var(--border-radius);

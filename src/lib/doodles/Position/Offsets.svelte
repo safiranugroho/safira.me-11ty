@@ -42,3 +42,7 @@
 
 {#if showVerticalOffsetInfo}<slot name="vertical-offset-info" />{/if}
 {#if showHorizontalOffsetInfo}<slot name="horizontal-offset-info" />{/if}
+
+<style>
+  @import '../../../global.css';
+</style>

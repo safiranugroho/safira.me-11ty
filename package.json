@@ -1,5 +1,5 @@
 {
-  "name": "doodles",
+  "name": "@safira.me/doodles",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -49,6 +49,14 @@
     "vite": "^4.0.0"
   },
   "type": "module",
+  "exports": {
+    "./components": "./package/web-components.min.js",
+    "./fonts": "./package/web-components-fonts.css"
+  },
+  "files": [
+    "./package/web-components.min.js",
+    "./package/web-components-fonts.css"
+  ],
   "dependencies": {
     "prismjs": "^1.29.0",
     "quagga": "^0.12.1"
