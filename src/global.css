@@ -5,8 +5,10 @@
   --primary-text-color: #242629;
   --secondary-text-color: #525252;
 
-  --primary-border-color: #dedede;
-  --secondary-border-color: #a5a5a5;
+  --primary-background-color: color-mix(in srgb, currentColor 1%, transparent);
+
+  --primary-border-color: color-mix(in srgb, currentColor 10%, transparent);
+  --secondary-border-color: color-mix(in srgb, currentColor 20%, transparent);
 
   --border-radius: 8px;
 
@@ -27,7 +29,7 @@ body {
   min-height: 100%;
   margin: 0;
 
-  color: var(--primary-text-color);
+  color: currentColor;
 }
 
 h1,
@@ -39,7 +41,8 @@ h6,
 p,
 pre,
 strong,
-em {
+em,
+input {
   color: currentColor;
 }
 
@@ -64,9 +67,9 @@ button:focus,
 button:active {
   font-family: inherit;
   font-size: 16px;
-  background-color: transparent;
+  background-color: var(--primary-background-color);
 
-  border: 1px solid currentColor;
+  border: 1px solid var(--primary-border-color);
   border-radius: var(--border-radius);
 
   padding: 8px 16px;
@@ -81,8 +84,7 @@ button:active {
 button:hover,
 button:focus-visible {
   color: currentColor;
-  border-color: currentColor;
-  opacity: var(--interactive-opacity);
+  border-color: var(--secondary-border-color);
   text-decoration: underline;
 }
 

@@ -117,6 +117,7 @@
 
   .range-slider {
     width: 100%;
+    accent-color: currentColor;
   }
 
   .range-label {
@@ -127,7 +128,7 @@
     margin: 0;
     padding: 0;
 
-    color: var(--primary-text-color);
+    /* color: var(--primary-text-color); */
   }
 
   .range-label .name {
@@ -135,9 +136,9 @@
     font-weight: 700;
   }
 
-  .range-label .value {
+  /* .range-label .value {
     color: var(--secondary-text-color);
-  }
+  } */
 
   .range-input {
     display: flex;

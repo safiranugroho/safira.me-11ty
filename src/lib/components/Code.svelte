@@ -46,7 +46,7 @@
   }
 
   .code {
-    background: white;
+    background: var(--primary-background-color);
 
     position: relative;
 
@@ -94,8 +94,8 @@
     top: -32px;
     left: -20px;
 
-    background-color: #efefef;
-    border: 1px solid #efefef;
+    background-color: var(--primary-background-color);
+    border: 1px solid var(--primary-border-color);
     border-radius: var(--border-radius);
 
     animation: fade-in-out 0.2s ease-out;
