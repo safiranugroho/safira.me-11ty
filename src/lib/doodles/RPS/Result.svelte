@@ -19,10 +19,7 @@
   export let result;
 
   $: transitionOffset = result === 'computer' ? -2000 : 2000;
-
   $: background = result === 'computer' ? computerBg : playerBg;
-  $: backgroundPositionLeft = result === 'computer' ? 'unset' : 0;
-  $: backgroundPositionRight = result === 'computer' ? 0 : 'unset';
 
   const hands = getContext('hands');
   const onReset = getContext('onReset');
@@ -31,10 +28,9 @@
 {#if result && playerHand && computerHand}
   <div class="result-container" transition:fly={{ delay: 0, x: transitionOffset, duration: 250 }}>
     <img
-      class="result-bg"
+      class={`result-bg ${result === 'computer' ? 'computer-wins' : 'player-wins'}`}
       src={background}
       alt=""
-      style="--left: {backgroundPositionLeft}; --right: {backgroundPositionRight}"
     />
     <div class="hand-result-container">
       <div class="hand-result">
@@ -97,6 +93,16 @@
     z-index: -1;
 
     height: 100%;
+  }
+
+  .result-bg.computer-wins {
+    left: 'unset';
+    right: 0;
+  }
+
+  .result-bg.player-wins {
+    left: 0;
+    right: 'unset';
   }
 
   .hand-result-container {

@@ -159,7 +159,7 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Oswald&display=swap');
+  @import '../../../global.css';
 
   :global(:root) {
     --weather-icon-dimension-mobile: 110px;

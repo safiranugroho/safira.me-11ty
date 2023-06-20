@@ -4,7 +4,7 @@
   import Footer from './Footer.svelte';
   import Head from './Head.svelte';
 
-  export let background = '#ffffff';
+  export let background = '';
 
   let showFooter = false;
   $: page.subscribe((p) => {

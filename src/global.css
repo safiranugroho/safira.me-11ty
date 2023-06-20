@@ -24,6 +24,7 @@ html {
 }
 
 body {
+  background: pink;
   font-family: var(--app-font-family);
 
   min-height: 100%;

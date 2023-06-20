@@ -2,7 +2,7 @@
   import Page from '$lib/components/Page.svelte';
   import Header from '$lib/components/Header.svelte';
   import ExternalLink from '$lib/components/ExternalLink.svelte';
-  import RPS from '$lib/doodles/RPS/index.svelte';
+  import Rps from '$lib/doodles/Rps/index.svelte';
 </script>
 
 <Page>
@@ -14,6 +14,5 @@
     ><ExternalLink slot="promptBy" href="https://www.adventofcss.com/">Advent of CSS</ExternalLink
     ></Header
   >
-
-  <RPS slot="content" />
+  <Rps slot="content" />
 </Page>

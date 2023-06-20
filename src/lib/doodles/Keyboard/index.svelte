@@ -88,7 +88,7 @@
 </div>
 
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+  @import '../../../global.css';
 
   .keyboard {
     font-family: 'Inter', sans-serif;

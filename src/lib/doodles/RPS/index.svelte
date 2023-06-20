@@ -74,7 +74,6 @@
 
 <style>
   @import '../../../global.css';
-  @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
 
   .game-container {
     font-family: 'Roboto Mono', sans-serif;
@@ -104,6 +103,7 @@
 
   .hand-container {
     flex: 1;
+    background-color: white;
 
     padding: 24px;
     border: 2px solid #000;
