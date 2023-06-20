@@ -17,10 +17,8 @@
     switch (code.toString()) {
       case '0':
         return {
-          background: '#E6DF95',
+          className: 'sunny',
           icon: sunny,
-          temperatureText: '#4DB0D3',
-          contentText: '#247490'
         };
       case '1':
       case '2':
@@ -28,10 +26,8 @@
       case '45':
       case '48':
         return {
-          background: '#4DB0D3',
+          className: 'cloudy',
           icon: partlyCloudy,
-          temperatureText: '#E6DF95',
-          contentText: '#D3EBF4'
         };
       case '51':
       case '53':
@@ -39,10 +35,8 @@
       case '56':
       case '57':
         return {
-          background: '#4DB0D3',
+          className: 'cloudy',
           icon: cloudy,
-          temperatureText: '#E6DF95',
-          contentText: '#D3EBF4'
         };
       case '61':
       case '63':
@@ -53,10 +47,8 @@
       case '81':
       case '82':
         return {
-          background: '#2B8BAD',
+          className: 'rainy',
           icon: rainy,
-          temperatureText: '#E6DF95',
-          contentText: '#D3EBF4'
         };
       case '71':
       case '73':
@@ -65,19 +57,15 @@
       case '85':
       case '86':
         return {
-          background: '#BCE1EF',
+          className: 'snowy',
           icon: snowy,
-          temperatureText: '#0E2E3A',
-          contentText: '#247490'
         };
       case '95':
       case '96':
       case '99':
         return {
-          background: '#0E2E3A',
+          className: 'stormy',
           icon: stormy,
-          temperatureText: '#E6DF95',
-          contentText: '#D3EBF4'
         };
     }
   };
@@ -126,15 +114,15 @@
         <div class="date-container">
           <p class="day">{map[day].day}</p>
           <p class="date">{map[day].date}</p>
-          <div class="info-container" style="--background: {map[day].weather.background}">
+          <div class="info-container {map[day].weather.className}">
             <img src={map[day].weather.icon} alt="Weather icon" class="weather-icon" />
-            <p class="temp-max" style="--color: {map[day].weather.temperatureText}">
+            <p class="temp-max">
               {map[day].temperatureMax.toFixed(0)}<span class="degree">°</span>
             </p>
-            <p class="prec" style="--color: {map[day].weather.contentText}">
+            <p class="prec">
               <PrecipitationIcon /><span>{map[day].precipitation.toFixed(0)}</span>
             </p>
-            <p class="temp-min" style="--color: {map[day].weather.contentText}">
+            <p class="temp-min">
               <TemperatureIcon /><span
                 >{map[day].temperatureMin.toFixed(0)}<span class="degree">°</span></span
               >
@@ -161,7 +149,7 @@
 <style>
   @import '../../../global.css';
 
-  :global(:root) {
+  :root {
     --weather-icon-dimension-mobile: 110px;
     --weather-icon-dimension-tablet: 220px;
     --weather-icon-dimension-desktop: 250px;
@@ -198,7 +186,6 @@
 
   .info-container {
     position: relative;
-    background: var(--background);
 
     border-radius: 12px;
 
@@ -206,6 +193,61 @@
     padding-top: var(--weather-icon-dimension-mobile);
     padding-bottom: 8px;
   }
+
+  .sunny {
+    background: #E6DF95
+  }
+
+  .cloudy {
+    background: #4DB0D3
+  }
+
+  .rainy {
+    background: #2B8BAD
+  }
+
+
+  .snowy {
+    background: #BCE1EF
+  }
+
+  .stormy {
+    background: #0E2E3A
+  }
+
+  .sunny > .temp-max {
+    color: #4DB0D3
+  }
+
+  .rainy > .temp-max,
+  .cloudy > .temp-max,
+  .stormy > .temp-max {
+    color: #E6DF95
+  }
+
+  .snowy > .temp-max {
+    color: #0E2E3A
+  }
+
+  .sunny > .prec,
+  .sunny > .temp-min {
+    color: #247490
+  }
+
+  .rainy > .prec,
+  .rainy > .temp-min,
+  .cloudy > .prec,
+  .cloudy > .temp-min,
+  .stormy > .prec,
+  .stormy > .temp-min {
+    color: #D3EBF4
+  }
+
+  .snowy > .prec,
+  .snowy > .temp-min {
+    color: #247490
+  }
+
 
   .day,
   .date {
@@ -230,12 +272,6 @@
     left: -15%;
 
     background: transparent;
-  }
-
-  .temp-max,
-  .prec,
-  .temp-min {
-    color: var(--color);
   }
 
   .temp-max {
