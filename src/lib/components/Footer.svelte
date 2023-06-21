@@ -11,7 +11,7 @@
 
 <style>
   .footer {
-    border-top: 1px solid var(--primary-border-color);
+    border-top: 1px solid var(--border-color-50);
     padding-top: 12px;
     margin-bottom: 64px;
   }

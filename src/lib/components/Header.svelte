@@ -42,7 +42,7 @@
     justify-content: center;
     gap: 2px;
 
-    border-bottom: 1px solid var(--primary-border-color);
+    border-bottom: 1px solid var(--border-color-50);
     padding: 16px 0;
   }
 
@@ -95,7 +95,7 @@
     .heading-container {
       text-align: right;
       border-bottom: none;
-      border-right: 1px solid var(--primary-border-color);
+      border-right: 1px solid var(--border-color-50);
       padding: 0 24px;
     }
 

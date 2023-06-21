@@ -87,7 +87,7 @@
   .nav-link:focus,
   .nav-link:focus-visible,
   .nav-link:focus-within {
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
   }
 
   @media screen and (min-width: 768px) {

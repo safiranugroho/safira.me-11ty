@@ -54,7 +54,7 @@
     padding-right: 32px; /** To offset the copy button width. */
     width: 100%;
 
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
     border-radius: var(--border-radius);
 
     display: flex;
@@ -95,7 +95,7 @@
     left: -20px;
 
     background-color: var(--background-color-50);
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
     border-radius: var(--border-radius);
 
     animation: fade-in-out 0.2s ease-out;

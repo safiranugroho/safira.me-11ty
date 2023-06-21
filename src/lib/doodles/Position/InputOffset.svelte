@@ -37,7 +37,7 @@
   .position-offset-input {
     all: unset;
 
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
     border-radius: var(--border-radius);
 
     font-weight: 700;

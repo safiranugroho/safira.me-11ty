@@ -18,7 +18,7 @@
   }
 
   .card {
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
     border-radius: 20px;
 
     text-align: center;
@@ -42,7 +42,7 @@
   .card:focus,
   .card:focus-visible,
   .card:focus-within {
-    border-color: var(--secondary-border-color);
+    border-color: var(--border-color-100);
   }
 
   @media screen and (min-width: 768px) {

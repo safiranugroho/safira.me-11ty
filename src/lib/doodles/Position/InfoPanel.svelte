@@ -18,7 +18,7 @@
     font-size: 1rem;
 
     background-color: var(--background-color-50);
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
     border-radius: var(--border-radius);
 
     padding: 24px;

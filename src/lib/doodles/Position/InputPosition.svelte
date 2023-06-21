@@ -31,7 +31,7 @@
   }
 
   .position-select {
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-50);
     border-radius: var(--border-radius);
 
     font-weight: 700;
@@ -44,7 +44,7 @@
   .position-select:hover,
   .position-select:focus-visible {
     color: currentColor;
-    border-color: var(--secondary-border-color);
+    border-color: var(--border-color-100);
     text-decoration: underline;
   }
 
