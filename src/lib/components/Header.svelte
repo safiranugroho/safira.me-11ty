@@ -42,7 +42,7 @@
     justify-content: center;
     gap: 2px;
 
-    border-bottom: 1px solid var(--border-color-50);
+    border-bottom: 1px solid var(--border-color);
     padding: 16px 0;
   }
 
@@ -56,13 +56,13 @@
     font-size: 20px;
     line-height: 24px;
     font-style: italic;
-    color: var(--primary-text-color);
+    color: var(--text-color);
   }
 
   .subheading {
     font-weight: 400;
     font-size: 14px;
-    color: var(--secondary-text-color);
+    color: var(--text-color-90);
   }
 
   .metadata-container {
@@ -78,7 +78,7 @@
 
     font-weight: 400;
     font-size: 12px;
-    color: var(--secondary-text-color);
+    color: var(--text-color-90);
   }
 
   @media screen and (min-width: 768px) {
@@ -95,7 +95,7 @@
     .heading-container {
       text-align: right;
       border-bottom: none;
-      border-right: 1px solid var(--border-color-50);
+      border-right: 1px solid var(--border-color);
       padding: 0 24px;
     }
 

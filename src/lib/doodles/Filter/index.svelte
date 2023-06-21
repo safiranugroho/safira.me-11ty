@@ -127,18 +127,12 @@
 
     margin: 0;
     padding: 0;
-
-    /* color: var(--primary-text-color); */
   }
 
   .range-label .name {
     font-family: var(--code-font-family);
     font-weight: 700;
   }
-
-  /* .range-label .value {
-    color: var(--secondary-text-color);
-  } */
 
   .range-input {
     display: flex;

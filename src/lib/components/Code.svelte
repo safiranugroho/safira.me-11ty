@@ -1,7 +1,8 @@
 <script lang="ts">
   import Prism from 'prismjs';
   import { createEventDispatcher } from 'svelte';
-  import copyIcon from '$lib/assets/copy.png';
+  import CopyIcon from '$lib/assets/copy-icon.svelte';
+    import Icon from './Icon.svelte';
 
   export let content: string;
   export let language: string;
@@ -31,7 +32,7 @@
       {@html Prism.highlight(content, Prism.languages[language], language)}
     </code>
     <button on:click={copy} class="code-copy-button">
-      <img src={copyIcon} alt="Copy to clipboard" class="code-copy-icon" />
+      <Icon><CopyIcon /></Icon>
       <div class={`code-copy-tooltip${show ? ' show' : ''}`}>Copied!</div>
     </button>
   </div>
@@ -54,7 +55,7 @@
     padding-right: 32px; /** To offset the copy button width. */
     width: 100%;
 
-    border: 1px solid var(--border-color-50);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
 
     display: flex;
@@ -64,6 +65,14 @@
   .code-content {
     font-family: var(--code-font-family);
     white-space: pre-wrap;
+    color: currentColor;
+  }
+
+  .code-content,
+  .code-content :global(> .token.selector),
+  .code-content :global(> .token.property),
+  .code-content :global(> .token.function) {
+    color: currentColor;
   }
 
   .code-copy-button,
@@ -95,7 +104,7 @@
     left: -20px;
 
     background-color: var(--background-color-50);
-    border: 1px solid var(--border-color-50);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
 
     animation: fade-in-out 0.2s ease-out;

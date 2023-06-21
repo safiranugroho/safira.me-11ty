@@ -18,7 +18,7 @@
   }
 
   .card {
-    border: 1px solid var(--border-color-50);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
 
     text-align: center;

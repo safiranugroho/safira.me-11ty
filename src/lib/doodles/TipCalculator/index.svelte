@@ -97,7 +97,7 @@
   }
 
   .output:first-child {
-    border-bottom: 1px solid var(--border-color-50);
+    border-bottom: 1px solid var(--border-color);
     margin: 0 8px;
   }
 
@@ -190,7 +190,7 @@
 
   .bill-amount {
     flex: 2;
-    border-right: 1px solid var(--border-color-50);
+    border-right: 1px solid var(--border-color);
   }
 
   .number-of-people {
@@ -207,8 +207,8 @@
     background: #eeeeee;
     padding: 24px 48px;
 
-    border-top: 1px solid var(--border-color-50);
-    border-bottom: 1px solid var(--border-color-50);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
   }
 
   .tip-amount > input {

@@ -1,6 +1,6 @@
-<span class="icon">
+<div class="icon">
   <slot />
-</span>
+</div>
 
 <style>
   @import '../../global.css';

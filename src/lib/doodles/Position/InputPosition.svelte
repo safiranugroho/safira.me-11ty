@@ -31,7 +31,7 @@
   }
 
   .position-select {
-    border: 1px solid var(--border-color-50);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
 
     font-weight: 700;
