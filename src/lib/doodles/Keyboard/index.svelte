@@ -32,17 +32,18 @@
     return map[id];
   };
 
+  let keyboard: HTMLDivElement;
   const addJiggle = () => {
     const randomIndex = getRandomIndex();
     const selector = getSelector(allKeys[randomIndex]);
-    const key = document.querySelector(selector);
+    const key = keyboard.querySelector(selector);
 
     key?.classList.add('jiggle');
   };
 
   const removeJiggle = (id: string) => {
     const selector = getSelector(id);
-    const prevKey = document.querySelector(selector);
+    const prevKey = keyboard.querySelector(selector);
     prevKey?.classList.remove('jiggle');
   };
 
@@ -58,7 +59,7 @@
   });
 </script>
 
-<div class="keyboard">
+<div class="keyboard" bind:this={keyboard}>
   <div class="row">
     {#each keys[0] as char}
       <div class="key" id={char}>{char}</div>
@@ -105,8 +106,6 @@
     gap: 12px;
 
     text-transform: uppercase;
-
-    width: 1200px;
   }
 
   .row {

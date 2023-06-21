@@ -18,3 +18,11 @@
 
   <Keyboard slot="content" />
 </Page>
+
+<style>
+  @import '../../global.css';
+
+  :global(.content) {
+    width: 100%
+  }
+</style>
