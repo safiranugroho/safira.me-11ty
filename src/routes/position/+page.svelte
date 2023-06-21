@@ -13,3 +13,17 @@
   />
   <Position slot="content" />
 </Page>
+
+<style>
+  :global(.content) {
+    padding: 48px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    :global(.content) {
+
+      max-width: 70%;
+      margin: auto;
+    }
+  }
+</style>

@@ -1,10 +1,11 @@
 <script lang="ts">
-  import infoIcon from '$lib/assets/info-icon.png';
+  import InfoIcon from '$lib/assets/info-icon.svelte';
+  import Icon from '$lib/components/Icon.svelte';
 </script>
 
 <details class="container">
   <summary class="title-container">
-    <img src={infoIcon} alt="" class="title-icon" />
+    <Icon><InfoIcon /></Icon>
     <p class="title"><slot name="title" /></p>
   </summary>
   <p class="description"><slot name="description" /></p>
@@ -30,7 +31,7 @@
   .title-container {
     display: flex;
     gap: 8px;
-    align-items: center;
+    align-items: flex-start;
 
     cursor: pointer;
 
@@ -39,15 +40,6 @@
 
   .title-container::-webkit-details-marker {
     display: none;
-  }
-
-  .title-icon {
-    align-self: flex-start;
-  
-    width: 1em;
-    height: 1em;
-
-    margin: 4px 0;
   }
 
   .title,

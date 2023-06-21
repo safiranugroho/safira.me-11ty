@@ -13,7 +13,6 @@
 
   import InputPosition from './InputPosition.svelte';
 
-  import InfoPanel from './InfoPanel.svelte';
   import OffsetAbsolute from './OffsetAbsolute.svelte';
   import OffsetRelative from './OffsetRelative.svelte';
   import OffsetFixed from './OffsetFixed.svelte';
@@ -113,8 +112,7 @@
     flex: 1;
 
     width: 100%;
-    padding: 48px 0;
-
+    
     display: grid;
     gap: 48px;
   }
@@ -178,8 +176,8 @@
     .container {
       grid-template-columns: repeat(2, 1fr);
 
-      max-width: 70%;
-      margin: auto;
+      /* max-width: 70%; */
+      /* margin: auto; */
     }
 
     .input-container {

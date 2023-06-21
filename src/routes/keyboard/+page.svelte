@@ -20,8 +20,6 @@
 </Page>
 
 <style>
-  @import '../../global.css';
-
   :global(.content) {
     width: 100%
   }
