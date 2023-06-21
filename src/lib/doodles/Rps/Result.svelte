@@ -127,6 +127,7 @@
   .hand-result-text {
     text-align: center;
     grid-row-start: 2;
+    color: #000;
   }
 
   .hand-result-icon {

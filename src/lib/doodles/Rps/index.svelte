@@ -129,6 +129,10 @@
     object-fit: contain;
   }
 
+  .hand-text {
+    color: #000;
+  }
+
   @media screen and (min-width: 768px) {
     .hands {
       flex-direction: row;
