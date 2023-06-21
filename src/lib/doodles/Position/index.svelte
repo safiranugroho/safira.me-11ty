@@ -138,7 +138,7 @@
     max-height: 420px;
 
     padding: 24px;
-    border-color: #1d3557;
+    border-color: currentColor;
     border-radius: var(--border-radius);
   }
 
@@ -146,7 +146,7 @@
     width: 150px;
     height: 150px;
 
-    border-color: #e63946;
+    border-color: currentColor;
     border-radius: 50%;
 
     overflow: hidden;

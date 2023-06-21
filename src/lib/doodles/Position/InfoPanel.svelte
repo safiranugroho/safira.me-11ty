@@ -21,7 +21,7 @@
     border: 1px solid var(--border-color-50);
     border-radius: var(--border-radius);
 
-    padding: 24px;
+    padding: 1.25em 1em;
     margin: 24px 0;
 
     display: flex;
