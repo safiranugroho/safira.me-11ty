@@ -14,7 +14,6 @@
   --border-color-300: color-mix(in srgb, currentColor 40%, transparent);
   --border-color-400: color-mix(in srgb, currentColor 50%, transparent);
 
-  --text-color-90: color-mix(in srgb, currentColor 90%, transparent);
   --text-color: currentColor;
 
   --border-radius: 8px;
@@ -36,7 +35,7 @@ body {
   min-height: 100%;
   margin: 0;
 
-  color: currentColor;
+  color: var(--primary-text-color);
 }
 
 h1,
@@ -51,7 +50,8 @@ strong,
 em,
 input,
 select,
-label {
+label,
+div {
   color: currentColor;
 }
 

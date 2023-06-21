@@ -62,7 +62,7 @@
   .subheading {
     font-weight: 400;
     font-size: 14px;
-    color: var(--text-color-90);
+    opacity: 0.8;
   }
 
   .metadata-container {
@@ -78,7 +78,7 @@
 
     font-weight: 400;
     font-size: 12px;
-    color: var(--text-color-90);
+    opacity: 0.8;
   }
 
   @media screen and (min-width: 768px) {

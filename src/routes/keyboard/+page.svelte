@@ -16,11 +16,13 @@
     ></Header
   >
 
-  <Keyboard slot="content" />
+  <div class="container" slot="content">
+    <Keyboard />
+  </div>
 </Page>
 
 <style>
-  :global(.content) {
+  .container {
     width: 100%
   }
 </style>

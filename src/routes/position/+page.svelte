@@ -11,16 +11,18 @@
     subheading="No flex, no grid, just position."
     completedDate="1 February 2023"
   />
-  <Position slot="content" />
+  <div class="container" slot="content">
+    <Position />
+  </div>
 </Page>
 
 <style>
-  :global(.content) {
+  .container {
     padding: 48px;
   }
 
   @media screen and (min-width: 1024px) {
-    :global(.content) {
+    .container {
 
       max-width: 70%;
       margin: auto;
