@@ -12,8 +12,13 @@
     ''
   );
 
+  let img: HTMLImageElement;
+
   onMount(() => {
-    filters.subscribe((f) => (all = f));
+    filters.subscribe((f) => {
+      all = f;
+      img.style.filter = css;
+    });
   });
 
   const handleInput =
@@ -36,8 +41,8 @@
 
 <div class="container">
   <div class="view-container">
-    <div class="asset" style="--filter: {css};">
-      <img src={picture} class="asset-img" alt="Two people at the beach with a sun umbrella" />
+    <div class="asset">
+      <img bind:this={img} src={picture} class="asset-img" alt="Two people at the beach with a sun umbrella" />
     </div>
     <Code content={`filter:${css || ' none'};`} language="css" />
   </div>
@@ -92,8 +97,6 @@
   }
 
   .asset-img {
-    filter: var(--filter);
-
     max-width: 100%;
     object-fit: contain;
   }
