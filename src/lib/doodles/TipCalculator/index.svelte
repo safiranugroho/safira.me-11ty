@@ -7,7 +7,7 @@
   let tipAmount = 0;
 
   let totalTipAmount = 0;
-  let totalPerPerson = '0';
+  let totalPerPerson = 0;
 
   function handleReset() {
     billAmount = null;
@@ -15,15 +15,12 @@
     tipAmount = 0;
 
     totalTipAmount = 0;
-    totalPerPerson = '0';
+    totalPerPerson = 0;
   }
 
   function handleCalculate() {
     totalTipAmount = tipAmount && billAmount ? billAmount * (tipAmount * 0.01) : 0;
-    totalPerPerson =
-      billAmount && numberOfPeople
-        ? ((billAmount + totalTipAmount) / numberOfPeople).toFixed(2)
-        : '0';
+    totalPerPerson = billAmount && numberOfPeople ? (billAmount + totalTipAmount) / numberOfPeople : 0;
   }
 </script>
 
@@ -33,27 +30,33 @@
       <span class="label">Tip amount</span>
       <span class="label">% from bill amount</span>
     </div>
-    <p class="value"><span class="currency">$</span>{totalTipAmount}</p>
+    <p class="value">
+      <span class="currency">$</span>
+      {totalTipAmount.toFixed(2)}
+    </p>
   </div>
   <div class="output">
     <div class="description">
       <span class="label">Total per person</span>
-      <span class="label">Bill + tip amount divided by number of people</span>
+      <span class="label">Bill + tip amount<br/>divided by number of people</span>
     </div>
-    <p class="value"><span class="currency">$</span>{totalPerPerson}</p>
+    <p class="value">
+      <span class="currency">$</span>
+      {totalPerPerson.toFixed(2)}
+    </p>
   </div>
   <div class="inputs">
     <div class="bill-amount input">
       <div>
         <img alt="Dollar sign icon" src={dollarIcon} />
-        <input type="number" id="bill-amount" maxlength="10" bind:value={billAmount} />
+        <input type="number" id="bill-amount" maxlength={6} bind:value={billAmount} />
       </div>
       <label for="bill-amount">Bill amount</label>
     </div>
     <div class="number-of-people input">
       <div>
         <img alt="People icon" src={peopleIcon} />
-        <input type="number" id="number-of-people" maxlength="10" bind:value={numberOfPeople} />
+        <input type="number" id="number-of-people" maxlength={4} bind:value={numberOfPeople} />
       </div>
       <label for="number-of-people">Number of people</label>
     </div>
@@ -104,15 +107,12 @@
   .description {
     flex: 1;
 
-    padding: 0 32px;
+    padding: 16px 32px;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
 
-    gap: 8px;
-
-    height: 90px;
+    gap: 4px;
   }
 
   .label:first-child {
@@ -140,6 +140,9 @@
     line-height: 80px;
 
     margin: 0;
+
+    display: flex;
+    gap: 8px;
   }
 
   .inputs {
@@ -159,24 +162,27 @@
     padding: 56px 48px;
 
     text-align: center;
+
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 56px;
   }
 
   .input > div {
     display: flex;
     align-items: center;
-    border-bottom: 3px dotted #b3b3b3;
+    border-bottom: 2px dotted #b3b3b3;
   }
 
   .input > div > img {
-    height: 42px;
+    height: 0.8em;
+    margin-right: 16px;
   }
 
   .input > div > input {
     all: unset;
-    font-size: 64px;
-    font-weight: 700;
     width: 100%;
-    line-height: 56px;
+    text-align: left;
   }
 
   .input > label {
@@ -185,14 +191,13 @@
     font-size: 14px;
     line-height: 18px;
 
-    margin-top: 12px;
+    margin-top: 4px;
   }
 
   .bill-amount {
     flex: 2;
     border-right: 1px solid var(--border-color);
   }
-
   .number-of-people {
     flex: 1.5;
   }
