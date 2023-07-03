@@ -25,7 +25,7 @@ export default {
     name: 'app',
     // Output it to public. This way, the SvelteKit
     // app will also host the web components.
-    file: 'static/web-components.js',
+    file: 'package/web-components.min.js',
   },
   watch: !production,
   plugins: [
@@ -45,7 +45,7 @@ export default {
     postcss({
       minify: production,
       include: [path.resolve('src/fonts.css')],
-      extract: path.resolve('static/web-components-fonts.css'),
+      extract: path.resolve('package/web-components-fonts.css'),
       plugins: [cssImport(), cssImportUrl()]
     }),
     commonjs(),
