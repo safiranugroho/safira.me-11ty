@@ -1,3 +1,7 @@
 [build]
   command = "npm run build"
   publish = "build"
+
+[context.branch-deploy]
+  command = "npm run release:patch"
+  publish = "package"
