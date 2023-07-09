@@ -4,4 +4,3 @@
 
 [context.branch-deploy]
   command = "npm run release:patch"
-  publish = "package"
