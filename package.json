@@ -50,11 +50,15 @@
   "type": "module",
   "exports": {
     "./components": "./package/web-components.min.js",
-    "./fonts": "./package/web-components-fonts.css"
+    "./metadata": "./package/web-components-metadata.min.js",
+    "./fonts": "./package/web-components-fonts.css",
+    "./types": "./package/index.d.ts"
   },
   "files": [
     "./package/web-components.min.js",
-    "./package/web-components-fonts.css"
+    "./package/web-components-fonts.css",
+    "./package/web-components-metadata.min.js",
+    "./package/index.d.ts"
   ],
   "dependencies": {
     "prismjs": "^1.29.0",

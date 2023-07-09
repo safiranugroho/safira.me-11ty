@@ -16,7 +16,7 @@ import path from 'path';
 
 const production = process.env.NODE_ENV !== 'dev';
 
-export default {
+export default [{
   // The file that creates all web components.
   input: 'src/web-components.ts',
   output: {
@@ -58,4 +58,20 @@ export default {
     // Minify the build
     production && terser(),
   ],
-}
+},
+{
+  input: 'src/web-components-metadata.ts',
+  output: {
+    sourcemap: !production,
+    format: 'es',
+    name: 'app',
+    file: 'package/web-components-metadata.min.js',
+  },
+  watch: !production,
+  plugins: [
+    typescript(),
+    resolve(),
+    commonjs(),
+    production && terser(),
+  ],
+}]
