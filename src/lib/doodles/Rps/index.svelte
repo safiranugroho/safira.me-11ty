@@ -106,7 +106,7 @@
     background-color: white;
 
     padding: 24px;
-    border: 2px solid #000;
+    border: 2px solid currentColor;
     box-sizing: border-box;
 
     display: grid;
